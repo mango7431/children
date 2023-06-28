@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+<<<<<<< HEAD
 	pageEncoding="UTF-8"%>
+=======
+    pageEncoding="UTF-8"%>
+>>>>>>> 4c9844fe3f7ca87d55009d9807a5e7dbf0f5d729
 
 	<header class="p-3 mb-3 border-bottom">
 	    <div class="container">
@@ -9,7 +13,11 @@
 	        </a>
 	
 	        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+<<<<<<< HEAD
 	          <li><a href="home.do" class="nav-link px-2 link-secondary">중고링</a></li>
+=======
+	          <li><a href="#" class="nav-link px-2 link-secondary">중고링</a></li>
+>>>>>>> 4c9844fe3f7ca87d55009d9807a5e7dbf0f5d729
 	          <li><a href="#" class="nav-link px-2 link-dark">공지사항</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">중고거래</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">채팅목록</a></li>
@@ -19,7 +27,11 @@
 	          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
 	        </form>
 	        
+<<<<<<< HEAD
 	        <div class="login">
+=======
+	        <div>
+>>>>>>> 4c9844fe3f7ca87d55009d9807a5e7dbf0f5d729
 	        	<a href="#">로그인</a>
 	        	<a href="#">회원가입</a>
 	        </div>
@@ -28,7 +40,11 @@
 	            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
 	          </a>
 	          <ul class="dropdown-menu text-small">
+<<<<<<< HEAD
 	            <li><a class="dropdown-item" href="#">내상점</a></li>
+=======
+	            <li><a class="dropdown-item" href="#">내 상점</a></li>
+>>>>>>> 4c9844fe3f7ca87d55009d9807a5e7dbf0f5d729
 	            <li><a class="dropdown-item" href="#">마이페이지</a></li>
 	            <li><hr class="dropdown-divider"></li>
 	            <li><a class="dropdown-item" href="#">로그아웃</a></li>
@@ -36,6 +52,7 @@
 	        </div>
 	      </div>
 	    </div>
+<<<<<<< HEAD
   </header>
   
   <script type="text/javascript">
@@ -47,3 +64,6 @@
 // 		$('.login').hide();
 // 	}
 </script>
+=======
+  </header>
+>>>>>>> 4c9844fe3f7ca87d55009d9807a5e7dbf0f5d729
