@@ -16,9 +16,9 @@
 
 	<div class="container">
 	<ul>
-		<li><a href="http://localhost:8088/idle/json_q_selectAll.do?writer=tester1">/json_q_selectAll.do</a></li>
-		<li><a href="http://localhost:8088/idle/q-selectAll.do?writer=tester1">q-selectAll.do</a></li>
-		<li><a href="http://localhost:8088/idle/q-selectOne.do">q-selectOne.do</a></li>
+		<li><a href="json_q_selectAll.do?writer=tester1">/json_q_selectAll.do</a></li>
+		<li><a href="q-selectAll.do?writer=tester1">q-selectAll.do</a></li>
+		<li><a href="q-selectOne.do">q-selectOne.do</a></li>
 	</ul>
 	</div>
 </body>

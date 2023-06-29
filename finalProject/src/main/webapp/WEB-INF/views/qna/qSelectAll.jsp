@@ -97,7 +97,7 @@
 						
 					  tag_vos += `
 					    <tr>
-					      <th scope="row" class="text-center">\${vo.qna_num}</th>
+					      <th scope="row" class="text-center align-middle">\${vo.qna_num}</th>
 					      <td class="py-4">
 					      	<a href="q-selectOne.do?qna_num=\${vo.qna_num}">
 						        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
@@ -123,7 +123,7 @@
 <jsp:include page="../top_menu.jsp"></jsp:include>
 
 	<div class="container">
-		<div class="breadcrumb fs-5 fw-bold">내 Q&A 목록</div>
+		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
  		<div class="container my-3">
 	 		<div class="row">
 	     	<div class="col-md-3 col-lg-2">     
@@ -133,7 +133,7 @@
 			    	<li><a href="#">찜목록</a></li>
 			    	<li><a href="#">내 거래 목록</a></li>
 			    	<li><a href="#">내동네설정</a></li>
-			    	<li class="fw-bold"><a href="#">내 Q&A 목록</a></li>
+			    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
 			    </ul>
 	   		</div>
 	   		<div class="col-md-9 col-lg-10 px-5">
@@ -153,8 +153,8 @@
 	        <table class="table table-sm">
 					  <thead>
 					    <tr>
-					      <th scope="col" class="col-2 text-center">글번호</th>
-					      <th scope="col" class="col-10 text-center">내용</th>
+					      <th scope="col" class="col-2 text-center py-3">글번호</th>
+					      <th scope="col" class="col-10 text-center py-3">내용</th>
 					    </tr>
 					  </thead>
 					  <tbody id="vos">
@@ -162,20 +162,16 @@
 					  </tbody>
 					</table>
 				
-				<nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				      </a>
+				<nav class="text-center">
+				  <ul class="list-inline">
+				    <li class="list-inline-item">
+				      <a href="#"><span>&laquo;</span></a>
 				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item"><a class="page-link" href="#">2</a></li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
+				    <li class="list-inline-item"><a class="page-link" href="#">1</a></li>
+				    <li class="list-inline-item"><a class="page-link" href="#">2</a></li>
+				    <li class="list-inline-item"><a class="page-link" href="#">3</a></li>
+				    <li class="list-inline-item">
+				      <a href="#"><span aria-hidden="true">&raquo;</span></a>
 				    </li>
 				  </ul>
 				</nav>  
