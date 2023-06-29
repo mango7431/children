@@ -5,26 +5,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap demo</title>
+<title>상품 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <script type="text/javascript">
-	
-	function check(){
-		if(document.getElementById("board_title").value==""){
-	        alert("제목을 입력하세요.");
-	        return;
-	    }
-	    if(document.getElementById("price").value==""){
-	        alert("가격을 입력하세요");
-	        return;
-	    }
-	    board_form.submit(); 
+	$(function(){
+		
+		let fileInput = document.getElementById('multipartFiles');
+		let max = 3;
+		
+		fileInput.addEventListener('change',function(event){
+			if(event.target.files.length > max){
+				alert('최대 '+max+'개 까지만 선택할 수 있습니다.');
+				fileInput.value='';
+			}
+		});
+	});
+
+		
+
+	function check() {
+		if (document.getElementById("board_title").value == "") {
+			alert("제목을 입력하세요.");
+			return;
+		}
+		if (document.getElementById("price").value == "") {
+			alert("가격을 입력하세요");
+			return;
+		}
+		board_form.submit();
 	}
-	
 </script>
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
@@ -108,6 +121,9 @@
 		
 		<div class="col-12">
 			<input type="hidden" name="board_num" class="form-control" id="board_num" value="${vo2.board_num }">
+			<input type="hidden" name="board_savename1" class="form-control" id="board_savename1" value="${vo2.board_savename1}">
+			<input type="hidden" name="board_savename2" class="form-control" id="board_savename2" value="${vo2.board_savename2}">
+			<input type="hidden" name="board_savename3" class="form-control" id="board_savename3" value="${vo2.board_savename3}">
 		</div>
 
 		<div class="col-12">

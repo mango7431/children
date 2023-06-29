@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.BoardService;
@@ -123,8 +124,19 @@ public class BoardController {
 	@RequestMapping(value = "/boardUpdateOK.do", method = RequestMethod.POST)
 	public String boardUpdateOK(BoardVO vo) throws IllegalStateException, IOException {
 		log.info("/boardUpdateOK.do...{}",vo);
+		log.info("사이즈 : {}",vo.getMultipartFiles().size());
 		
-		if(vo.getMultipartFiles().size()!=0) {
+		List<MultipartFile> selectedFiles = new ArrayList<MultipartFile>();
+		
+		for (MultipartFile file : vo.getMultipartFiles()) {
+			if(!file.isEmpty()) {
+				log.info("{}",file);
+				selectedFiles.add(file);
+			}
+		}
+		log.info("selectedFiles {}",selectedFiles);
+		
+		if(selectedFiles.size()!=0) {
 			
 			List<String> list = new ArrayList<String>(Arrays.asList("board_default.png","board_default.png","board_default.png"));
 			
