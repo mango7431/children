@@ -42,3 +42,9 @@ a {
 	color : #0156FF;
 }
 
+.q-filter-btn .selected {
+	border-radius: 20px;
+  background-color: #0156FF;
+  color: #fff;
+}
+

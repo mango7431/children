@@ -15,9 +15,51 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			var urlParams = new URLSearchParams(window.location.search);
+			var category = "";
+			if (urlParams.get('category') === "전체") {
+				category = 0;
+			}
+			
+			var category = urlParams.get('category');
+			
+			renderQnAList(category);
+			
+			$(".q-category").on("click", function(){
+				$(".q-category").removeClass('selected');
+				$(this).addClass('selected');
+				category = $(this).text();
+				
+				if (category === '계정문의') {
+					category = 1;
+			  } else if (category === '채팅, 알림문의') {
+				  category = 2;
+			  } else if (category === '거래문의') {
+				  category = 3;
+			  } else if (category === '광고문의') {
+				  category = 4;
+			  } else if (category === '기타문의'){
+				  category = 5;
+			  } else if (category === '전체'){
+				  category = 0;
+			  }
+				
+				urlParams.set('category', category);
+        var newUrl = window.location.pathname + '?' + urlParams.toString();
+        
+        window.history.replaceState({}, '', newUrl);
+				
+				renderQnAList(category);
+			});
+			
+		}); //load
+		
+		function renderQnAList(category){
 			$.ajax({
 				url: "json_q_selectAll.do",
-				data: {writer: "tester1"},
+				data: {writer: "tester1",
+							 category: category
+				},
 				method: 'GET',
 				dataType: 'json',
 				success: function(vos){
@@ -31,17 +73,22 @@
 					var formattedDate = date.toLocaleString();
 					
 					$.each(vos, function(index, vo) {
-						status = vo.status === 1 ? '미답변' : '답변완료';
+						if (vo.qna_status === 1) {
+							status = '미답변';
+					  } else if (vo.qna_status === 2) {
+						  status = '답변완료';
+					  }
+						status = vo.qna_status === 1 ? '미답변' : '답변완료';
 						
-						if (vo.gender === 1) {
+						if (vo.qna_category === 1) {
 							category = '계정문의';
-					  } else if (vo.gender === 2) {
+					  } else if (vo.qna_category === 2) {
 						  category = '채팅, 알림문의';
-					  } else if (vo.gender === 3) {
+					  } else if (vo.qna_category === 3) {
 						  category = '거래문의';
-					  } else if (vo.gender === 4) {
+					  } else if (vo.qna_category === 4) {
 						  category = '광고문의';
-					  }else {
+					  }else if (vo.qna_category === 5){
 						  category = '기타문의';
 					  }
 						
@@ -68,7 +115,7 @@
 					console.log('xhr.status:', xhr.status);
 				}
 			});
-		});
+		}
 	</script>
 	
 </head>
@@ -93,8 +140,16 @@
 	      	<div class="row">
 	      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
 	      		<div class="col-md-6 text-end"><a href="#">글쓰기</a></div>
+      			<hr class="mt-2">
+	      		<ul class="list-inline q-filter-btn">
+	      			<li class="list-inline-item px-3 py-2 q-category selected">전체</li>
+	      			<li class="list-inline-item px-3 py-2 q-category">계정문의</li>
+	      			<li class="list-inline-item px-3 py-2 q-category">채팅, 알림문의</li>
+	      			<li class="list-inline-item px-3 py-2 q-category">거래문의</li>
+	      			<li class="list-inline-item px-3 py-2 q-category">광고문의</li>
+	      			<li class="list-inline-item px-3 py-2 q-category">기타문의</li>	      			
+	      		</ul>
 	      	</div>
-				<hr>
 	        <table class="table table-sm">
 				  <thead>
 				    <tr>
