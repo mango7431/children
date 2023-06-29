@@ -1,6 +1,9 @@
 package test.com.idle.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -22,5 +25,12 @@ public class BoardVO {
 	private String board_savename3;
 	private int board_status;
 	private int board_type;
+	private int likecount;
+	private int chatcount;
+	private String id;
+	private String name;
+	private String address;
+	private String member_savename;
+	private List<MultipartFile> multipartFiles;
 
 }

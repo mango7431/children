@@ -30,4 +30,49 @@ public class BoardDAOimpl implements BoardDAO {
 		return vos;
 	}
 
+	@Override
+	public BoardVO selectOne(BoardVO vo) {
+		log.info("selectOne()...{}",vo);
+		
+		BoardVO vo2 = sqlSession.selectOne("B_SELECT_ONE", vo);
+		
+		return vo2;
+	}
+
+	@Override
+	public int viewCountUp(BoardVO vo) {
+		log.info("viewCountUp()...{}",vo);
+		
+		int flag = sqlSession.update("VIEW_COUNT_UP",vo);
+		
+		return flag;
+	}
+
+	@Override
+	public int insert(BoardVO vo) {
+		log.info("insert()...{}",vo);
+		
+		int flag = sqlSession.insert("B_INSERT",vo);
+		
+		return flag;
+	}
+
+	@Override
+	public int update(BoardVO vo) {
+		log.info("update()...{}",vo);
+		
+		int flag = sqlSession.update("B_UPDATE",vo);
+		
+		return flag;
+	}
+
+	@Override
+	public int delete(BoardVO vo) {
+		log.info("delete()...{}",vo);
+		
+		int flag = sqlSession.delete("B_DELETE",vo);
+		
+		return flag;
+	}
+
 }

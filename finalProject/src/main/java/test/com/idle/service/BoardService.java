@@ -24,4 +24,24 @@ public class BoardService {
 		return dao.selectAll();
 	}
 
+	public BoardVO selectOne(BoardVO vo) {
+		return dao.selectOne(vo);
+	}
+
+	public int viewCountUp(BoardVO vo) {
+		return dao.viewCountUp(vo);
+	}
+
+	public int insert(BoardVO vo) {
+		return dao.insert(vo);
+	}
+
+	public int update(BoardVO vo) {
+		return dao.update(vo);
+	}
+
+	public int delete(BoardVO vo) {
+		return dao.delete(vo);
+	}
+
 }
