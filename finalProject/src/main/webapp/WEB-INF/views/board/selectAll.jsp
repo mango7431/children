@@ -19,7 +19,7 @@
 	<div class="col">
 		<div class="card" style="width: 18rem;">
 				<a href="boardSelectOne.do?board_num=${vo.board_num }" class="list-group-item list-group-item-action active">
-					<img src="resources/img/${vo.board_savename1 }" class="card-img-top">
+					<img src="resources/img/thumb_${vo.board_savename1 }" class="card-img-top">
 				</a>
 			<div class="card-body">
 				<p class="card-title">${vo.board_title }</p>

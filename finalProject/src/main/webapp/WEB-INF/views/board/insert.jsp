@@ -28,6 +28,7 @@
 </script>
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
+	<section style="padding-left: 100px; padding-right: 100px;">
 	<h1 id="board_type" style="margin-left: 60px">상품 등록</h1>
 <div style="max-width: 1000px; margin: 0 auto;">
 	<form class="row g-3" action="boardInsertOK.do" method="post" enctype="multipart/form-data" name="board_form">
@@ -108,5 +109,6 @@
 		</div>
 	</form>
 	</div>
+	</section>
 </body>
 </html>
