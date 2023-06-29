@@ -1,0 +1,44 @@
+ul {
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+
+
+.mypage-floating-menu {
+	background-color:#F5F7FF;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+}
+
+.mypage-floating-menu a {
+	color: #666666;
+}
+
+.mypage-floating-menu a:hover {
+	color: #333333;
+}
+
+.mypage-floating-menu li {
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+/*.mypage-floating-menu li::before {
+	content: "";
+	border-left: 2px solid #0156FF;
+}*/
+
+.breadcrumb {
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+
+.q-status {
+	color : #0156FF;
+}
+

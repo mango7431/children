@@ -26,10 +26,16 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-<!-- 				<value>classpath:jdbc/sqlMapper_member.xml</value> -->
+ 				<value>classpath:jdbc/sqlMapper_qna.xml</value>
 <!-- 				<value>classpath:jdbc/sqlMapper_board.xml</value> -->
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+		<!-- -1 이면 크기제한 없음 -->
 	</bean>
 
 	<bean id="sqlSession"

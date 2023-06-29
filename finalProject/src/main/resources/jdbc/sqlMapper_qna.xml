@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test.com.idle">
+	<select id="Q_SELECT_ALL" resultType="test.com.idle.vo.QnaVO">
+		select * from qna where writer=#{writer} order by qna_num desc
+	</select>
+	
+	<select id="Q_PAGING" resultType="test.com.idle.vo.QnaVO">
+		select * from qna where writer=#{writer} and page=#{page} and limit=#{limit}
+	</select>
+	
+	<select id="Q_SELECT_ONE" resultType="test.com.idle.vo.QnaVO">
+		select * from qna where writer=#{writer} and qna_num = #{qnaNum}
+	</select>
+	
+	<insert id="Q_INSERT" parameterType="test.com.idle.vo.QnaVO">
+		insert into qna(qna_num,qna_title,qna_content,writer,qna_category)
+		values(seq_qna.nextval,#{title},#{content},#{writer},#{qnaCategory})
+	</insert>
+	
+	<update id="Q_UPDATE" parameterType="test.com.idle.vo.QnaVO">
+		update qna set title=#{title} , content=#{content}, 
+		qna_date=sysdate, qna_category=#{qnaCategory}
+		where qna_num = #{qnaNum}
+	</update>
+	
+	<delete id="Q_DELETE">
+		delete from qna where qna_num = #{qnaNum}
+	</delete>
+	
+</mapper>
