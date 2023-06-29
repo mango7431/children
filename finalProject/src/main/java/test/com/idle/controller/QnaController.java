@@ -23,4 +23,11 @@ public class QnaController {
 		return "qna/qSelectAll";
 	}
 	
+	@RequestMapping(value = "q-selectOne.do", method = RequestMethod.GET)
+	public String qSelectOne(Model model) {
+		log.info("/q-selectOne.do");
+		
+		return "qna/qSelectOne";
+	}
+	
 }

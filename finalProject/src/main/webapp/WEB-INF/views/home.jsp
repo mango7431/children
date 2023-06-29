@@ -15,8 +15,11 @@
 <jsp:include page="top_menu.jsp"></jsp:include>
 
 	<div class="container">
-		<a href="http://localhost:8088/idle/json_q_selectAll.do?writer=tester1">/json_q_selectAll.do</a>
-		<a href="http://localhost:8088/idle/q-selectAll.do?writer=tester1">q-selectAll.do</a>
+	<ul>
+		<li><a href="http://localhost:8088/idle/json_q_selectAll.do?writer=tester1">/json_q_selectAll.do</a></li>
+		<li><a href="http://localhost:8088/idle/q-selectAll.do?writer=tester1">q-selectAll.do</a></li>
+		<li><a href="http://localhost:8088/idle/q-selectOne.do">q-selectOne.do</a></li>
+	</ul>
 	</div>
 </body>
 </html>

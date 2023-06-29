@@ -98,7 +98,7 @@
 					  tag_vos += `
 					    <tr>
 					      <th scope="row" class="text-center">\${vo.qna_num}</th>
-					      <td>
+					      <td class="py-4">
 					      	<a href="q-selectOne.do?qna_num=\${vo.qna_num}">
 						        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
 						        <div class="mt-3">\${category}</div>
@@ -136,11 +136,11 @@
 			    	<li class="fw-bold"><a href="#">내 Q&A 목록</a></li>
 			    </ul>
 	   		</div>
-	   		<div class="col-md-9 col-lg-10">
+	   		<div class="col-md-9 col-lg-10 px-5">
 	      	<div class="row">
 	      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
 	      		<div class="col-md-6 text-end"><a href="#">글쓰기</a></div>
-      			<hr class="mt-2">
+      			<hr class="mt-3">
 	      		<ul class="list-inline q-filter-btn">
 	      			<li class="list-inline-item px-3 py-2 q-category selected">전체</li>
 	      			<li class="list-inline-item px-3 py-2 q-category">계정문의</li>
@@ -151,16 +151,16 @@
 	      		</ul>
 	      	</div>
 	        <table class="table table-sm">
-				  <thead>
-				    <tr>
-				      <th scope="col" class="col-2 text-center">글번호</th>
-				      <th scope="col" class="col-10 text-center">내용</th>
-				    </tr>
-				  </thead>
-				  <tbody id="vos">
-
-				  </tbody>
-				</table>
+					  <thead>
+					    <tr>
+					      <th scope="col" class="col-2 text-center">글번호</th>
+					      <th scope="col" class="col-10 text-center">내용</th>
+					    </tr>
+					  </thead>
+					  <tbody id="vos">
+	
+					  </tbody>
+					</table>
 				
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
