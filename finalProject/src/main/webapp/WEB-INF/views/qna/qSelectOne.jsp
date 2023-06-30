@@ -48,9 +48,9 @@
 				  }
 						
 					let tag_vo = `
-	    				<div class="fs-4"><span>\${status}</span>\${vo.qna_title}</div>
+	    				<div class="fs-4 mb-2"><span class="q-status fs-5 fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
 	    				<div><span>\${category}</span><span class="ms-3">\${formattedDate}</span></div>
-	    				<hr>
+	    				<hr class="my-3">
 	    				<div>\${vo.qna_content}</div>
 				  `;
 					
@@ -87,7 +87,7 @@
       		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
       		<div class="col-md-6 text-end">
       			<a href="#">수정하기</a>
-      			<a href="#">삭제하기</a>
+      			<a href="#" class="ms-3">삭제하기</a>
       		</div>
      			<hr class="mt-3">
       	</div>
