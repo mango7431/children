@@ -124,10 +124,9 @@
 
 	<div class="container">
 		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
- 		<div class="container my-3">
-	 		<div class="row">
+	 		<div class="row my-3">
 	     	<div class="col-md-3 col-lg-2">     
-			    <ul class="mypage-floating-menu">
+			    <ul class="mypage-floating-menu px-0">
 			    	<li><a href="#">마이페이지</a></li>
 			    	<li><a href="#">회원정보수정</a></li>
 			    	<li><a href="#">찜목록</a></li>
@@ -178,7 +177,6 @@
 	          
 	  		</div>      
 	  	</div>
-		</div>
 	</div>
 </body>
 </html>

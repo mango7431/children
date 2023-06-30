@@ -27,17 +27,16 @@
 <jsp:include page="../top_menu.jsp"></jsp:include>
 
 	<div class="container">
-		<div class="breadcrumb fs-5 fw-bold">내 Q&A 목록</div>
- 		<div class="container my-3">
-	 		<div class="row">
+		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
+	 		<div class="row my-3">
 	     	<div class="col-md-3 col-lg-2">     
-			    <ul class="mypage-floating-menu">
+			    <ul class="mypage-floating-menu px-0">
 			    	<li><a href="#">마이페이지</a></li>
 			    	<li><a href="#">회원정보수정</a></li>
 			    	<li><a href="#">찜목록</a></li>
 			    	<li><a href="#">내 거래 목록</a></li>
 			    	<li><a href="#">내동네설정</a></li>
-			    	<li class="fw-bold"><a href="#">내 Q&A 목록</a></li>
+			    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
 			    </ul>
 	   		</div>
 	   		<div class="col-md-9 col-lg-10 px-5">
