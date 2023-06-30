@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test.com.idle">
+
+<!-- 	중고거래 목록 -->
+	<select id="B_SELECTALL" resultType="test.com.idle.vo.BoardVO">
+		select * from board
+		<where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="minPrice != null">
+                AND price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null">
+                AND price &lt;= #{maxPrice}
+            </if>
+            <if test="board_type != null">
+                AND board_type = #{board_type}
+            </if>
+        </where>
+        order by board_date desc
+	</select>
+	
+	<select id="B_SELECTALL_VIEWS" resultType="test.com.idle.vo.BoardVO">
+		select * from board
+		<where>
+            <if test="category != null">
+                AND category = #{category}
+            </if>
+            <if test="minPrice != null">
+                AND price &gt;= #{minPrice}
+            </if>
+            <if test="maxPrice != null">
+                AND price &lt;= #{maxPrice}
+            </if>
+            <if test="board_type != null">
+                AND board_type = #{board_type}
+            </if>
+        </where>
+        order by view_count desc
+	</select>
+	
+	
+</mapper>
