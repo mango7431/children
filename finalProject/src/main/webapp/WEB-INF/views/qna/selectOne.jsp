@@ -60,6 +60,14 @@
 					console.log('xhr.status:', xhr.status);
 				}
 			});
+			
+			$('.delete-btn').click(function(event) {
+	            event.preventDefault();
+	            var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+	            if (confirmDelete) {
+	                window.location.href = $(this).attr('href');
+	            }
+      });
 		}); //load
 		
 		
@@ -87,7 +95,7 @@
       		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
       		<div class="col-md-6 text-end">
       			<a href="q-update.do?qna_num=${param.qna_num}">수정하기</a>
-      			<a href="q-deleteOK.do?qna_num=${param.qna_num}" class="ms-3">삭제하기</a>
+      			<a href="q-deleteOK.do?qna_num=${param.qna_num}" class="ms-3 delete-btn">삭제하기</a>
       		</div>
      			<hr class="mt-3">
       	</div>
