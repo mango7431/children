@@ -30,6 +30,13 @@ public class QnaController {
 		return "qna/selectOne";
 	}
 	
+	@RequestMapping(value = "q-insert.do", method = RequestMethod.GET)
+	public String qInsert(Model model) {
+		log.info("/q-insert.do");
+		
+		return "qna/insert";
+	}
+	
 	@RequestMapping(value = "q-update.do", method = RequestMethod.GET)
 	public String qUpdate(Model model) {
 		log.info("/q-update.do");

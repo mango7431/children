@@ -135,7 +135,7 @@
 	   		<div class="col-md-9 col-lg-10 px-5">
 	      	<div class="row">
 	      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
-	      		<div class="col-md-6 text-end"><a href="#">글쓰기</a></div>
+	      		<div class="col-md-6 text-end"><a href="q-insert.do">글쓰기</a></div>
       			<hr class="mt-3">
 	      		<ul class="list-inline q-filter-btn">
 	      			<li class="list-inline-item px-3 py-2 q-category selected">전체</li>
