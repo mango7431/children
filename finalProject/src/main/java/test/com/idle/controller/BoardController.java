@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -78,7 +79,13 @@ public class BoardController {
 			if(getOriginalFileName.length()!=0){
 				list.set(i,getOriginalFileName);
 				String realPath = sContext.getRealPath("resources/img");
+				String adminRealPath = realPath.replaceAll("finalProject", "finalAdmin");
 				log.info("realPath : {}", realPath);
+				log.info("adminRealPath : {}", adminRealPath);
+				
+				// 관리자 프로젝트쪽에도 이미지 생성
+				File adminf = new File(adminRealPath+"\\"+list.get(i));
+				FileCopyUtils.copy(vo.getMultipartFiles().get(i).getBytes(),adminf);
 				
 				File f = new File(realPath + "\\" + list.get(i));
 				vo.getMultipartFiles().get(i).transferTo(f);
@@ -92,6 +99,10 @@ public class BoardController {
 				String formatName = list.get(i).substring(list.get(i).lastIndexOf(".")+1);
 				log.info("{}",formatName);
 				ImageIO.write(thumb_buffer_img, formatName, thumb_file);
+				
+				File admin_thumb_file = new File(adminRealPath + "/thumb_" + list.get(i));
+				log.info("{}",formatName);
+				ImageIO.write(thumb_buffer_img, formatName, admin_thumb_file);
 			}
 		}
 		
@@ -149,7 +160,13 @@ public class BoardController {
 				if(getOriginalFileName.length()!=0){
 					list.set(i,getOriginalFileName);
 					String realPath = sContext.getRealPath("resources/img");
+					String adminRealPath = realPath.replaceAll("finalProject", "finalAdmin");
 					log.info("realPath : {}", realPath);
+					log.info("adminRealPath : {}", adminRealPath);
+					
+					// 관리자 프로젝트쪽에도 이미지 생성
+					File adminf = new File(adminRealPath+"\\"+list.get(i));
+					FileCopyUtils.copy(vo.getMultipartFiles().get(i).getBytes(),adminf);
 					
 					File f = new File(realPath + "\\" + list.get(i));
 					vo.getMultipartFiles().get(i).transferTo(f);
@@ -163,6 +180,10 @@ public class BoardController {
 					String formatName = list.get(i).substring(list.get(i).lastIndexOf(".")+1);
 					log.info("{}",formatName);
 					ImageIO.write(thumb_buffer_img, formatName, thumb_file);
+					
+					File admin_thumb_file = new File(adminRealPath + "/thumb_" + list.get(i));
+					log.info("{}",formatName);
+					ImageIO.write(thumb_buffer_img, formatName, admin_thumb_file);
 				}
 			}
 			
