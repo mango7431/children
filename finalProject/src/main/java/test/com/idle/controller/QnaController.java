@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.QnaService;
+import test.com.idle.vo.QnaVO;
 
 @Slf4j
 @Controller
@@ -35,6 +36,21 @@ public class QnaController {
 		log.info("/q-insert.do");
 		
 		return "qna/insert";
+	}
+	
+	@RequestMapping(value = "q-insertOK.do", method = RequestMethod.GET)
+	public String qInsertOK(QnaVO vo) {
+		log.info("/q-insertOK.do");
+		log.info("{}", vo);
+		
+		int result = service.qInsert(vo);
+		log.info("result:{}", result);
+		
+		if(result == 1) {
+			return "redirect:q-selectAll.do";
+		} else {			
+			return "redirect:q-insert.do";
+		}
 	}
 	
 	@RequestMapping(value = "q-update.do", method = RequestMethod.GET)

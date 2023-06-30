@@ -1,6 +1,8 @@
 package test.com.idle.restcontroller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +35,7 @@ public class QnaRestController {
 	@ResponseBody
 	@RequestMapping(value = "/json_q_selectOne.do", method = RequestMethod.GET)
 	public QnaVO json_q_selectOne(QnaVO vo) {
-		log.info("/json_q_selectAll.do...vo:{}", vo);
+		log.info("/json_q_selectOne.do...vo:{}", vo);
 		
 		QnaVO vo2 = service.qSelectOne(vo);
 		log.info("vo2:{}", vo2);

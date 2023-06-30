@@ -22,6 +22,7 @@
 		<li><a href="json_q_selectOne.do?qna_num=1">json_q_selectOne.do</a></li>
 		<li><a href="q-selectOne.do">q-selectOne.do</a></li>
 		<hr>
+		<li><a href="q-insertOK.do?writer=tester1&qna_category=1&qna_title=계정이 이상해요&qna_content=확인해주세요">q-insertOK.do</a></li>
 	</ul>
 	</div>
 </body>

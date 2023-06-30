@@ -48,6 +48,7 @@
 			
 			//Q&A 폼 유효성 검사
 			$('.finish-btn').click(function() {
+				
 				if($('#category').val() === '카테고리') {
 					event.preventDefault();
 					alert("카테고리를 선택해주세요.");

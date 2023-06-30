@@ -18,7 +18,7 @@
 	
 	<insert id="Q_INSERT" parameterType="test.com.idle.vo.QnaVO">
 		insert into qna(qna_num,qna_title,qna_content,writer,qna_category)
-		values(seq_qna.nextval,#{title},#{content},#{writer},#{qnaCategory})
+		values(seq_qna.nextval,#{qna_title},#{qna_content},#{writer},#{qna_category})
 	</insert>
 	
 	<update id="Q_UPDATE" parameterType="test.com.idle.vo.QnaVO">
