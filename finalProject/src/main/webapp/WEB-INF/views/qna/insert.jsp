@@ -103,14 +103,14 @@
 		            maxlength="33" placeholder="제목">
 		        </div>
 			    </div>
-			    <div class="row mt-3">
+			    <div class="row my-3">
 		        <div class="col">
 		            <textarea id="content" name="qna_content" 
 		            	onkeyup="fn_checkByte(this)"
 		            	class="form-control" placeholder="내용을 입력해주세요" style="height: 200px"></textarea>
 		        </div>
 			    </div>
-			    <div class="row mt-3">
+			    <div class="row">
 			    	<div class="col">
 			    		<sup>(<span id="nowByte">0</span>/3000bytes)</sup>	
 			    	</div>

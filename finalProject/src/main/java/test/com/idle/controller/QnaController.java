@@ -75,4 +75,20 @@ public class QnaController {
 		}
 	}
 	
+	@RequestMapping(value = "q-deleteOK.do", method = RequestMethod.GET)
+	public String qDelete(QnaVO vo) {
+		log.info("/q-deleteOK.do");
+		log.info("{]", vo);
+		
+		int result = service.qDelete(vo);
+		log.info("result:{}", result);
+		
+		if(result==1) {
+			return "redirect:q-selectAll.do";
+		} else {
+			return "redirect:q-selectOne.do?qna_num=" + vo.getQna_num();
+		}
+
+	}
+	
 }

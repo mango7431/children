@@ -28,7 +28,7 @@
 	</update>
 	
 	<delete id="Q_DELETE">
-		delete from qna where qna_num = #{qnaNum}
+		delete from qna where qna_num = #{qna_num}
 	</delete>
 	
 </mapper>
