@@ -81,7 +81,7 @@
 			    </div>
 			    <div class="row mt-3">
 		        <div class="col d-flex justify-content-end">
-		            <button type="submit" class="finish-btn">작성하기</button>
+		            <button type="submit" class="submit-btn">작성하기</button>
 		        </div>
 			    </div>
 				</form>	

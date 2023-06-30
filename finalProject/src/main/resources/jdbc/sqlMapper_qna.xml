@@ -22,9 +22,9 @@
 	</insert>
 	
 	<update id="Q_UPDATE" parameterType="test.com.idle.vo.QnaVO">
-		update qna set title=#{title} , content=#{content}, 
-		qna_date=sysdate, qna_category=#{qnaCategory}
-		where qna_num = #{qnaNum}
+		update qna set qna_title=#{qna_title}, qna_content=#{qna_content}, 
+		qna_date=sysdate, qna_category=#{qna_category}
+		where qna_num = #{qna_num}
 	</update>
 	
 	<delete id="Q_DELETE">

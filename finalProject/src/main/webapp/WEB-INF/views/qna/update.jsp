@@ -36,6 +36,7 @@
 					  category = '기타문의';
 				  }
 					
+					$('#num').val(vo.qna_num);
 					$('#title').val(vo.qna_title);
 					$('#content').text(vo.qna_content);
 					$('#category').val(vo.qna_category);
@@ -48,7 +49,6 @@
 			
 			//Q&A 폼 유효성 검사
 			$('.finish-btn').click(function() {
-				
 				if($('#category').val() === '카테고리') {
 					event.preventDefault();
 					alert("카테고리를 선택해주세요.");
@@ -87,9 +87,9 @@
       		<div class="col fs-5 fw-bold">Q&A 수정</div>
      			<hr class="mt-3">
       	</div>
-      	      	<form action="q-insertOK.do" method="get">
+      	<form action="q-updateOK.do" method="get">
 			    <div class="row align-items-start justify-content-center">
-		        <input type="hidden" name="writer" value="tester1">
+		        <input type="hidden" id="num" name="qna_num" value="">
 		        <div class="col-md-5 col-lg-3 mb-3 mb-md-0">
 		            <select id="category" name="qna_category" class="form-select" aria-label="Default select example">
 		                <option>카테고리</option>
@@ -111,7 +111,7 @@
 			    </div>
 			    <div class="row mt-3">
 		        <div class="col d-flex justify-content-end">
-		            <button type="submit" class="finish-btn">수정하기</button>
+		            <button type="submit" class="submit-btn">수정하기</button>
 		        </div>
 			    </div>
 				</form>

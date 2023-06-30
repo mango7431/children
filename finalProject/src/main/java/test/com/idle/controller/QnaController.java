@@ -60,4 +60,19 @@ public class QnaController {
 		return "qna/update";
 	}
 	
+	@RequestMapping(value = "q-updateOK.do", method = RequestMethod.GET)
+	public String qUpdateOK(QnaVO vo) {
+		log.info("/q-updateOK.do");
+		log.info("{}", vo);
+		
+		int result = service.qUpdate(vo);
+		log.info("result:{}", result);
+		
+		if(result == 1) {
+			return "redirect:q-selectOne.do?qna_num="+vo.getQna_num();
+		} else {			
+			return "redirect:q-update.do?qna_num="+vo.getQna_num();
+		}
+	}
+	
 }
