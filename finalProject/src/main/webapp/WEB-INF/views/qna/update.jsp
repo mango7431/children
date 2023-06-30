@@ -14,56 +14,89 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	
 	<script type="text/javascript">
-		$(function(){
-			$.ajax({
-				url: "json_q_selectOne.do",
-				data: {qna_num : ${param.qna_num}},
-				method: 'GET',
-				dataType: 'json',
-				success: function(vo){
-					console.log('ajax...success:', vo);
-					let category = '';
-					
-					if (vo.qna_category === 1) {
-						category = '계정문의';
-				  } else if (vo.qna_category === 2) {
-					  category = '채팅, 알림문의';
-				  } else if (vo.qna_category === 3) {
-					  category = '거래문의';
-				  } else if (vo.qna_category === 4) {
-					  category = '광고문의';
-				  }else if (vo.qna_category === 5){
-					  category = '기타문의';
-				  }
-					
-					$('#num').val(vo.qna_num);
-					$('#title').val(vo.qna_title);
-					$('#content').text(vo.qna_content);
-					$('#category').val(vo.qna_category);
 
-				},
-				error: function(xhr, status, error) {
-					console.log('xhr.status:', xhr.status);
+	$(function(){
+		$.ajax({
+			url: "json_q_selectOne.do",
+			data: {qna_num : ${param.qna_num}},
+			method: 'GET',
+			dataType: 'json',
+			success: function(vo){
+				console.log('ajax...success:', vo);
+				let category = '';
+				
+				if (vo.qna_category === 1) {
+					category = '계정문의';
+				} else if (vo.qna_category === 2) {
+					category = '채팅, 알림문의';
+				} else if (vo.qna_category === 3) {
+					category = '거래문의';
+				} else if (vo.qna_category === 4) {
+					category = '광고문의';
+				}else if (vo.qna_category === 5){
+					category = '기타문의';
 				}
-			});
-			
-			//Q&A 폼 유효성 검사
-			$('.finish-btn').click(function() {
-				if($('#category').val() === '카테고리') {
-					event.preventDefault();
-					alert("카테고리를 선택해주세요.");
-				} else if ($('#title').val() === '') {
-					event.preventDefault();
-					alert("제목을 입력해주세요.");
-				} else if ($('#content').val() === '') {
-					event.preventDefault();
-					alert("문의할 내용을 작성해주세요.");
-				}
-			});
-		}); //load
+				
+				$('#num').val(vo.qna_num);
+				$('#title').val(vo.qna_title);
+				$('#content').text(vo.qna_content);
+				$('#category').val(vo.qna_category);
+				
+				var content_txt = $('#content').text();
+				console.log(content_txt);
+				fn_checkByte($('#content').text());
+
+			},
+			error: function(xhr, status, error) {
+				console.log('xhr.status:', xhr.status);
+			}
+		});
 		
-		
-	</script>
+		// Q&A 폼 유효성 검사
+		$('.submit-btn').click(function() {
+			if ($('#category').val() === '카테고리') {
+				event.preventDefault();
+				alert("카테고리를 선택해주세요.");
+			} else if ($('#title').val() === '') {
+				event.preventDefault();
+				alert("제목을 입력해주세요.");
+			} else if ($('#content').val() === '') {
+				event.preventDefault();
+				alert("문의할 내용을 작성해주세요.");
+			} else if (nowBytes > maxByte) { 
+				event.preventDefault();
+				alert('최대 3000Byte까지만 입력 가능합니다.');
+			}
+		});
+	}); //load
+	
+	function fn_checkByte(text_val){
+    const maxByte = 3000; //최대 100바이트
+    const text_len = text_val.length; //입력한 문자수
+	    
+    let totalByte=0;
+    for(let i=0; i<text_len; i++){
+    	const each_char = text_val.charAt(i);
+        const uni_char = escape(each_char); //유니코드 형식으로 변환
+        if(uni_char.length>4){
+        	// 한글 : 3Byte
+           totalByte += 3;
+        }else{
+        	// 영문,숫자,특수문자 : 1Byte
+           totalByte += 1;
+        }
+    }
+	    
+    if(totalByte>maxByte){
+      	document.getElementById("nowByte").innerText = totalByte;
+        document.getElementById("nowByte").style.color = "red";
+      } else{
+      	document.getElementById("nowByte").innerText = totalByte;
+        document.getElementById("nowByte").style.color = "green";
+      }
+	}
+</script>
+
 	
 </head>
 <body>
@@ -101,15 +134,21 @@
 		            </select>
 		        </div>
 		        <div class="col-md-7 col-lg-9">
-		            <input type="text" id="title" name="qna_title" class="form-control" placeholder="제목">
+		            <input type="text" id="title" name="qna_title" class="form-control" 
+		            maxlength="33" placeholder="제목">
 		        </div>
 			    </div>
 			    <div class="row mt-3">
 		        <div class="col">
-		            <textarea id="content" name="qna_content" class="form-control" placeholder="내용을 입력해주세요" style="height: 200px"></textarea>
+		            <textarea id="content" name="qna_content" class="form-control" 
+		            	onkeyup="fn_checkByte(this.value)"
+		            	placeholder="내용을 입력해주세요" style="height: 200px"></textarea>
 		        </div>
 			    </div>
 			    <div class="row mt-3">
+			    	<div class="col">
+			    		<sup>(<span id="nowByte">0</span>/3000bytes)</sup>	
+			    	</div>
 		        <div class="col d-flex justify-content-end">
 		            <button type="submit" class="submit-btn">수정하기</button>
 		        </div>

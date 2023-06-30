@@ -2,3 +2,4 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="resources/css/menu.css">
 <link rel="stylesheet" href="resources/css/btn.css">
+<link rel="stylesheet" href="resources/css/board.css">
