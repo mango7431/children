@@ -86,14 +86,14 @@
       	<div class="row">
       		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
       		<div class="col-md-6 text-end">
-      			<a href="#">수정하기</a>
+      			<a href="q-update.do?qna_num=${param.qna_num}">수정하기</a>
       			<a href="#" class="ms-3">삭제하기</a>
       		</div>
      			<hr class="mt-3">
       	</div>
-  				<div class="row q-detail py-3" id="vo">
+ 				<div class="row q-detail py-3" id="vo">
 
-    			</div>
+   			</div>
   		</div>      
   	</div>
 	</div>

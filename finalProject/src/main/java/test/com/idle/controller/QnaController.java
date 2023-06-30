@@ -20,14 +20,21 @@ public class QnaController {
 	public String qSelectAll(Model model) {
 		log.info("/q-selectAll.do");
 		
-		return "qna/qSelectAll";
+		return "qna/selectAll";
 	}
 	
 	@RequestMapping(value = "q-selectOne.do", method = RequestMethod.GET)
 	public String qSelectOne(Model model) {
 		log.info("/q-selectOne.do");
 		
-		return "qna/qSelectOne";
+		return "qna/selectOne";
+	}
+	
+	@RequestMapping(value = "q-update.do", method = RequestMethod.GET)
+	public String qUpdate(Model model) {
+		log.info("/q-update.do");
+		
+		return "qna/update";
 	}
 	
 }

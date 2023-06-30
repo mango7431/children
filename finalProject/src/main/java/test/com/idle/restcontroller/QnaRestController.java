@@ -39,5 +39,4 @@ public class QnaRestController {
 		log.info("vo2:{}", vo2);
 		return vo2;
 	}
-	
 }
