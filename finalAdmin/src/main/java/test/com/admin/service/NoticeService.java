@@ -32,8 +32,8 @@ public class NoticeService {
 		return dao.delete(vo);
 	}
 	
-	public List<NoticeVO> selectAll(){
-		return dao.selectAll();
+	public List<NoticeVO> selectAll(int cpage){
+		return dao.selectAll(cpage);
 	}
 	
 	public NoticeVO selectOne(NoticeVO vo) {
@@ -42,5 +42,9 @@ public class NoticeService {
 	
 	public List<NoticeVO> searchList(String searchKey, String searchWord){
 		return dao.searchList(searchKey, searchWord);
+	}
+
+	public int n_row_count() {
+		return dao.n_row_count();
 	}
 }

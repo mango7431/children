@@ -1,6 +1,8 @@
 package test.com.admin.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,16 @@ public class NoticeDAOimpl implements NoticeDAO {
 	}
 
 	@Override
-	public List<NoticeVO> selectAll() {
+	public List<NoticeVO> selectAll(int cpage) {
 		log.info("selectAll()...");
-		return sqlSession.selectList("N_SELECT_ALL");
+		log.info("cpage...{}",cpage);
+		int pageBlock = 10;
+		int startRow = (cpage - 1) * pageBlock + 1;// 1,11,...
+		int endRow = startRow + pageBlock - 1;// 10,20...
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		return sqlSession.selectList("N_SELECT_ALL",map); //시작행,끝
 	}
 
 	@Override
@@ -62,6 +71,12 @@ public class NoticeDAOimpl implements NoticeDAO {
 			key = "N_SEARCH_LIST_NOTICE_CONTENT";
 		}
 		return sqlSession.selectList(key,"%"+searchWord+"%");
+	}
+
+	@Override
+	public int n_row_count() {
+		log.info("n_row_count()...");
+		return sqlSession.selectOne("N_ROW_COUNT");
 	}
 
 }

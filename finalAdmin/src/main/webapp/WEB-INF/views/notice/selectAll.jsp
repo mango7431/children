@@ -49,7 +49,12 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="4">1</td>
+			<td colspan="4">
+					<c:forEach var="i" begin="1"
+							end="${totalPageCount }" step="1">
+							<a href="n_selectAll.do?cpage=${i }${params}">${i }</a>&nbsp;
+					</c:forEach>
+			</td>
 		</tr>
 	</tfoot>
 	</table>

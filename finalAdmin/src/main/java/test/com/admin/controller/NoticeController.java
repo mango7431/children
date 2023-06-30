@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.NoticeService;
@@ -23,16 +24,21 @@ public class NoticeController {
 	NoticeService service;
 	
 	@RequestMapping(value = {"/n_selectAll.do"}, method = RequestMethod.GET)
-	public String n_selectAll(Model model) {
+	public String n_selectAll(Model model, @RequestParam(defaultValue = "1") int cpage) {
 		log.info("/n_selectAll.do");
-		
-		List<NoticeVO> vos = service.selectAll();
+		log.info("cpage...{}",cpage);
+		List<NoticeVO> vos = service.selectAll(cpage);
 		log.info("{}",vos);
-		
+		int result = service.n_row_count();
+		log.info("result...{}",Math.ceil(result/10.0));
 		model.addAttribute("vos",vos);
+		model.addAttribute("totalPageCount",Math.ceil(result/10.0));
+		
 		
 		return "notice/selectAll";
 	}
+	
+	
 	
 	@RequestMapping(value = {"/n_selectOne.do"}, method = RequestMethod.GET)
 	public String n_selectOne(NoticeVO vo, Model model) {

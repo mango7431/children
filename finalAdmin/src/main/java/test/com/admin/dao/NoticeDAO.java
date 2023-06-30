@@ -12,11 +12,13 @@ public interface NoticeDAO {
 	
 	public int delete(NoticeVO vo);
 	
-	public List<NoticeVO> selectAll();
+	public List<NoticeVO> selectAll(int cpage);
 	
 	public NoticeVO selectOne(NoticeVO vo);
 
 	public List<NoticeVO> searchList(String searchKey, String searchWord);
+
+	public int n_row_count();
 	
 
 }
