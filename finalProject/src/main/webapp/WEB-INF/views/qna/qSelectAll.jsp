@@ -68,9 +68,6 @@
 					let status = '';
 					let category = '';
 					let date = '';
-
-					// 날짜 형식 지정
-					var formattedDate = date.toLocaleString();
 					
 					$.each(vos, function(index, vo) {
 						if (vo.qna_status === 1) {

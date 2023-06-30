@@ -16,8 +16,10 @@
 
 	<div class="container">
 	<ul>
-		<li><a href="json_q_selectAll.do?writer=tester1">/json_q_selectAll.do</a></li>
+		<li><a href="json_q_selectAll.do?writer=tester1">json_q_selectAll.do</a></li>
 		<li><a href="q-selectAll.do?writer=tester1">q-selectAll.do</a></li>
+		<hr>
+		<li><a href="json_q_selectOne.do?qna_num=1">json_q_selectOne.do</a></li>
 		<li><a href="q-selectOne.do">q-selectOne.do</a></li>
 	</ul>
 	</div>

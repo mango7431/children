@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="Q_SELECT_ONE" resultType="test.com.idle.vo.QnaVO">
-		select * from qna where writer=#{writer} and qna_num = #{qnaNum}
+		select * from qna where qna_num = #{qna_num}
 	</select>
 	
 	<insert id="Q_INSERT" parameterType="test.com.idle.vo.QnaVO">

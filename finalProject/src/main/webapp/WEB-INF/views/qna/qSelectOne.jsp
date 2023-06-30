@@ -15,8 +15,51 @@
 	
 	<script type="text/javascript">
 		$(function(){
-			
-			
+			$.ajax({
+				url: "json_q_selectOne.do",
+				data: {qna_num : ${param.qna_num}},
+				method: 'GET',
+				dataType: 'json',
+				success: function(vo){
+					console.log('ajax...success:', vo);
+					let status = '';
+					let category = '';
+
+					let date = new Date(vo.qna_date);
+					let formattedDate = date.toLocaleString();
+					
+					if (vo.qna_status === 1) {
+						status = '미답변';
+				  } else if (vo.qna_status === 2) {
+					  status = '답변완료';
+				  }
+					status = vo.qna_status === 1 ? '미답변' : '답변완료';
+					
+					if (vo.qna_category === 1) {
+						category = '계정문의';
+				  } else if (vo.qna_category === 2) {
+					  category = '채팅, 알림문의';
+				  } else if (vo.qna_category === 3) {
+					  category = '거래문의';
+				  } else if (vo.qna_category === 4) {
+					  category = '광고문의';
+				  }else if (vo.qna_category === 5){
+					  category = '기타문의';
+				  }
+						
+					let tag_vo = `
+	    				<div class="fs-4"><span>\${status}</span>\${vo.qna_title}</div>
+	    				<div><span>\${category}</span><span class="ms-3">\${formattedDate}</span></div>
+	    				<hr>
+	    				<div>\${vo.qna_content}</div>
+				  `;
+					
+					$("#vo").html(tag_vo);
+				},
+				error: function(xhr, status, error) {
+					console.log('xhr.status:', xhr.status);
+				}
+			});
 		}); //load
 		
 		
@@ -28,35 +71,31 @@
 
 	<div class="container">
 		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
-	 		<div class="row my-3">
-	     	<div class="col-md-3 col-lg-2">     
-			    <ul class="mypage-floating-menu px-0">
-			    	<li><a href="#">마이페이지</a></li>
-			    	<li><a href="#">회원정보수정</a></li>
-			    	<li><a href="#">찜목록</a></li>
-			    	<li><a href="#">내 거래 목록</a></li>
-			    	<li><a href="#">내동네설정</a></li>
-			    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
-			    </ul>
-	   		</div>
-	   		<div class="col-md-9 col-lg-10 px-5">
-	      	<div class="row">
-	      		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
-	      		<div class="col-md-6 text-end">
-	      			<a href="#">수정하기</a>
-	      			<a href="#">삭제하기</a>
-	      		</div>
-      			<hr class="mt-3">
-	      	</div>
-   				<div class="row q-detail py-3">
-     				<div class="fs-4"><span>미답변</span>문의사항입니다.</div>
-     				<div><span>계정문의</span><span class="ms-3">2022.08.23</span></div>
-     				<hr>
-     				<div>글내용입니다.</div>
-     			</div>
-	  		</div>      
-	  	</div>
-		</div>
+ 		<div class="row my-3">
+     	<div class="col-md-3 col-lg-2">     
+		    <ul class="mypage-floating-menu px-0">
+		    	<li><a href="#">마이페이지</a></li>
+		    	<li><a href="#">회원정보수정</a></li>
+		    	<li><a href="#">찜목록</a></li>
+		    	<li><a href="#">내 거래 목록</a></li>
+		    	<li><a href="#">내동네설정</a></li>
+		    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
+		    </ul>
+   		</div>
+   		<div class="col-md-9 col-lg-10 px-5">
+      	<div class="row">
+      		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
+      		<div class="col-md-6 text-end">
+      			<a href="#">수정하기</a>
+      			<a href="#">삭제하기</a>
+      		</div>
+     			<hr class="mt-3">
+      	</div>
+  				<div class="row q-detail py-3" id="vo">
+
+    			</div>
+  		</div>      
+  	</div>
 	</div>
 </body>
 </html>
