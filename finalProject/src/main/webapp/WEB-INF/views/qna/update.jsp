@@ -87,35 +87,34 @@
       		<div class="col fs-5 fw-bold">Q&A 수정</div>
      			<hr class="mt-3">
       	</div>
-      	<form action="q-updateOK.do" method="get">
-	 				<div class="row py-3 align-items-center justify-content-center">
-						<div class="col-md-5 col-lg-3">
-							<select id="category" class="form-select" aria-label="Default select example">
-								<option>카테고리</option>
-							  <option value="1">계정문의</option>
-							  <option value="2">채팅, 알림문의</option>
-							  <option value="3">거래문의</option>
-							  <option value="4">광고문의</option>
-							  <option value="5">기타문의</option>
-							</select>
-						</div>
-						<div class="col-md-7 col-lg-9">
-							<div>
-							  <input type="text" id="title" class="form-control" placeholder="제목">
-							</div>
-						</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col">
-				  		<textarea id="content" class="form-control" placeholder="내용을 입력해주세요" style="height: 200px"></textarea>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col mt-3 d-flex justify-content-end">
-				  		<button class="finish-btn">수정하기</button>
-	   				</div>
-	   			</div>
-   			</form>
+      	      	<form action="q-insertOK.do" method="get">
+			    <div class="row align-items-start justify-content-center">
+		        <input type="hidden" name="writer" value="tester1">
+		        <div class="col-md-5 col-lg-3 mb-3 mb-md-0">
+		            <select id="category" name="qna_category" class="form-select" aria-label="Default select example">
+		                <option>카테고리</option>
+		                <option value="1">계정문의</option>
+		                <option value="2">채팅, 알림문의</option>
+		                <option value="3">거래문의</option>
+		                <option value="4">광고문의</option>
+		                <option value="5">기타문의</option>
+		            </select>
+		        </div>
+		        <div class="col-md-7 col-lg-9">
+		            <input type="text" id="title" name="qna_title" class="form-control" placeholder="제목">
+		        </div>
+			    </div>
+			    <div class="row mt-3">
+		        <div class="col">
+		            <textarea id="content" name="qna_content" class="form-control" placeholder="내용을 입력해주세요" style="height: 200px"></textarea>
+		        </div>
+			    </div>
+			    <div class="row mt-3">
+		        <div class="col d-flex justify-content-end">
+		            <button type="submit" class="finish-btn">수정하기</button>
+		        </div>
+			    </div>
+				</form>
    			
   		</div>      
   	</div>
