@@ -13,19 +13,19 @@ import test.com.admin.vo.QnaVO;
 public class QnaController {
 	
 	
-	@RequestMapping(value = "/qna_selectAll.do", method = RequestMethod.GET)
-	public String qna_selectAll() {
-		log.info("/qna_selectAll.do");
+	@RequestMapping(value = "/qnaSelectAll.do", method = RequestMethod.GET)
+	public String qnaSelectAll() {
+		log.info("/qnaSelectAll.do");
 
 		return "qna/selectAll";
-	}//end qna_selectAll
+	}//end qnaSelectAll
 	
-	@RequestMapping(value = "/qna_selectOne.do", method = RequestMethod.GET)
-	public String qna_selectOne(QnaVO vo) {
-		log.info("/qna_selectOne.do");
+	@RequestMapping(value = "/qnaSelectOne.do", method = RequestMethod.GET)
+	public String qnaSelectOne(QnaVO vo) {
+		log.info("/qnaSelectOne.do");
 		log.info("{}",vo);
 		
 		return "qna/selectOne";
-	}//end qna_selectOne
+	}//end qnaSelectOne
 	
 }

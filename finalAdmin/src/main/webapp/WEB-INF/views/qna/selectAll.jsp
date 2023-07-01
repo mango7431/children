@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Qna게시판 목록</title>
+<title>Qna 목록</title>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
@@ -13,85 +14,41 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-		url : "b_json_selectAll.do",
-//			data:{},
-		method:'GET',//default get
-//			method:'POST',
-		dataType:'json', //xml,text
-		success : function(arr) {
-			console.log('ajax...success:', arr);//{}
-			
- 			let tag_vos = '';
- 			
- 			$.each(arr,function(index,vo){
-//	 				console.log(index,vo);
-//	 				console.log(vo.num,vo.id,vo.pw,vo.name,vo.tel);
- 				tag_vos += `
- 					<tr>
- 					<td>				
- 						<a href="b_selectOne.do?wnum=\${vo.wnum}">\${vo.wnum}</a>
- 					</td>
- 					<td>\${vo.title}</td>
- 					<td>\${vo.writer}</td>
- 					<td>\${vo.wdate}</td>
- 					<td>\${vo.vcount}</td>
- 				</tr>
- 				`;
- 			});
-			
-			$("#vos").html(tag_vos);
-		},
-		error:function(xhr,status,error){
-			console.log('xhr.status:', xhr.status);
-		}
-	});//end $.ajax()...
-});//end onload...
-
-function searchList(){
-	console.log("searchList()...");
-	
-	$.ajax({
-		url : "b_json_searchList.do",
-		data:{
-			searchKey:$('#searchKey').val(),
-			searchWord:$('#searchWord').val(),
-		},
-		method:'GET',//default get
-//			method:'POST',
-		dataType:'json', //xml,text
-		success : function(arr) {
-			console.log('ajax...success:', arr);//{}
-			
- 			let tag_vos = '';
- 			
- 			$.each(arr,function(index,vo){
-//	 				console.log(index,vo);
-//	 				console.log(vo.num,vo.id,vo.pw,vo.name,vo.tel);
- 				tag_vos += `
- 					<tr>
- 					<td>				
- 						<a href="b_selectOne.do?wnum=\${vo.wnum}">\${vo.wnum}</a>
- 					</td>
- 					<td>\${vo.title}</td>
- 					<td>\${vo.writer}</td>
- 					<td>\${vo.wdate}</td>
- 					<td>\${vo.vcount}</td>
- 				</tr>
- 				`;
- 			});
-			
-			$("#vos").html(tag_vos);
-		},
-		error:function(xhr,status,error){
-			console.log('xhr.status:', xhr.status);
-		}
-	});//end $.ajax()...
-	
-}//end searchList()
+	$(function(){
+		$.ajax({
+			url : "jsonQnaSelectAll.do",
+			method:'GET',
+			dataType:'json',
+			success : function(arr) {
+				console.log('ajax...success:', arr);
+				
+	 			let tag_vos = '';
+	 			
+	 			$.each(arr,function(index,vo){
+	 				tag_vos += `
+	 					<tr>
+	 					<td>				
+	 						<a href="jsonQnaSelectOne.do?qna_num=\${vo.qna_num}">\${vo.qna_num}</a>
+	 					</td>
+	 					<td>\${vo.qna_status}</td>
+	 					<td>\${vo.qna_category}</td>
+	 					<td>\${vo.qna_content}</td>
+	 					<td>\${vo.writer}</td>
+	 					<td>\${vo.qna_date}</td>
+	 				</tr>
+	 				`;
+	 			});
+				
+				$("#vos").html(tag_vos);
+			},
+			error:function(xhr,status,error){
+				console.log('xhr.status:', xhr.status);
+			}
+		});//end $.ajax()...
+	});//end onload...
 
 </script>
+
 
 
 
@@ -111,23 +68,15 @@ function searchList(){
 	<table id="boardList">
 		<thead>
 			<tr>
-				<th>wnum</th>
-				<th>title</th>
-				<th>writer</th>
-				<th>wdate</th>
-				<th>vcount</th>
+				<th>질문번호</th>
+				<th>답변여부</th>
+				<th>구분</th>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>등록일자</th>
 			</tr>
 		</thead>
 		<tbody id="vos">
-			<%-- 			<c:forEach var="vo" items="${vos}"> --%>
-			<!-- 				<tr> -->
-			<%-- 					<td><a href="b_selectOne.do?wnum=${vo.wnum}">${vo.wnum}</a></td> --%>
-			<%-- 					<td>${vo.title}</td> --%>
-			<%-- 					<td>${vo.writer}</td> --%>
-			<%-- 					<td>${vo.wdate}</td> --%>
-			<%-- 					<td>${vo.vcount}</td> --%>
-			<!-- 				</tr> -->
-			<%-- 			</c:forEach> --%>
 		</tbody>
 		<tfoot>
 			<tr>

@@ -10,7 +10,9 @@
 
 	<select id="QNA_SELECT_ALL"
 		resultType="test.com.admin.vo.QnaVO">
-		select * from qna order by qna_num desc
+		select qna_num,qna_status,qna_category,qna_content,writer,
+			TO_CHAR(qna_date, 'YYYY-MM-DD') qna_date from qna  
+			order by qna_num desc
 	</select>
 	
 	<select id="QNA_SELECT_ONE"
