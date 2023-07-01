@@ -20,10 +20,10 @@ public class MemberRestController {
 	@Autowired
 	MemberService service;
 	
-	@RequestMapping(value = "/json_idCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/jsonIdCheck.do", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, String> json_idCheck(MemberVO vo) {
-		log.info("/json_idCheck.do");
+	public Map<String, String> jsonIdCheck(MemberVO vo) {
+		log.info("/jsonIdCheck.do");
 		log.info("{}",vo);//id
 		
 		MemberVO vo2 = service.idCheck(vo);
@@ -37,6 +37,6 @@ public class MemberRestController {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("result", msg);
 		return map;
-	}
+	}//end jsonIdCheck
 	
 }//end class

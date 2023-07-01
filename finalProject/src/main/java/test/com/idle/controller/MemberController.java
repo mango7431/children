@@ -35,32 +35,32 @@ public class MemberController {
 	
 	
 	//테스트용
-	@RequestMapping(value = "/m_insert2.do", method = RequestMethod.GET)
-	public String m_insert2() {
-		log.info("/m_insert2.do");
+	@RequestMapping(value = "/memberInsert2.do", method = RequestMethod.GET)
+	public String memberInsert2() {
+		log.info("/memberInsert2.do");
 		
 		return "member/insert2";
-	}//end m_insert2
+	}//end memberInsert2
 	
 	
 	//테스트용
-	@RequestMapping(value = "/m_insert3.do", method = RequestMethod.GET)
-	public String m_insert3() {
-		log.info("/m_insert3.do");
+	@RequestMapping(value = "/memberInsert3.do", method = RequestMethod.GET)
+	public String memberInsert3() {
+		log.info("/memberInsert3.do");
 		
 		return "member/insert3";
-	}//end m_insert3
+	}//end memberInsert3
 	
-	@RequestMapping(value = "/m_insert.do", method = RequestMethod.GET)
-	public String m_insert() {
-		log.info("/m_insert.do");
+	@RequestMapping(value = "/memberInsert.do", method = RequestMethod.GET)
+	public String memberInsert() {
+		log.info("/memberInsert.do");
 
 		return "member/insert";
-	}//end m_insert
+	}//end memberInsert
 	
-	@RequestMapping(value = "/m_insertOK.do", method = RequestMethod.POST)
-	public String m_insertOK(MemberVO vo) throws IllegalStateException, IOException {
-		log.info("/m_insertOK.do");
+	@RequestMapping(value = "/memberInsertOK.do", method = RequestMethod.POST)
+	public String memberInsertOK(MemberVO vo) throws IllegalStateException, IOException {
+		log.info("/memberInsertOK.do");
 		log.info("{}", vo);
 		
 		String getOriginalFilename = vo.getMultipartFile().getOriginalFilename();
@@ -105,7 +105,7 @@ public class MemberController {
 			return "redirect:m_insert.do";
 		}
 		
-	}//end m_insertOK
+	}//end memberInsertOK
 	
 //	@RequestMapping(value = "/m_selectAll.do", method = RequestMethod.GET)
 //	public String m_selectAll(Model model) {

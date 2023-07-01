@@ -21,9 +21,9 @@
 	               	
 	        <div>
 	        	<a id="login" href="login.do">로그인</a>
-	        	<a id="m_insert" href="m_insert3.do">회원가입3(최종)</a>
-<!-- 	        	<a href="m_insert.do">회원가입1</a> -->
-<!-- 	        	<a href="m_insert2.do">회원가입2</a> -->
+	        	<a id="m_insert" href="memberInsert3.do">회원가입3(최종)</a>
+<!-- 	        	<a href="memberInsert1.do">회원가입1</a> -->
+<!-- 	        	<a href="memberInsert2.do">회원가입2</a> -->
 <!-- 	        	<a href="m_selectAll.do">회원목록test</a> -->
 	        </div>
 	        <div class="dropdown text-end">

@@ -23,7 +23,7 @@
 		//2.jquery ajax
 		console.log('id:', $("#id").val());
 		$.ajax({
-			url : "json_idCheck.do",
+			url : "jsonIdCheck.do",
 			data : {
 				id : $("#id").val()
 			},
@@ -47,7 +47,7 @@
 
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 
-	<form action="m_insertOK.do" method="post"
+	<form action="memberInsertOK.do" method="post"
 		enctype="multipart/form-data">
 		<table id="memberList">
 			<tr>
