@@ -12,7 +12,9 @@
 </head>
 <body>
 <jsp:include page="top_menu.jsp"></jsp:include>
-	<h1>Hello, world!</h1>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<h1>Hello, world! ${user_id}</h1>
 	<P>The time on the server is ${serverTime}.</P>
 	<table class="table table-success table-striped">
 		<tr>

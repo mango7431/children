@@ -9,8 +9,8 @@
 			<value>classpath:jdbc/oracle.properties</value>
 		</property>
 	</bean>
-
-	<!--1. pom.xml commons-dbcp.jar -->
+	
+		<!--1. pom.xml commons-dbcp.jar -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName"
@@ -26,7 +26,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-<!-- 				<value>classpath:jdbc/sqlMapper_member.xml</value> -->
+				<value>classpath:jdbc/sqlMapper_member.xml</value>
 <!-- 				<value>classpath:jdbc/sqlMapper_board.xml</value> -->
 			</list>
 		</property>
@@ -35,6 +35,12 @@
 	<bean id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="-1" />
+		<!-- -1 이면 크기제한 없음 -->
 	</bean>
 		
 </beans>
