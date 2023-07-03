@@ -121,7 +121,7 @@
 
 	<div class="container">
 		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
-	 		<div class="row my-3">
+ 		<div class="row my-3">
 	     	<div class="col-md-3 col-lg-2">     
 			    <ul class="mypage-floating-menu px-0">
 			    	<li><a href="#">마이페이지</a></li>
@@ -173,7 +173,7 @@
 				</nav>  
 	          
 	  		</div>      
-	  	</div>
+	  </div>
 	</div>
 </body>
 </html>

@@ -1,6 +1,5 @@
 package test.com.idle.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;

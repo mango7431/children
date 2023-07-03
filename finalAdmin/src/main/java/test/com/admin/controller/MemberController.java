@@ -1,4 +1,4 @@
-package test.com.admin;
+package test.com.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,20 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @Slf4j
-public class HomeController {
+public class MemberController {
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = {"/","home.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/memberSelectAll.do"}, method = RequestMethod.GET)
 	public String home(Model model) {
 
-		return "home";
+		return "member/selectAll";
 	}
 	
 }

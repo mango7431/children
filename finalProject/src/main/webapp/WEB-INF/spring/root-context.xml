@@ -27,7 +27,6 @@
 		<property name="mapperLocations">
 			<list>
  				<value>classpath:jdbc/sqlMapper_qna.xml</value>
-<!-- 				<value>classpath:jdbc/sqlMapper_board.xml</value> -->
 			</list>
 		</property>
 	</bean>

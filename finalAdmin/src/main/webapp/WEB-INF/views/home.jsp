@@ -12,19 +12,12 @@
 </head>
 <body>
 <jsp:include page="top_menu.jsp"></jsp:include>
-	<h1>Hello, world!</h1>
-	<P>The time on the server is ${serverTime}.</P>
-	<table class="table table-success table-striped">
-		<tr>
-			<td>test1</td>
-			<td>test1</td>
-			<td>test1</td>
-		</tr>
-		<tr>
-			<td>test1</td>
-			<td>test1</td>
-			<td>test1</td>
-		</tr>
-	</table>
+
+	<div class="container">
+	<ul>
+		<li><a href="jsonMemberSelectAll.do">jsonMemberSelectAll.do</a></li>
+		<li><a href="memberSelectAll.do">memberSelectAll.do.do</a></li>
+	</ul>
+	</div>
 </body>
 </html>

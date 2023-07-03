@@ -17,28 +17,28 @@ public class QnaController {
 	@Autowired
 	private QnaService service;
 	
-	@RequestMapping(value = "qnaSelectAll.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaSelectAll.do", method = RequestMethod.GET)
 	public String qnaSelectAll(Model model) {
 		log.info("/qnaSelectAll.do");
 		
 		return "qna/selectAll";
 	}
 	
-	@RequestMapping(value = "qnaSelectOne.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaSelectOne.do", method = RequestMethod.GET)
 	public String qnaSelectOne(Model model) {
 		log.info("/qnaSelectOne.do");
 		
 		return "qna/selectOne";
 	}
 	
-	@RequestMapping(value = "qnaInsert.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaInsert.do", method = RequestMethod.GET)
 	public String qnaInsert(Model model) {
 		log.info("/qnaInsert.do");
 		
 		return "qna/insert";
 	}
 	
-	@RequestMapping(value = "qnaInsertOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaInsertOK.do", method = RequestMethod.GET)
 	public String qnaInsertOK(QnaVO vo) {
 		log.info("/qnaInsertOK.do");
 		log.info("{}", vo);
@@ -53,14 +53,14 @@ public class QnaController {
 		}
 	}
 	
-	@RequestMapping(value = "qnaUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaUpdate.do", method = RequestMethod.GET)
 	public String qnaUpdate(Model model) {
 		log.info("/qnaUpdate.do");
 		
 		return "qna/update";
 	}
 	
-	@RequestMapping(value = "qnaUpdateOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaUpdateOK.do", method = RequestMethod.GET)
 	public String qnaUpdateOK(QnaVO vo) {
 		log.info("/qnaUpdateOK.do");
 		log.info("{}", vo);
@@ -75,7 +75,7 @@ public class QnaController {
 		}
 	}
 	
-	@RequestMapping(value = "qnaDeleteOK.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qnaDeleteOK.do", method = RequestMethod.GET)
 	public String qnaDeleteOK(QnaVO vo) {
 		log.info("/qnaDeleteOK.do");
 		log.info("{]", vo);
