@@ -42,4 +42,14 @@ public class MemberRestController {
 		return vos;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = {"/jsonMemberSelectOne.do"}, method = RequestMethod.GET)
+	public MemberVO jsonMemberSelectOne(MemberVO vo) {
+		log.info("/jsonMemberSelectOne.do");
+		
+		MemberVO vo2 = service.memberSelectOne(vo);
+		log.info("vo2:{}", vo2);
+		return vo2;
+	}
+	
 }

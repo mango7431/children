@@ -19,6 +19,8 @@
 		<li><a href="memberSelectAll.do">memberSelectAll.do</a></li>
 		<hr>
 		<li><a href="jsonMemberSearchList.do?searchKey=id&searchWord=tester1">jsonMemberSearchList.do</a></li>
+		<hr>
+		<li><a href="jsonMemberSelectOne.do?id=tester1">jsonMemberSelectOne.do</a></li>
 	</ul>
 	</div>
 </body>

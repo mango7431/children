@@ -29,7 +29,8 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public MemberVO memberSelectOne(MemberVO vo) {
-		return null;
+		log.info("memberSelectOne...");
+		return sqlSession.selectOne("M_SELECT_ONE", vo);
 	}
 
 	@Override
