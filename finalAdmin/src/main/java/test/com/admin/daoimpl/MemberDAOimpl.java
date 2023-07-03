@@ -39,7 +39,18 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public List<MemberVO> memberSearchList(String searchKey, String searchWord) {
-		return null;
+		log.info("memberSearchList...");
+		log.info("searchKey: " + searchKey);
+		log.info("searchWord: " + searchWord);
+		
+		List<MemberVO> vos = null;
+		
+		if (searchKey.equals("id")) {
+			vos = sqlSession.selectList("M_SEARCHLIST_ID", "%" + searchWord + "%");		
+		} else {
+			vos = sqlSession.selectList("M_SEARCHLIST_NAME", "%" + searchWord + "%");					
+		}
+		return vos;
 	}
 
 }

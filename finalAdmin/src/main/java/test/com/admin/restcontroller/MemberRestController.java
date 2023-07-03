@@ -30,4 +30,16 @@ public class MemberRestController {
 		return vos;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = {"/jsonMemberSearchList.do"}, method = RequestMethod.GET)
+	public List<MemberVO> jsonMemberSearchList(String searchKey, String searchWord) {
+		log.info("/jsonMemberSearchList.do");
+		log.info("searchKey:{}", searchKey);
+		log.info("searchWord:{}", searchWord);
+		
+		List<MemberVO> vos = service.memberSearchList(searchKey, searchWord);
+		log.info("vos size:{}", vos.size());
+		return vos;
+	}
+	
 }

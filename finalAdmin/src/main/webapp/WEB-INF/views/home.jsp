@@ -16,7 +16,9 @@
 	<div class="container">
 	<ul>
 		<li><a href="jsonMemberSelectAll.do">jsonMemberSelectAll.do</a></li>
-		<li><a href="memberSelectAll.do">memberSelectAll.do.do</a></li>
+		<li><a href="memberSelectAll.do">memberSelectAll.do</a></li>
+		<hr>
+		<li><a href="jsonMemberSearchList.do?searchKey=id&searchWord=tester1">jsonMemberSearchList.do</a></li>
 	</ul>
 	</div>
 </body>

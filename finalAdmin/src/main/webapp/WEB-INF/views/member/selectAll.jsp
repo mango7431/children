@@ -44,7 +44,7 @@
 			});
 			
 			$("#vos").on("click", "tr", function() {
-			    var id = $(this).find("td:nth-child(3)").text(); // ID 값을 가져옴
+			    var id = $(this).find("td:nth-child(3)").text();
 			    goToDetailPage(id);
 			});
 			
@@ -54,6 +54,43 @@
 			var detailPageUrl = "memberSelectOne.do?id="+id
 			window.location.href = detailPageUrl;
 		}
+		
+		function searchList() {
+			console.log("searchList()...");
+			
+			$.ajax({
+				url: "jsonMemberSearchList.do",
+				data: {
+					searchKey: $('#searchKey').val(),
+					searchWord: $('#searchWord').val()					
+				},
+				method: 'GET',
+				dataType: 'json',
+				success: function(vos){
+					console.log('ajax...success:', vos);				
+					let tag_vos = '';
+					$.each(vos, function(index, vo) {
+						tag_vos += `
+					    <tr>
+					      <td scope="row" class="text-center align-middle">\${index+1}</td>
+					      <td scope="row" class="text-center align-middle">
+					      	<img width="35px" src="resources/uploadimg/\${vo.member_savename}">
+					      </td>
+					      <td scope="row" class="text-center align-middle">\${vo.id}</td>
+					      <td scope="row" class="text-center align-middle">\${vo.name}</td>
+					      <td scope="row" class="text-center align-middle">\${vo.address}</td>
+					      <td scope="row" class="text-center align-middle">\${vo.member_report}</td>
+				    	</tr>
+					  `;
+					});
+					
+					$("#vos").html(tag_vos);
+				},
+				error: function(xhr, status, error) {
+					console.log('xhr.status:', xhr.status);
+				}
+			});
+		}
 	</script>
 </head>
 <body>
@@ -62,17 +99,17 @@
 		<div class="breadcrumb fs-5 fw-bold px-4">회원목록</div>
 		<div class="row justify-content-end">
 			<div class="col-2">
-		    <select class="form-select" required aria-label="select example">
+		    <select class="form-select" id="searchKey" required aria-label="select example">
 		      <option selected>선택</option>
-		      <option value="아이디">아이디</option>
-		      <option value="이름">이름</option>
+		      <option value="id">아이디</option>
+		      <option value="name">이름</option>
 		    </select>
 			</div>
 			<div class="col-3">
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" id="searchWord">				
 			</div>
 			<div class="col-1">
-				<button type="button" class="submit-btn">검색</button>
+				<button type="button" class="submit-btn" onclick="searchList()">검색</button>
 			</div>
 		</div>	
 		<hr>
