@@ -92,11 +92,16 @@ function searchList(page=1){
 	<section style="padding-left: 100px; padding-right: 100px;">
 		<h1>중고거래(관리자)</h1>
 		<p>게시글 총 갯수 : <label id="totalCount">${page.totalCount}</label></p>
-		<select name="searchKey" id="searchKey">
+		
+		<form action="boardSearchList.do">
+			<select name="searchKey" id="searchKey">
 			<option value="board_title">제목</option>
 			<option value="writer">작성자</option>
-		</select> <input type="text" name="searchWord" value="제목" id="searchWord"/>
-		<button onclick="searchList()" class="btn btn-primary">검색</button>
+			</select> 
+			<input type="text" name="searchWord" value="제목" id="searchWord"/>
+			<input type="hidden" name="page" value="1" id="page"/>
+			<input type="submit" value="검색">
+		</form>
 		<table class="table">
 			<thead>
 				<tr>
@@ -120,17 +125,32 @@ function searchList(page=1){
 			</tbody>
 			<tfoot id="pages">
 				<tr>
-					<td colspan="5" align="center">
-						<c:if test="${page.startPage > 1}">
-                			<a href="boardSelectAll.do?page=${page.startPage - 1}">&lt;</a>
-            			</c:if>
-						<c:forEach begin="${page.startPage}" end="${page.endPage}" var="num">
-							<a href="boardSelectAll.do?page=${num}">${num}</a>
-						</c:forEach>
-						<c:if test="${page.endPage < page.totalPage}">
-                			<a href="boardSelectAll.do?page=${page.endPage + 1}">&gt;</a>
-            			</c:if>
-					</td>
+					<c:if test="${empty param.searchKey}">
+						<td colspan="5" align="center">
+							<c:if test="${page.startPage > 1}">
+								<a href="boardSelectAll.do?page=${page.startPage - 1}">&lt;</a>
+							</c:if> 
+								<c:forEach begin="${page.startPage}" end="${page.endPage}" var="num">
+									<a href="boardSelectAll.do?page=${num}">${num}</a>
+								</c:forEach> 
+							<c:if test="${page.endPage < page.totalPage}">
+								<a href="boardSelectAll.do?page=${page.endPage + 1}">&gt;</a>
+							</c:if>
+						</td>
+					</c:if>
+					<c:if test="${not empty param.searchKey}">
+						<td colspan="5" align="center">
+							<c:if test="${page.startPage > 1}">
+								<a href="boardSearchList.do?searchKey=${param.searchKey}&searchWord=${param.searchWord}&page=${page.startPage - 1}">&lt;</a>
+							</c:if> 
+								<c:forEach begin="${page.startPage}" end="${page.endPage}" var="num">
+									<a href="boardSearchList.do?searchKey=${param.searchKey}&searchWord=${param.searchWord}&page=${num}">${num}</a>
+								</c:forEach> 
+							<c:if test="${page.endPage < page.totalPage}">
+								<a href="boardSearchList.do?searchKey=${param.searchKey}&searchWord=${param.searchWord}&page=${page.endPage + 1}">&gt;</a>
+							</c:if>
+						</td>
+					</c:if>
 				</tr>
 			</tfoot>
 		</table>

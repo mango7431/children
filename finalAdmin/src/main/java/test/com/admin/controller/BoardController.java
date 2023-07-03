@@ -28,6 +28,7 @@ public class BoardController {
 		log.info("boardCount : {}",boardCount);
 		
 		PageVO page = new PageVO(vo.getPage(),10,boardCount);
+		log.info("{}",page);
 		
 		List<BoardVO> vos = service.selectAllPage(page);
 		log.info("vos : {}",vos);
@@ -73,6 +74,25 @@ public class BoardController {
 		log.info("result : {}",result);
 		
 		return "redirect:boardSelectAll.do?page=1";
+	}
+	
+	@RequestMapping(value = "/boardSearchList.do", method = RequestMethod.GET)
+	public String boardSearchList(String searchKey,String searchWord,PageVO vo,Model model) {
+		log.info("/boardSearchList.do...{}",vo);
+		
+		int boardSearchCount = service.boardSearchCount(searchKey,searchWord);
+		log.info("boardCount : {}",boardSearchCount);
+		
+		PageVO page = new PageVO(vo.getPage(),10,boardSearchCount);
+		log.info("{}",page);
+		
+		List<BoardVO> vos = service.searchList(searchKey,searchWord,page);
+		log.info("{}",vos);
+		
+		model.addAttribute("vos", vos);
+		model.addAttribute("page",page);
+		
+		return "board/selectAll";
 	}
 	
 	

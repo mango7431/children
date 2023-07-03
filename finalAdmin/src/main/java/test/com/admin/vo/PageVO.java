@@ -26,8 +26,10 @@ public class PageVO {
 		totalPage = (totalCount - 1)/size+1;
 		
 		// 페이지가 잘못 넘어왔을때
-		this.page = (page<1)?1:page;
-		this.page = (page>totalPage)? totalPage:page;
+		page = (page<1)?1:page;
+		page = (page>totalPage)? totalPage:page;
+		
+		this.page = page;
 		
 		// 1페이지면 start = 1 즉, 데이터 첫번째부터
 		start = (this.page-1)*size+1;
