@@ -15,7 +15,7 @@
 <jsp:include page="../top_menu.jsp"></jsp:include>
 	<h1>공지사항 작성</h1>
 	
-	<form action="n_insertOK.do" method="post">
+	<form action="noticeInsertOK.do" method="post">
 		<table id="noticeList">
 			<tr>
 				<td><label for="notice_title">제목</label></td>

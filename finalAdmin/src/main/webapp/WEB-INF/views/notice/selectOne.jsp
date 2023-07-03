@@ -36,8 +36,8 @@
 	<tfoot>
 		<tr>
 			<td colspan="4">
-			<a href="n_update.do?notice_num=${param.notice_num}" class="myButton">수정</a>
-			<a href="n_deleteOK.do?notice_num=${param.notice_num}" class="myButton">삭제</a>
+			<a href="noticeUpdate.do?notice_num=${param.notice_num}" class="myButton">수정</a>
+			<a href="noticeDeleteOK.do?notice_num=${param.notice_num}" class="myButton">삭제</a>
 			</td>
 		</tr>
 	</tfoot>

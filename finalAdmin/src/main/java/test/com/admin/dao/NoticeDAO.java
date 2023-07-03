@@ -18,7 +18,7 @@ public interface NoticeDAO {
 
 	public List<NoticeVO> searchList(String searchKey, String searchWord);
 
-	public int n_row_count();
+	public int noticeRowCount();
 	
 
 }

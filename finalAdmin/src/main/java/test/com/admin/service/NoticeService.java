@@ -44,7 +44,7 @@ public class NoticeService {
 		return dao.searchList(searchKey, searchWord);
 	}
 
-	public int n_row_count() {
-		return dao.n_row_count();
+	public int noticeRowCount() {
+		return dao.noticeRowCount();
 	}
 }

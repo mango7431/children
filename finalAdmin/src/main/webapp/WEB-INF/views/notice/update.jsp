@@ -15,7 +15,7 @@
 <jsp:include page="../top_menu.jsp"></jsp:include>
 	<h1>공지사항 수정</h1>
 	
-	<form action="n_updateOK.do" method="post">
+	<form action="noticeUpdateOK.do" method="post">
 		<table id="noticeList">
 			<tr>
 				<td><label for="notice_num">번호</label></td>

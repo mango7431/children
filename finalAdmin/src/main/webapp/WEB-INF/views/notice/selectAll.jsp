@@ -15,10 +15,10 @@
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<h1>공지사항</h1>
-	<a href="n_insert.do?notice_num=${param.notice_num}" class="myButton" style="float: right;">글쓰기</a>
+	<a href="noticeInsert.do?notice_num=${param.notice_num}" class="myButton" style="float: right;">글쓰기</a>
 	
 	<div style="float:right;">
-		<form action="n_searchList.do">
+		<form action="noticeSearchList.do">
 			<select name="searchKey" id=searchKey">
 				<option value="notice_title">제목</option>
 				<option value="notice_content">내용</option>
@@ -40,7 +40,7 @@
 	<tbody>
 		<c:forEach var="vo" items="${vos}">
 			<tr>
-				<td><a href="n_selectOne.do?notice_num=${vo.notice_num}">${vo.notice_num}</a></td>
+				<td><a href="noticeSelectOne.do?notice_num=${vo.notice_num}">${vo.notice_num}</a></td>
 				<td>${vo.notice_title}</td>
 				<td>${vo.notice_content}</td>
 				<td>${vo.notice_date}</td>
@@ -52,7 +52,7 @@
 			<td colspan="4">
 					<c:forEach var="i" begin="1"
 							end="${totalPageCount }" step="1">
-							<a href="n_selectAll.do?cpage=${i }${params}">${i }</a>&nbsp;
+							<a href="noticeSelectAll.do?cpage=${i }${params}">${i }</a>&nbsp;
 					</c:forEach>
 			</td>
 		</tr>

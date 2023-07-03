@@ -23,13 +23,13 @@ public class NoticeController {
 	@Autowired
 	NoticeService service;
 	
-	@RequestMapping(value = {"/n_selectAll.do"}, method = RequestMethod.GET)
-	public String n_selectAll(Model model, @RequestParam(defaultValue = "1") int cpage) {
-		log.info("/n_selectAll.do");
+	@RequestMapping(value = {"/noticeSelectAll.do"}, method = RequestMethod.GET)
+	public String noticeSelectAll(Model model, @RequestParam(defaultValue = "1") int cpage) {
+		log.info("/noticeSelectAll.do");
 		log.info("cpage...{}",cpage);
 		List<NoticeVO> vos = service.selectAll(cpage);
 		log.info("{}",vos);
-		int result = service.n_row_count();
+		int result = service.noticeRowCount();
 		log.info("result...{}",Math.ceil(result/10.0));
 		model.addAttribute("vos",vos);
 		model.addAttribute("totalPageCount",Math.ceil(result/10.0));
@@ -40,9 +40,9 @@ public class NoticeController {
 	
 	
 	
-	@RequestMapping(value = {"/n_selectOne.do"}, method = RequestMethod.GET)
-	public String n_selectOne(NoticeVO vo, Model model) {
-		log.info("/n_selectOne.do...{}",vo);
+	@RequestMapping(value = {"/noticeSelectOne.do"}, method = RequestMethod.GET)
+	public String noticeSelectOne(NoticeVO vo, Model model) {
+		log.info("/noticeSelectOne.do...{}",vo);
 		
 		NoticeVO vo2 = service.selectOne(vo);
 		model.addAttribute("vo2",vo2);
@@ -50,9 +50,9 @@ public class NoticeController {
 		return "notice/selectOne";
 	}
 	
-	@RequestMapping(value = {"/n_searchList.do"}, method = RequestMethod.GET)
-	public String n_searchList(Model model,String searchKey, String searchWord) {
-		log.info("/n_searchList.do");
+	@RequestMapping(value = {"/noticeSearchList.do"}, method = RequestMethod.GET)
+	public String noticeSearchList(Model model,String searchKey, String searchWord) {
+		log.info("/noticeSearchList.do");
 		log.info("searchKey:{}",searchKey);
 		log.info("searchWord:{}",searchWord);
 		
@@ -63,16 +63,16 @@ public class NoticeController {
 		return "notice/selectAll";
 	}
 	
-	@RequestMapping(value = {"/n_insert.do"}, method = RequestMethod.GET)
-	public String n_insert() {
-		log.info("/n_insert.do");
+	@RequestMapping(value = {"/noticeInsert.do"}, method = RequestMethod.GET)
+	public String noticeInsert() {
+		log.info("/noticeInsert.do");
 		
 		return "notice/insert";
 	}
 	
-	@RequestMapping(value = {"/n_insertOK.do"}, method = RequestMethod.POST)
-	public String n_insertOK(NoticeVO vo) {
-		log.info("/n_insert.do...{}",vo);
+	@RequestMapping(value = {"/noticeInsertOK.do"}, method = RequestMethod.POST)
+	public String noticeInsertOK(NoticeVO vo) {
+		log.info("/noticeInsertOK.do...{}",vo);
 		
 		int result = service.insert(vo);
 		log.info("result...{}", result);
@@ -85,9 +85,9 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value = {"/n_update.do"}, method = RequestMethod.GET)
-	public String n_update(NoticeVO vo, Model model) {
-		log.info("/n_update.do...{}",vo);
+	@RequestMapping(value = {"/noticeUpdate.do"}, method = RequestMethod.GET)
+	public String noticeUpdate(NoticeVO vo, Model model) {
+		log.info("/noticeUpdate.do...{}",vo);
 		
 		NoticeVO vo2 = service.selectOne(vo);
 		model.addAttribute("vo2",vo2);
@@ -95,31 +95,31 @@ public class NoticeController {
 		return "notice/update";
 	}
 	
-	@RequestMapping(value = {"/n_updateOK.do"}, method = RequestMethod.POST)
-	public String n_updateOK(NoticeVO vo) {
-		log.info("/n_updateOK.do...{}",vo);
+	@RequestMapping(value = {"/noticeUpdateOK.do"}, method = RequestMethod.POST)
+	public String noticeUpdateOK(NoticeVO vo) {
+		log.info("/noticeUpdateOK.do...{}",vo);
 		
 		int result = service.update(vo);
 		log.info("result...{}", result);
 		
 		if(result==1) {
-			return "redirect:n_selectOne.do?notice_num="+vo.getNotice_num();
+			return "redirect:noticeSelectOne.do?notice_num="+vo.getNotice_num();
 		}else {
-			return "redirect:n_update.do?notice_num="+vo.getNotice_num();			
+			return "redirect:noticeUpdate.do?notice_num="+vo.getNotice_num();			
 		}
 	}
 	
-	@RequestMapping(value = {"/n_deleteOK.do"}, method = RequestMethod.GET)
-	public String n_deleteOK(NoticeVO vo) {
-		log.info("/n_deleteOK.do...{}",vo);
+	@RequestMapping(value = {"/noticeDeleteOK.do"}, method = RequestMethod.GET)
+	public String noticeDeleteOK(NoticeVO vo) {
+		log.info("/noticeDeleteOK.do...{}",vo);
 		
 		int result = service.delete(vo);
 		log.info("result...{}", result);
 		
 		if(result==1) {
-			return "redirect:n_selectAll.do";
+			return "redirect:noticeSelectAll.do";
 		}else {
-			return "redirect:n_selectOne.do?notice_num="+vo.getNotice_num();			
+			return "redirect:noticeSelectOne.do?notice_num="+vo.getNotice_num();			
 		}
 	}
 	

@@ -74,8 +74,8 @@ public class NoticeDAOimpl implements NoticeDAO {
 	}
 
 	@Override
-	public int n_row_count() {
-		log.info("n_row_count()...");
+	public int noticeRowCount() {
+		log.info("noticeRowCount()...");
 		return sqlSession.selectOne("N_ROW_COUNT");
 	}
 
