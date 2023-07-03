@@ -56,7 +56,7 @@
 		
 		function renderQnAList(category){
 			$.ajax({
-				url: "json_q_selectAll.do",
+				url: "jsonQnaSelectAll.do",
 				data: {writer: "tester1",
 							 category: category
 				},
@@ -96,7 +96,7 @@
 					    <tr>
 					      <th scope="row" class="text-center align-middle">\${vo.qna_num}</th>
 					      <td class="py-4">
-					      	<a href="q-selectOne.do?qna_num=\${vo.qna_num}">
+					      	<a href="qnaSelectOne.do?qna_num=\${vo.qna_num}">
 						        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
 						        <div class="mt-3">\${category}</div>
 						        <div class="mt-2">\${formattedDate}</div>
@@ -129,13 +129,13 @@
 			    	<li><a href="#">찜목록</a></li>
 			    	<li><a href="#">내 거래 목록</a></li>
 			    	<li><a href="#">내동네설정</a></li>
-			    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
+			    	<li class="fw-bold"><a href="qnaSelectAll.do">내 Q&A 목록</a></li>
 			    </ul>
 	   		</div>
 	   		<div class="col-md-9 col-lg-10 px-5">
 	      	<div class="row">
 	      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
-	      		<div class="col-md-6 text-end"><a href="q-insert.do">글쓰기</a></div>
+	      		<div class="col-md-6 text-end"><a href="qnaInsert.do">글쓰기</a></div>
       			<hr class="mt-3">
 	      		<ul class="list-inline q-filter-btn">
 	      			<li class="list-inline-item px-3 py-2 q-category selected">전체</li>

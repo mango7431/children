@@ -16,13 +16,13 @@
 
 	<div class="container">
 	<ul>
-		<li><a href="json_q_selectAll.do?writer=tester1">json_q_selectAll.do</a></li>
-		<li><a href="q-selectAll.do?writer=tester1">q-selectAll.do</a></li>
+		<li><a href="jsonQnaSelectAll.do?writer=tester1">jsonQnaSelectAll.do</a></li>
+		<li><a href="qnaSelectAll.do?writer=tester1">qnaSelectAll.do</a></li>
 		<hr>
-		<li><a href="json_q_selectOne.do?qna_num=1">json_q_selectOne.do</a></li>
-		<li><a href="q-selectOne.do">q-selectOne.do</a></li>
+		<li><a href="jsonQnaSelectOne.do?qna_num=1">jsonQnaSelectOne.do</a></li>
+		<li><a href="qnaSelectOne.do">qnaSelectOne.do</a></li>
 		<hr>
-		<li><a href="q-insertOK.do?writer=tester1&qna_category=1&qna_title=계정이 이상해요&qna_content=확인해주세요">q-insertOK.do</a></li>
+		<li><a href="qnaInsertOK.do?writer=tester1&qna_category=1&qna_title=계정이 이상해요&qna_content=확인해주세요">qnaInsertOK.do</a></li>
 	</ul>
 	</div>
 </body>

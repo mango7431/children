@@ -17,76 +17,76 @@ public class QnaController {
 	@Autowired
 	private QnaService service;
 	
-	@RequestMapping(value = "q-selectAll.do", method = RequestMethod.GET)
-	public String qSelectAll(Model model) {
-		log.info("/q-selectAll.do");
+	@RequestMapping(value = "qnaSelectAll.do", method = RequestMethod.GET)
+	public String qnaSelectAll(Model model) {
+		log.info("/qnaSelectAll.do");
 		
 		return "qna/selectAll";
 	}
 	
-	@RequestMapping(value = "q-selectOne.do", method = RequestMethod.GET)
-	public String qSelectOne(Model model) {
-		log.info("/q-selectOne.do");
+	@RequestMapping(value = "qnaSelectOne.do", method = RequestMethod.GET)
+	public String qnaSelectOne(Model model) {
+		log.info("/qnaSelectOne.do");
 		
 		return "qna/selectOne";
 	}
 	
-	@RequestMapping(value = "q-insert.do", method = RequestMethod.GET)
-	public String qInsert(Model model) {
-		log.info("/q-insert.do");
+	@RequestMapping(value = "qnaInsert.do", method = RequestMethod.GET)
+	public String qnaInsert(Model model) {
+		log.info("/qnaInsert.do");
 		
 		return "qna/insert";
 	}
 	
-	@RequestMapping(value = "q-insertOK.do", method = RequestMethod.GET)
-	public String qInsertOK(QnaVO vo) {
-		log.info("/q-insertOK.do");
+	@RequestMapping(value = "qnaInsertOK.do", method = RequestMethod.GET)
+	public String qnaInsertOK(QnaVO vo) {
+		log.info("/qnaInsertOK.do");
 		log.info("{}", vo);
 		
-		int result = service.qInsert(vo);
+		int result = service.qnaInsert(vo);
 		log.info("result:{}", result);
 		
 		if(result == 1) {
-			return "redirect:q-selectAll.do";
+			return "redirect:qnaSelectAll.do";
 		} else {			
-			return "redirect:q-insert.do";
+			return "redirect:qnaInsert.do";
 		}
 	}
 	
-	@RequestMapping(value = "q-update.do", method = RequestMethod.GET)
-	public String qUpdate(Model model) {
-		log.info("/q-update.do");
+	@RequestMapping(value = "qnaUpdate.do", method = RequestMethod.GET)
+	public String qnaUpdate(Model model) {
+		log.info("/qnaUpdate.do");
 		
 		return "qna/update";
 	}
 	
-	@RequestMapping(value = "q-updateOK.do", method = RequestMethod.GET)
-	public String qUpdateOK(QnaVO vo) {
-		log.info("/q-updateOK.do");
+	@RequestMapping(value = "qnaUpdateOK.do", method = RequestMethod.GET)
+	public String qnaUpdateOK(QnaVO vo) {
+		log.info("/qnaUpdateOK.do");
 		log.info("{}", vo);
 		
-		int result = service.qUpdate(vo);
+		int result = service.qnaUpdate(vo);
 		log.info("result:{}", result);
 		
 		if(result == 1) {
-			return "redirect:q-selectOne.do?qna_num="+vo.getQna_num();
+			return "redirect:qnaSelectOne.do?qna_num="+vo.getQna_num();
 		} else {			
-			return "redirect:q-update.do?qna_num="+vo.getQna_num();
+			return "redirect:qnaUpdate.do?qna_num="+vo.getQna_num();
 		}
 	}
 	
-	@RequestMapping(value = "q-deleteOK.do", method = RequestMethod.GET)
-	public String qDelete(QnaVO vo) {
-		log.info("/q-deleteOK.do");
+	@RequestMapping(value = "qnaDeleteOK.do", method = RequestMethod.GET)
+	public String qnaDeleteOK(QnaVO vo) {
+		log.info("/qnaDeleteOK.do");
 		log.info("{]", vo);
 		
-		int result = service.qDelete(vo);
+		int result = service.qnaDelete(vo);
 		log.info("result:{}", result);
 		
 		if(result==1) {
-			return "redirect:q-selectAll.do";
+			return "redirect:qnaSelectAll.do";
 		} else {
-			return "redirect:q-selectOne.do?qna_num=" + vo.getQna_num();
+			return "redirect:qnaSelectOne.do?qna_num=" + vo.getQna_num();
 		}
 
 	}

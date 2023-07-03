@@ -22,32 +22,32 @@ public class QnaDAOimpl implements QnaDAO {
 	}
 
 	@Override
-	public int qInsert(QnaVO vo) {
-		log.info("qInsert...{}", vo);
+	public int qnaInsert(QnaVO vo) {
+		log.info("qnaInsert...{}", vo);
 		return sqlSession.insert("Q_INSERT", vo);
 	}
 
 	@Override
-	public int qUpdate(QnaVO vo) {
-		log.info("qUpdate...{}", vo);
+	public int qnaUpdate(QnaVO vo) {
+		log.info("qnaUpdate...{}", vo);
 		return sqlSession.update("Q_UPDATE", vo);
 	}
 
 	@Override
-	public int qDelete(QnaVO vo) {
-		log.info("qDelete...{}", vo);
+	public int qnaDelete(QnaVO vo) {
+		log.info("qnaDelete...{}", vo);
 		return sqlSession.delete("Q_DELETE", vo);
 	}
 
 	@Override
-	public QnaVO qSelectOne(QnaVO vo) {
-		log.info("qSelectOne...{}", vo);
+	public QnaVO qnaSelectOne(QnaVO vo) {
+		log.info("qnaSelectOne...{}", vo);
 		return sqlSession.selectOne("Q_SELECT_ONE", vo);
 	}
 
 	@Override
-	public List<QnaVO> qSelectAll(QnaVO vo) {
-		log.info("qSelectAll...{}", vo);
+	public List<QnaVO> qnaSelectAll(QnaVO vo) {
+		log.info("qnaSelectAll...{}", vo);
 		return sqlSession.selectList("Q_SELECT_ALL", vo);
 	}
 

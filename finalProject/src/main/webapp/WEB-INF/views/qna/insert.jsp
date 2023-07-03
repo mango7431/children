@@ -77,7 +77,7 @@
 		    	<li><a href="#">찜목록</a></li>
 		    	<li><a href="#">내 거래 목록</a></li>
 		    	<li><a href="#">내동네설정</a></li>
-		    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
+		    	<li class="fw-bold"><a href="qnaSelectAll.do">내 Q&A 목록</a></li>
 		    </ul>
    		</div>
    		<div class="col-md-9 col-lg-10 px-5">
@@ -85,7 +85,7 @@
       		<div class="col fs-5 fw-bold">Q&A 작성</div>
      			<hr class="mt-3">
       	</div>
-      	<form action="q-insertOK.do" method="get">
+      	<form action="qnaInsertOK.do" method="get">
 			    <div class="row align-items-start justify-content-center">
 		        <input type="hidden" name="writer" value="tester1">
 		        <div class="col-md-5 col-lg-3 mb-3 mb-md-0">

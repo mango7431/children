@@ -23,21 +23,21 @@ public class QnaRestController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/json_q_selectAll.do", method = RequestMethod.GET)
-	public List<QnaVO> json_q_selectAll(QnaVO vo) {
-		log.info("/json_q_selectAll.do...vo:{}", vo);
+	@RequestMapping(value = "/jsonQnaSelectAll.do", method = RequestMethod.GET)
+	public List<QnaVO> jsonQnaSelectAll(QnaVO vo) {
+		log.info("/jsonQnaSelectAll.do...vo:{}", vo);
 		
-		List<QnaVO> vos = service.qSelectAll(vo);
+		List<QnaVO> vos = service.qnaSelectAll(vo);
 		log.info("vos.size:{}", vos.size());
 		return vos;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/json_q_selectOne.do", method = RequestMethod.GET)
-	public QnaVO json_q_selectOne(QnaVO vo) {
-		log.info("/json_q_selectOne.do...vo:{}", vo);
+	@RequestMapping(value = "/jsonQnaSelectOne.do", method = RequestMethod.GET)
+	public QnaVO jsonQnaSelectOne(QnaVO vo) {
+		log.info("/jsonQnaSelectOne.do...vo:{}", vo);
 		
-		QnaVO vo2 = service.qSelectOne(vo);
+		QnaVO vo2 = service.qnaSelectOne(vo);
 		log.info("vo2:{}", vo2);
 		return vo2;
 	}

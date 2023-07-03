@@ -20,24 +20,24 @@ public class QnaService {
 		log.info("QnaService...");
 	}
 	
-	public int qInsert(QnaVO vo) {
-		return dao.qInsert(vo);
+	public int qnaInsert(QnaVO vo) {
+		return dao.qnaInsert(vo);
 	}
 	
-	public int qUpdate(QnaVO vo) {
-		return dao.qUpdate(vo);
+	public int qnaUpdate(QnaVO vo) {
+		return dao.qnaUpdate(vo);
 	}
 	
-	public int qDelete(QnaVO vo) {
-		return dao.qDelete(vo);
+	public int qnaDelete(QnaVO vo) {
+		return dao.qnaDelete(vo);
 	}
 	
-	public QnaVO qSelectOne(QnaVO vo) {
-		return dao.qSelectOne(vo);
+	public QnaVO qnaSelectOne(QnaVO vo) {
+		return dao.qnaSelectOne(vo);
 	}
 	
-	public List<QnaVO> qSelectAll(QnaVO vo) {
-		return dao.qSelectAll(vo);
+	public List<QnaVO> qnaSelectAll(QnaVO vo) {
+		return dao.qnaSelectAll(vo);
 	}
 	
 	public List<QnaVO> page(int page, int limit){

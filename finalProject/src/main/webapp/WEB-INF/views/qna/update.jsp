@@ -17,7 +17,7 @@
 
 	$(function(){
 		$.ajax({
-			url: "json_q_selectOne.do",
+			url: "jsonQnaSelectOne.do",
 			data: {qna_num : ${param.qna_num}},
 			method: 'GET',
 			dataType: 'json',
@@ -112,7 +112,7 @@
 		    	<li><a href="#">찜목록</a></li>
 		    	<li><a href="#">내 거래 목록</a></li>
 		    	<li><a href="#">내동네설정</a></li>
-		    	<li class="fw-bold"><a href="q-selectAll.do">내 Q&A 목록</a></li>
+		    	<li class="fw-bold"><a href="qnaSelectAll.do">내 Q&A 목록</a></li>
 		    </ul>
    		</div>
    		<div class="col-md-9 col-lg-10 px-5">
@@ -120,7 +120,7 @@
       		<div class="col fs-5 fw-bold">Q&A 수정</div>
      			<hr class="mt-3">
       	</div>
-      	<form action="q-updateOK.do" method="get">
+      	<form action="qnaUpdateOK.do" method="get">
 			    <div class="row align-items-start justify-content-center">
 		        <input type="hidden" id="num" name="qna_num" value="">
 		        <div class="col-md-5 col-lg-3 mb-3 mb-md-0">
