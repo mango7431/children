@@ -54,7 +54,8 @@
 		</div>
 		<div class="col-12">
 			<label for="writer" class="form-label">작성자</label> 
-			<input type="text" name="writer" class="form-control" id="writer" value="tester1">
+			<label class="form-control">${user_id }</label>
+			<input type="hidden" name="writer" class="form-control" id="writer" value="${user_id }">
 		</div>
 		<div class="col-12">
 			<label for="board_content" class="form-label">내용</label> 

@@ -41,9 +41,11 @@
 				
 				let board_title = ``;
 				if(vo2.board_status==1){
-					board_title = `판매중 \${vo2.board_title}`;
+					board_title = `거래중 \${vo2.board_title}`;
+				}else if(vo2.board_status==2){
+					board_title = `거래완료 \${vo2.board_title}`;
 				}else{
-					board_title = `판매완료 \${vo2.board_title}`;
+					board_title = `숨기기 \${vo2.board_title}`;
 				}
 				$('#board_title').html(board_title);
 				
@@ -61,15 +63,17 @@
 				let deal_region = `거래지역 : \${vo2.deal_region}`;
 				$('#deal_region').html(deal_region);
 				
-				let count = `찜 \${vo2.likecount} 채팅 \${vo2.chatcount} 조회 \${vo2.view_count}`;
+				let count = `♥(찜) \${vo2.likecount} 채팅 \${vo2.chatcount} 조회 \${vo2.view_count}`;
 				$('#count').html(count);
 				
-				let buttons = `
-				<button>찜</button>
-				<button>채팅</button>
-				<button>신고하기</button>
-				`;
-				$('#buttons').html(buttons);
+				if('${user_id}'!=vo2.writer){
+					let buttons = `
+						<button onclick="likeButton()">찜</button>
+						<button onclick="chat()">채팅</button>
+						<button>신고하기</button>
+						`;
+						$('#buttons').html(buttons);
+				}
 				
 				
 				let m_img = `<img src="resources/img/\${vo2.member_savename }" class="d-block w-100">`;
@@ -84,19 +88,129 @@
 				let board_content = `\${vo2.board_content}`;
 				$('#board_content').html(board_content);
 				
-				let udbutton = `
-				<a href="boardUpdate.do?board_num=\${vo2.board_num}">수정</a>
-				<a href="boardDeleteOK.do?board_num=\${vo2.board_num}">삭제</a>
-				`;
-				$('#udbutton').html(udbutton);
+				if('${user_id}'==vo2.writer){
+					let udbutton = `
+						<a href="boardUpdate.do?board_num=\${vo2.board_num}">수정</a>
+						<a href="boardDeleteOK.do?board_num=\${vo2.board_num}">삭제</a>
+						`;
+						$('#udbutton').html(udbutton);
+						
+					let board_status = `
+						 <div class="dropdown">
+				          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+				            거래상태
+				          </a>
+				          <ul class="dropdown-menu text-small">
+				            <li><button onclick="changeStatus(1)" class="dropdown-item">거래중</button></li>
+				            <li><button onclick="changeStatus(2)" class="dropdown-item">거래완료</button></li>
+				            <li><hr class="dropdown-divider"></li>
+				            <li><button onclick="changeStatus(3)" class="dropdown-item">숨기기</button></li>
+				          </ul>
+				        </div>
+					`;
+					
+					$('#board_status').html(board_status);
+				}
 				
 			},
 			error:function(xhr,status,error){
 				console.log('xhr:',xhr.status);
 			}
 		});
-		
 	});
+	
+	function likeButton(){
+		console.log("likeButton()");
+		$.ajax({
+			url:"jsonLikeSelectOne.do",
+			data:{
+				id:'${user_id}',
+				board_num:${param.board_num}
+			},
+			method:'GET',
+			dataType:'json',
+			success: function(obj){
+				console.log(obj);
+				
+				if(obj.result=='OK'){
+					console.log('찜하기');
+					
+					$.ajax({
+						
+						url:"jsonLikeInsert.do",
+						data:{
+							id:'${user_id}',
+							board_num:${param.board_num}
+						},
+						method:'GET',
+						dataType:'json',
+						success: function(result){
+							if(result==1){
+								location.href = 'boardSelectOne.do?board_num=${param.board_num}';
+							}
+						},
+						error:function(xhr,status,error){
+							console.log('xhr:',xhr.status);
+						}
+						
+					});
+					
+				}else{
+					console.log('찜해제');
+					$.ajax({
+						
+						url:"jsonLikeDelete.do",
+						data:{
+							likes_num:obj.LikesVO.likes_num
+						},
+						method:'GET',
+						dataType:'json',
+						success: function(result){
+							if(result==1){
+								location.href = 'boardSelectOne.do?board_num=${param.board_num}';
+							}
+						},
+						error:function(xhr,status,error){
+							console.log('xhr:',xhr.status);
+						}
+						
+					});
+				}
+			},
+			error:function(xhr,status,error){
+				console.log('xhr:',xhr.status);
+			}
+		});
+		
+	}
+	
+	function chat(){
+		console.log("chat()");
+		
+	}
+	
+	function changeStatus(status){
+		console.log("changeStatus",status);
+		
+		$.ajax({
+			url:"jsonChangeStatus.do",
+			data:{
+				board_status:status,
+				board_num:${param.board_num}
+			},
+			method:'GET',
+			dataType:'json',
+			success: function(result){
+				console.log(result);
+				if(result==1){
+					location.href = 'boardSelectOne.do?board_num=${param.board_num}';
+				}
+			},
+			error:function(xhr,status,error){
+				console.log('xhr:',xhr.status);
+			}
+		});
+	}
 	
 </script>
 </head>
@@ -141,8 +255,9 @@
 					<p class="card-text" id="category"></p>
 					<p class="card-text" id="deal_region"></p>
 					<p class="card-text" id="count"></p>
-					<p class="card-text" id="buttons" align="right"></p>
 					<p class="card-text" id="udbutton"></p>
+					<p class="card-text" id="buttons" align="right"></p>
+					<p class="card-text" id="board_status"></p>
 				</div>
 			</div>
 		</div>

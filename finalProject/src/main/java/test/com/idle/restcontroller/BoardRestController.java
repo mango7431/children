@@ -28,5 +28,15 @@ public class BoardRestController {
 		return vo2;
 	}
 	
+	@RequestMapping(value = "/jsonChangeStatus.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int jsonChangeStatus(BoardVO vo) {
+		log.info("/jsonChangeStatus.do...{}",vo);
+		
+		int result = service.changeStatus(vo);
+		log.info("{}",result);
+		
+		return result;
+	}
 
 }

@@ -28,6 +28,7 @@
 			<list>
 <!-- 				<value>classpath:jdbc/sqlMapper_member.xml</value> -->
 				<value>classpath:jdbc/sqlMapper_board.xml</value>
+				<value>classpath:jdbc/sqlMapper_likes.xml</value>
 			</list>
 		</property>
 	</bean>

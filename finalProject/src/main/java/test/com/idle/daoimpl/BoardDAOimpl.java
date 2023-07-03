@@ -75,4 +75,13 @@ public class BoardDAOimpl implements BoardDAO {
 		return flag;
 	}
 
+	@Override
+	public int changeStatus(BoardVO vo) {
+		log.info("changeStatus()...{}",vo);
+		
+		int flag = sqlSession.update("BOARD_CHANGE_STATUS",vo);
+		
+		return flag;
+	}
+
 }

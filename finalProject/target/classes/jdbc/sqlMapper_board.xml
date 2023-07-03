@@ -36,6 +36,10 @@
 		where board_num = #{board_num}
 	</update>
 	
+	<update id="BOARD_CHANGE_STATUS">
+		update board set board_status = #{board_status} where board_num=#{board_num}
+	</update>
+	
 	<insert id="B_INSERT">
 		INSERT INTO board(board_num,board_title,board_content,writer,category,deal_region,price,board_status,board_type,board_savename1,board_savename2,board_savename3)
 		VALUES (seq_board.nextval,#{board_title},#{board_content},#{writer},#{category},#{deal_region},#{price},#{board_status},#{board_type},#{board_savename1},#{board_savename2},#{board_savename3})

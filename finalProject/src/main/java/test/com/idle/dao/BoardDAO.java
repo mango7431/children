@@ -18,4 +18,6 @@ public interface BoardDAO {
 
 	int delete(BoardVO vo);
 
+	int changeStatus(BoardVO vo);
+
 }

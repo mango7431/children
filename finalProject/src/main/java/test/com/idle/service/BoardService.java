@@ -44,4 +44,8 @@ public class BoardService {
 		return dao.delete(vo);
 	}
 
+	public int changeStatus(BoardVO vo) {
+		return dao.changeStatus(vo);
+	}
+
 }
