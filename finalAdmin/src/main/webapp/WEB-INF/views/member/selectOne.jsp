@@ -13,6 +13,7 @@
 	<jsp:include page="../css.jsp"></jsp:include>
 	
 	<script type="text/javascript">
+	let userId = '';
 	
 	$(function(){
 		$.ajax({
@@ -22,6 +23,8 @@
 			dataType: 'json',
 			success: function(vo){
 				console.log('ajax...success:', vo);
+				
+				userId = vo.id;
 					
 				let tag_vo = `
 		      <tr>
@@ -58,6 +61,12 @@
 		});
 	}); //load
 
+	function memberDelete() {
+	  	var confirmDelete = confirm(userId + "님을 정말 탈퇴시키겠습니까?");
+	  	if (confirmDelete) {
+      	window.location.href = "memberDeleteOK.do?id="+userId;
+      }
+	}
 	</script>
 </head>
 <body>
@@ -75,7 +84,7 @@
 		  <div class="col-8">
 		    <button>신고 증가</button>
 		    <button>신고 감소</button>
-		    <button>회원 탈퇴</button>
+		    <button onclick="memberDelete()">회원 탈퇴</button>
 		  </div>
 		</div>
 

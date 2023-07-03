@@ -35,7 +35,8 @@ public class MemberDAOimpl implements MemberDAO {
 
 	@Override
 	public int memberDelete(MemberVO vo) {
-		return 0;
+		log.info("memberDelete...");
+		return sqlSession.delete("M_DELETE", vo);
 	}
 
 	@Override

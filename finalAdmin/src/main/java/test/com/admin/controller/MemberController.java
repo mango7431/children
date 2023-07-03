@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.MemberService;
+import test.com.admin.vo.MemberVO;
 
 @Controller
 @Slf4j
@@ -28,4 +29,18 @@ public class MemberController {
 		return "member/selectOne";
 	}
 	
+	@RequestMapping(value = {"/memberDeleteOK.do"}, method = RequestMethod.GET)
+	public String memberDeleteOK(MemberVO vo) {
+		log.info("/memberDeleteOK.do");
+		log.info("{}:", vo);
+		
+		int result = service.memberDelete(vo);
+		log.info("result:{}", result);
+		
+		if(result==1) {
+			return "redirect:memberSelectAll.do";
+		} else {
+			return "redirect:memberSelectOne.do?id=" + vo.getId();
+		}
+	}	
 }
