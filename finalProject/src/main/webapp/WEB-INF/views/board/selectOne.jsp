@@ -69,7 +69,7 @@
 				if('${user_id}'!=vo2.writer){
 					let buttons = `
 						<button onclick="likeButton()">찜</button>
-						<button onclick="chat()">채팅</button>
+						<button onclick="chat('\${vo2.writer}')">채팅</button>
 						<button>신고하기</button>
 						`;
 						$('#buttons').html(buttons);
@@ -184,8 +184,31 @@
 		
 	}
 	
-	function chat(){
+	function chat(writer){
 		console.log("chat()");
+		console.log(writer);
+		
+		$.ajax({
+			url:"jsonChatInsert.do",
+			data:{
+				board_num:${param.board_num},
+				buyer:'${user_id}',
+				seller:writer
+			},
+			method:'GET',
+			dataType:'json',
+			success: function(result){
+				console.log(result);
+				if(result==1){
+					location.href = 'roomSelectAll.do';
+				}
+			},
+			error:function(xhr,status,error){
+				console.log('xhr:',xhr.status);
+			}
+			
+			
+		});
 		
 	}
 	

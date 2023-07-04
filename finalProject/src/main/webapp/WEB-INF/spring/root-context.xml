@@ -26,9 +26,10 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-<!-- 				<value>classpath:jdbc/sqlMapper_member.xml</value> -->
 				<value>classpath:jdbc/sqlMapper_board.xml</value>
 				<value>classpath:jdbc/sqlMapper_likes.xml</value>
+				<value>classpath:jdbc/sqlMapper_room.xml</value>
+				<value>classpath:jdbc/sqlMapper_message.xml</value>
 			</list>
 		</property>
 	</bean>

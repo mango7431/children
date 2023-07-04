@@ -29,6 +29,7 @@
 	
 	<a href="testlogin1.do">tester1</a>
 	<a href="testlogin2.do">tester2</a>
+	<a href="testlogin123.do">tester123</a>
 	<a href="testlogout.do">로그아웃</a>
 	
 	<h2>${user_id }</h2>

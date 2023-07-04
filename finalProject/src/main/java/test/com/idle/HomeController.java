@@ -58,6 +58,15 @@ public class HomeController {
 		return "redirect:home.do";
 	}
 	
+	@RequestMapping(value = "/testlogin123.do", method = RequestMethod.GET)
+	public String testlogin123() {
+		log.info("/testlogin123.do...");
+		
+		session.setAttribute("user_id", "tester123");
+		
+		return "redirect:home.do";
+	}
+	
 	@RequestMapping(value = "/testlogout.do", method = RequestMethod.GET)
 	public String testlogout() {
 		log.info("/testlogout.do...");
