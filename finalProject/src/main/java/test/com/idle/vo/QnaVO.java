@@ -13,4 +13,5 @@ public class QnaVO {
 	private Timestamp qna_date;
 	private int qna_status;
 	private int qna_category;
+	private QnaReplyVO qnareplyVO;
 }

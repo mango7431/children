@@ -4,6 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test.com.idle">
+	<resultMap id="qnaResultMap" type="test.com.idle.vo.QnaVO">
+        <id property="qna_num" column="qna_num" />
+        <id property="qna_title" column="qna_title" />
+        <id property="qna_content" column="qna_content" />
+        <id property="writer" column="writer" />
+        <id property="qna_date" column="qna_date" />
+        <id property="qna_status" column="qna_status" />
+        <id property="qna_category" column="qna_category" />
+        <association property="qnareplyVO" resultMap="qnareplyResultMap" />
+    </resultMap>
+
+    <resultMap id="qnareplyResultMap" type="test.com.idle.vo.QnaReplyVO">
+        <id property="qnareply_num" column="qnareply_num" />
+        <id property="qna_num" column="qna_num" />
+        <id property="qnareply_title" column="qnareply_title" />
+        <id property="qnareply_content" column="qnareply_content" />
+        <id property="qnareply_date" column="qnareply_date" />
+    </resultMap>
+
 	<select id="Q_SELECT_ALL" resultType="test.com.idle.vo.QnaVO">
 		select * from qna where writer=#{writer} order by qna_num desc
 	</select>
@@ -12,8 +31,11 @@
 		select * from qna where writer=#{writer} and page=#{page} and limit=#{limit}
 	</select>
 	
-	<select id="Q_SELECT_ONE" resultType="test.com.idle.vo.QnaVO">
-		select * from qna where qna_num = #{qna_num}
+	<select id="Q_SELECT_ONE" resultMap="qnaResultMap">
+		select * from qna q 
+		left outer join qnareply qr 
+		on q.qna_num = qr.qna_num 
+		where q.qna_num = #{qna_num}
 	</select>
 	
 	<insert id="Q_INSERT" parameterType="test.com.idle.vo.QnaVO">

@@ -9,7 +9,7 @@
 	        </a>
 	
 	        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-	          <li><a href="#" class="nav-link px-2 link-secondary">중고링</a></li>
+	          <li><a href="home.do" class="nav-link px-2 link-secondary">중고링</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">공지사항</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">중고거래</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">채팅목록</a></li>

@@ -102,6 +102,13 @@
  				<div class="row q-detail py-3" id="vo">
 
    			</div>
+   			
+   			<div id="answer">
+   				<div>답변</div>
+	 				<div class="row q-detail py-3 mt-3" id="vo">
+	
+	   			</div>
+ 				</div>
   		</div>      
   	</div>
 	</div>
