@@ -24,8 +24,12 @@
     </resultMap>
 
 	<select id="Q_SELECT_ALL" resultType="test.com.idle.vo.QnaVO">
-		select * from qna where writer=#{writer} order by qna_num desc
-	</select>
+    select * from qna where writer=#{writer} 
+    <if test="qna_category!=0">
+        and qna_category = #{qna_category}
+    </if>
+    order by qna_num desc
+	</select>	
 	
 	<select id="Q_PAGING" resultType="test.com.idle.vo.QnaVO">
 		select * from qna where writer=#{writer} and page=#{page} and limit=#{limit}
