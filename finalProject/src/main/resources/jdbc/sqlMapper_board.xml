@@ -7,7 +7,14 @@
 
 <!-- 	중고거래 목록 -->
 	<select id="B_SELECTALL" resultType="test.com.idle.vo.BoardVO">
-		select * from board
+		select b.*, nvl(l.likecount, 0) as likecount 
+		from board b
+        left join (
+            select board_num, count(*) as likecount
+            from likes
+            group by board_num
+        ) l
+        on b.board_num = l.board_num
 		<where>
             <if test="category != null and category != ''">
                 AND category = #{category}
@@ -26,7 +33,14 @@
 	</select>
 	
 	<select id="B_SELECTALL_VIEWS" resultType="test.com.idle.vo.BoardVO">
-		select * from board
+		select b.*, nvl(l.likecount, 0) as likecount 
+		from board b
+        left join (
+            select board_num, count(*) as likecount
+            from likes
+            group by board_num
+        ) l
+        on b.board_num = l.board_num
 		<where>
             <if test="category != null">
                 AND category = #{category}
@@ -41,8 +55,30 @@
                 AND board_type = #{board_type}
             </if>
         </where>
-        order by view_count desc
+        order by view_count desc, likecount desc
 	</select>
 	
+	<!-- 영웅님 -->
+	<select id="B_SELECT_ONE" resultType="test.com.idle.vo.BoardVO">
+		select b.*,
+		m.id,m.name,m.address,m.member_savename, nvl(l.likecount, 0) as
+		likecount, nvl(r.chatcount, 0) as chatcount
+		from board b join member m
+		on b.writer = m.id
+		left join(
+		select board_num, count(*) as likecount
+		from likes
+		group by board_num
+		) l on b.board_num = l.board_num
+		left join(
+		select board_num, count(*) as chatcount
+		from room r
+		group by board_num
+		) r on b.board_num = r.board_num
+		where b.board_num = #{board_num}
+	</select>
 	
+	<update id="VIEW_COUNT_UP">
+		update board set view_count = view_count+1 where board_num=#{board_num}
+	</update>
 </mapper>

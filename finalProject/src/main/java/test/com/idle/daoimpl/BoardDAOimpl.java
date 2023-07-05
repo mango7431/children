@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.dao.BoardDAO;
+import test.com.idle.vo.BlackVO;
 import test.com.idle.vo.BoardVO;
 
 @Repository
@@ -24,7 +25,7 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectAll(String category, Integer minPrice, Integer maxPrice, Integer board_type) {
+	public List<BoardVO> boardSelectAll(String category, Integer minPrice, Integer maxPrice, Integer board_type) {
 		log.info("selectAll...");
 		
 		Map<String, Object> filters = new HashMap<>();
@@ -38,7 +39,7 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 	
 	@Override
-	public List<BoardVO> selectAll(Integer minPrice, Integer maxPrice, Integer board_type) {
+	public List<BoardVO> boardSelectAll(Integer minPrice, Integer maxPrice, Integer board_type) {
 		log.info("selectAll...");
 		
 		Map<String, Object> filters = new HashMap<>();
@@ -51,7 +52,7 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectAllViews(Integer minPrice, Integer maxPrice, Integer board_type) {
+	public List<BoardVO> boardSelectAllViews(Integer minPrice, Integer maxPrice, Integer board_type) {
 		log.info("selectAll...");
 		
 		Map<String, Object> filters = new HashMap<>();
@@ -62,5 +63,32 @@ public class BoardDAOimpl implements BoardDAO {
 		
 		return vos;
 	}
+	
+	@Override
+	public int blackInsert(BlackVO vo) {
+		log.info("blackInsert...");
+		
+		int flag = sqlSession.update("BLACK_INSERT",vo);
+		
+		return flag;
+	}
 
+	//영웅님
+	@Override
+	public BoardVO selectOne(BoardVO vo) {
+		log.info("selectOne()...{}",vo);
+		
+		BoardVO vo2 = sqlSession.selectOne("B_SELECT_ONE", vo);
+		
+		return vo2;
+	}
+
+	@Override
+	public int viewCountUp(BoardVO vo) {
+		log.info("viewCountUp()...{}",vo);
+		
+		int flag = sqlSession.update("VIEW_COUNT_UP",vo);
+		
+		return flag;
+	}
 }

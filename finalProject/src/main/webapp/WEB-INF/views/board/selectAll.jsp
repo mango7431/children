@@ -44,6 +44,10 @@ main{
 /* 	z-index: 1; */
 }
 
+.headerTitle{
+	margin: 30px 0 0 50px;
+}
+
 /*필터(사이트메뉴)*/
 aside{
 	width: 15%;
@@ -124,6 +128,7 @@ aside .filterBtn{
 
 .itemshow > button:last-child {
   margin-left: auto;
+  margin-right: 25px;
   width : 10%;
   height : 35px;
   border-radius: 20px;
@@ -138,7 +143,7 @@ aside .filterBtn{
 /* 메인 */
 .itemContainer{
 	width: 82%;
-	border: 1px solid black;	
+/* 	border: 1px solid black;	 */
 	gap: 50px;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -152,7 +157,6 @@ aside .filterBtn{
 }
 
 .sellingItems{
-	border: 1px solid black;
 	width: 236px;
 	float: left;
 	margin: 10px;
@@ -164,8 +168,15 @@ aside .filterBtn{
 	overflow: hidden;
 	margin: 0 auto;
 	border-radius: 10%;
-	border: 1px solid blue;
 	text-align: center;
+}
+
+.sellingItems .itemImage a img{
+	width: 100%;
+	height: 100%;
+/* 	object-fit: cover; */
+/* 	display: block; */
+/*  	margin: 0 auto; */
 }
 
 .sellingItems .itemContent{
@@ -188,17 +199,17 @@ aside .filterBtn{
 </head>
 <body>
 <jsp:include page="../top_menu.jsp"></jsp:include>
-
-
+<header>
+	<div class="headerTitle"><h4><b>중고거래</b></h4></div>
+</header>
 <main>
-	<div class="boardTitle"><h4><b>중고거래</b></h4></div>
 	<aside>
 		<div class="boardFilter">
 			<p align="center"><b>Filters</b></p>
 			<p><b>Category</b></p>
-			<form id="filterForm" action="selectAll.do" method="GET">
+			<form id="filterForm" action="boardSelectAll.do" method="GET">
        		 	<ul  class="categoryList">
-       		 		<li><a href="selectAll.do?category=all">전체(${fn:length(vos)})</a></li>
+       		 		<li><a href="boardSelectAll.do?category=all">전체(${fn:length(vos)})</a></li>
        		 		<li><input type="radio" id="category1" name="category" value="디지털기기"/><label for="category1">디지털기기</label></li>
        		 		<li><input type="radio" id="category2" name="category" value="생활가전"/><label for="category2">생활가전</label></li>
        		 		<li><input type="radio" id="category3" name="category" value="가구"/><label for="category3">가구</label></li>
@@ -241,7 +252,7 @@ aside .filterBtn{
 			<div  class="itemSort">
 				Sort By: <select id="sortType" onchange="sortChange()">
 					<option value="latest">최신순</option>
-					<option value="views">조회수순</option>
+					<option value="views">인기순</option>
 				</select>
 			</div>
 			</div>
@@ -260,24 +271,39 @@ aside .filterBtn{
 				          <!-- 상품각각 -->
 				          <div class="sellingItem">
 				            <div class="itemImage">
-				            <a href="selectOne/${vo.board_num}">
-				                <img src="resources/${vo.board_savename1}" alt="" />
+				            <a href="boardSelectOne.do?board_num=${vo.board_num}">
+				                <img src="resources/img/${vo.board_savename1}" alt="" />
 				              </a>
 				            </div>
 				            <div class="itemContent">
-				              <a href="selectOne/${vo.board_num}">
+				              <a href="boardSelectOne.do?board_num=${vo.board_num}">
 				             	<c:choose>
 								  <c:when test="${vo.board_type eq 1}">
-								    <span style="background:#d3d3d3;border-radius:3px;">팔아요</span><br />
+								     <c:choose>
+                                        <c:when test="${vo.board_status eq 1}">
+                                         <span style="background:#d3d3d3;border-radius:3px;">판매중</span>
+                                        </c:when>
+                                        <c:when test="${vo.board_status eq 2}">
+                                         <span style="background:#d3d3d3;border-radius:3px;">판매완료</span>
+                                        </c:when>
+                                     </c:choose>
 								  </c:when>
 								  <c:when test="${vo.board_type eq 2}">
-								    <span style="background:#d3d3d3;border-radius:3px;">구해요</span><br />
+								    <c:choose>
+                                     <c:when test="${vo.board_status eq 1}">
+                                       <span style="background:#d3d3d3;border-radius:3px;">구매중</span>
+                                      </c:when>
+                                      <c:when test="${vo.board_status eq 2}">
+                                       <span style="background:#d3d3d3;border-radius:3px;">구매완료</span>
+                                      </c:when>
+                                    </c:choose>
 								  </c:when>
 								</c:choose>
 				                <span>${vo.board_title}</span><br />
 				                <span><fmt:formatNumber value="${vo.price}" pattern="#,###" />원</span><br />
 				                <span>${vo.deal_region}</span><br />
-				                <span><img width="25px" src="resources/view_count.png" alt="" /></span><span>${vo.view_count}</span>
+				                <span><img width="25px" src="resources/img/view_count.png" alt="" /></span><span>${vo.view_count}</span>
+				                <span>♡ ${vo.likecount}</span>
 				              </a>
 				            </div>
 				          </div>
@@ -291,12 +317,12 @@ aside .filterBtn{
 	</div>
 </main>
 
-<script>
+<script type="text/javascript">
 
 	//최신순,조회수순
 	function sortChange() {
 		 var sortType = document.getElementById("sortType").value;
-		location.href = "selectAll.do?sortType=" + sortType;
+		location.href = "boardSelectAll.do?sortType=" + sortType;
 	 }
 	
 	//필터버튼
@@ -311,15 +337,15 @@ aside .filterBtn{
 	
 	//팔아요,구해요
 	function showAllBoards() {
-   		 window.location.href = "selectAll.do";
+   		 window.location.href = "boardSelectAll.do";
  	 }
 	
 	function showSellBoards() {
-	    window.location.href = "selectAll.do?board_type=1";
+	    window.location.href = "boardSelectAll.do?board_type=1";
 	  }
 
 	 function showBuyBoards() {
-	   window.location.href = "selectAll.do?board_type=2";
+	   window.location.href = "boardSelectAll.do?board_type=2";
 	 }
 	 
 	 //카테고리 더보기 토글

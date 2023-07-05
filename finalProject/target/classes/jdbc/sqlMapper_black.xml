@@ -5,9 +5,8 @@
 
 <mapper namespace="test.com.idle">
 
-	<insert id="BLACK_INSERT" parameterType="test.com.idle.vo.BlackVO">
-		insert into black(black_type,reporter_id,target_id,board_num,comments,black_category)
-		value(seq_black.nextval,#{black_type},#{reporter_id},#{target_id},#{board_num},#{comments},#{black_category})
-		where board.board_num=#{board_num}
+	<insert id="BLACK_INSERT">
+		insert into black(black_num,black_type,reporterid,targetid,board_num,comments,black_category)
+		values(seq_black.nextval,#{black_type},#{reporterid},#{targetid},#{board_num},#{comments},#{black_category})
 	</insert>
 </mapper>
