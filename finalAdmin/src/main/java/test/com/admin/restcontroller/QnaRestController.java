@@ -30,10 +30,12 @@ public class QnaRestController {
 		return vos;
 	}// end jsonQnaSelectAll
 	
+
+	
 	@RequestMapping(value = "/jsonQnaSelectOne.do", method = RequestMethod.GET)
 	@ResponseBody
 	public QnaVO jsonQnaSelectOne(QnaVO vo) {
-		log.info("/jsonQnaSelectOne.do");
+		log.info("/jsonQnaSelectOne.do...{}",vo);
 		log.info("{}", vo);
 
 		QnaVO vo2 = service.selectOne(vo);

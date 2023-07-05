@@ -28,5 +28,9 @@ public class QnaService {
 		return dao.selectOne(vo);
 	}
 
+	public List<QnaVO> selectAll2() {
+		return dao.selectAll2();
+	}
+
 	
 }

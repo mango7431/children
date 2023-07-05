@@ -27,6 +27,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:jdbc/sqlMapper_qna.xml</value>
+				<value>classpath:jdbc/sqlMapper_qnareply.xml</value>
 			
 			</list>
 		</property>

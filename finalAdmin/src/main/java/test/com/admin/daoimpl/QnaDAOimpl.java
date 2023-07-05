@@ -37,4 +37,11 @@ public class QnaDAOimpl implements QnaDAO {
 		return vo2;
 	}
 
+	@Override
+	public List<QnaVO> selectAll2() {
+		log.info("selectAll2()...");
+		List<QnaVO> vos = sqlSession.selectList("QNA_SELECT_ALL2");
+		return vos;
+	}
+
 }
