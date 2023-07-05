@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#noticeList {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
+}
+
+#noticeList td, #noticeList th {
+	border: 1px solid #eaeaea;
+	padding: 8px;
+}
+
+#noticeList noticeList(even) {
+	background-color: #000000;
+}
+
+#noticeList tr:hover {
+	background-color: #eaeaea;
+}
+
+#noticeList th {
+	padding-top: 13px;
+	padding-bottom: 13px;
+	background-color: #000000;
+	color: white;
+}

@@ -10,8 +10,8 @@
 	
 	        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 	          <li><a href="#" class="nav-link px-2 link-secondary">중고링</a></li>
-	          <li><a href="#" class="nav-link px-2 link-dark">공지사항</a></li>
-	          <li><a href="#" class="nav-link px-2 link-dark">중고거래</a></li>
+	          <li><a href="noticeSelectAll.do" class="nav-link px-2 link-dark">공지사항</a></li>
+	          <li><a href="boardSelectAll.do" class="nav-link px-2 link-dark">중고거래</a></li>
 	          <li><a href="#" class="nav-link px-2 link-dark">채팅목록</a></li>
 	        </ul>
 	
@@ -28,7 +28,7 @@
 	            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
 	          </a>
 	          <ul class="dropdown-menu text-small">
-	            <li><a class="dropdown-item" href="#">내 상점</a></li>
+	            <li><a class="dropdown-item" href="sellselectAll.do">내 상점</a></li>
 	            <li><a class="dropdown-item" href="#">마이페이지</a></li>
 	            <li><hr class="dropdown-divider"></li>
 	            <li><a class="dropdown-item" href="#">로그아웃</a></li>
