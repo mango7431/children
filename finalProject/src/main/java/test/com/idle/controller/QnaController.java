@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.QnaService;
+import test.com.idle.vo.Criteria;
+import test.com.idle.vo.PageVO;
 import test.com.idle.vo.QnaVO;
 
 @Slf4j
@@ -18,8 +20,10 @@ public class QnaController {
 	private QnaService service;
 	
 	@RequestMapping(value = "/qnaSelectAll.do", method = RequestMethod.GET)
-	public String qnaSelectAll(Model model) {
+	public String qnaSelectAll(Criteria cri, Model model) {
 		log.info("/qnaSelectAll.do");
+		
+		model.addAttribute("pageMaker", cri);
 		
 		return "qna/selectAll";
 	}

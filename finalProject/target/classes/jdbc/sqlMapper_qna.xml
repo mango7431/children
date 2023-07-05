@@ -32,7 +32,31 @@
 	</select>	
 	
 	<select id="Q_PAGING" resultType="test.com.idle.vo.QnaVO">
-		select * from qna where writer=#{writer} and page=#{page} and limit=#{limit}
+	  <![CDATA[
+	    SELECT *
+	    FROM (
+	      SELECT /*+INDEX_DESC(qna qna_pk)*/ 
+	        rownum rn, qna_num, qna_title, qna_content, writer, qna_date, qna_status, qna_category
+	      FROM qna
+	      WHERE rownum <= #{criteria.pageNum} * #{criteria.amount}
+	        AND writer = #{qnaVO.writer}
+	      ]]>
+	        <if test="qnaVO.qna_category != 0">
+	          AND qna_category = #{qnaVO.qna_category}
+	        </if>
+	    ) 
+	  <![CDATA[
+	    WHERE rn > (#{criteria.pageNum} - 1) * #{criteria.amount}
+	  ]]>
+	</select>
+
+	<select id="Q_TOTAL_COUNT" resultType="int">
+		select count(*) from qna 
+		where qna_num > 0 
+		and writer = #{qnaVO.writer}
+		<if test="qnaVO.qna_category != 0">
+    	AND qna_category = #{qnaVO.qna_category}
+    </if>
 	</select>
 	
 	<select id="Q_SELECT_ONE" resultMap="qnaResultMap">

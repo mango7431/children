@@ -5,3 +5,10 @@
   padding: 8px 15px;
   border: none;
 }
+
+.page-num.active a {
+	padding: 5px 10px;
+	border-radius: 50%;
+	background-color: blue;
+	color: #fff;
+}

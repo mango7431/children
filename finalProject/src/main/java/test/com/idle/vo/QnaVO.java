@@ -3,6 +3,7 @@ package test.com.idle.vo;
 import java.sql.Timestamp;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class QnaVO {

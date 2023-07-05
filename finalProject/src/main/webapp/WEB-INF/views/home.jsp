@@ -23,6 +23,8 @@
 		<li><a href="qnaSelectOne.do">qnaSelectOne.do</a></li>
 		<hr>
 		<li><a href="qnaInsertOK.do?writer=tester1&qna_category=1&qna_title=계정이 이상해요&qna_content=확인해주세요">qnaInsertOK.do</a></li>
+		<hr>
+		<li><a href="jsonQnaSelectCount.do?pageNum=1&amount=10&qna_category=2&writer=tester1">jsonQnaSelectCount.do</a></li>
 	</ul>
 	</div>
 </body>

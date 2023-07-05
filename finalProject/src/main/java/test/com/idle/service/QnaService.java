@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.dao.QnaDAO;
+import test.com.idle.vo.Criteria;
 import test.com.idle.vo.QnaVO;
 
 @Slf4j
@@ -40,7 +41,11 @@ public class QnaService {
 		return dao.qnaSelectAll(vo);
 	}
 	
-	public List<QnaVO> page(int page, int limit){
-		return dao.page(page, limit);
+	public List<QnaVO> paging(Criteria cri, QnaVO vo){
+		return dao.paging(cri, vo);
+	}
+	
+	public int getTotalCount(Criteria cri, QnaVO vo){
+		return dao.getTotalCount(cri, vo);
 	}
 }

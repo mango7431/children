@@ -1,6 +1,8 @@
 package test.com.idle.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.dao.QnaDAO;
+import test.com.idle.vo.Criteria;
 import test.com.idle.vo.QnaVO;
 
 @Slf4j
@@ -52,10 +55,24 @@ public class QnaDAOimpl implements QnaDAO {
 	}
 
 	@Override
-	public List<QnaVO> page(int page, int limit) {
-		log.info("page...page:{}, limit:{}", page, limit);
-		//수정해야함.
-		return null;
+	public List<QnaVO> paging(Criteria cri, QnaVO vo) {
+		log.info("paging...Criteria:{}", cri);
+		
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		paramMap.put("criteria", cri);
+		paramMap.put("qnaVO", vo);		
+		
+		return sqlSession.selectList("Q_PAGING", paramMap);
 	}
 
+	@Override
+	public int getTotalCount(Criteria cri, QnaVO vo) {
+		log.info("getTotalCount...Criteria:{}", cri);
+		
+		Map<Object, Object> paramMap = new HashMap<Object, Object>();
+		paramMap.put("criteria", cri);
+		paramMap.put("qnaVO", vo);	
+		
+		return sqlSession.selectOne("Q_TOTAL_COUNT", paramMap);
+	}
 }

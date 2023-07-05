@@ -18,11 +18,13 @@
 			//매개변수 가져오기
 			var urlParams = new URLSearchParams(window.location.search);
 			var parameterCategory = urlParams.get('qna_category') || 0;
-			
+					
 			var selectedCategory = convertNumToCategory(parseInt(parameterCategory));
 		  $("#q-category-" + convertCategoryToEng(selectedCategory)).addClass('selected');
 		  
-		  renderQnAList(parameterCategory);
+		  console.log("parameterCategory", parameterCategory);
+		  
+		  renderQnAListPagination(parameterCategory);
 		  
 		  $(".q-category").on("click", function(){
 				$(".q-category").removeClass('selected');
@@ -31,26 +33,55 @@
 			 	$("#q-category-" + convertCategoryToEng(btnCategory)).addClass('selected');
 				
 				parameterCategory = convertCategoryToNum(btnCategory);
-				
 				urlParams.set('qna_category', convertCategoryToNum(btnCategory));
+			  urlParams.set('pageNum', 1);
+			  $('input[name="pageNum"]').val(1);
+				
 		    var newUrl = window.location.pathname + '?' + urlParams.toString();
 		    
-		    renderQnAList(parameterCategory);
-		    window.history.replaceState({}, '', newUrl);
+			  renderQnAListPagination(parameterCategory);
+		    //window.history.replaceState({}, '', newUrl);
+		    window.location.href = newUrl;
+			});
+		  
+			//페이징 처리
+			var actionForm = $("#actionForm");
+			
+			$(document).on("click", ".pagenate_button a", function(e) {
+			  $('input[name="qna_category"]').val(parameterCategory);
+				e.preventDefault();
+				
+				console.log('click');
+				
+				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+				actionForm.submit();
 			});
 			
+			$(document).on("click", ".page-num a", function(e) {
+			  $('input[name="qna_category"]').val(parameterCategory);
+				e.preventDefault();
+				
+				console.log('click');
+				
+				actionForm.find("input[name='pageNum']").val($(this).text());
+				actionForm.submit();
+			});
 		}); //load
 		
+		// Q&A 리스트 ajax
 		function renderQnAList(initCategory=0){
+			console.log("initCategory:" , initCategory);
 			$.ajax({
 				url: "jsonQnaSelectAll.do",
-				data: {writer: "tester1",
-							 qna_category: initCategory
+				data: {writer: "tester1", //사용자 정보 수정하기
+							 qna_category: initCategory,
+							 pageNum : $('input[name="pageNum"]').val(),
+							 amount : $('input[name="amount"]').val()
 				},
 				method: 'GET',
 				dataType: 'json',
 				success: function(vos){
-					console.log('ajax...success:', vos);
+					console.log('ajax...success:', vos);	
 				  let tag_vos = '';
 					let status = '';
 					let txtCategory = '';
@@ -58,34 +89,103 @@
 					
 					$("#vos").empty();
 					
-					$.each(vos, function(index, vo) {						
-						if (vo.qna_status === 1) {
-							status = '미답변';
-					  } else if (vo.qna_status === 2) {
-						  status = '답변완료';
-					  }
-						status = vo.qna_status === 1 ? '미답변' : '답변완료';
-						
-						txtCategory = convertNumToCategory(vo.qna_category);
-						
-						date = new Date(vo.qna_date);
-						let formattedDate = date.toLocaleString();
-						
-					  tag_vos += `
-					    <tr>
-					      <th scope="row" class="text-center align-middle">\${vo.qna_num}</th>
-					      <td class="py-4 my-1">
-					      	<a href="qnaSelectOne.do?qna_num=\${vo.qna_num}">
-						        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
-						        <div class="mt-3">\${txtCategory}</div>
-						        <div class="mt-2">\${formattedDate}</div>
-						      </a>
+					if(vos.length === 0) {
+						tag_vos = `
+							<tr>
+					      <td scope="row" class="text-center align-middle py-4 my-1" colspan="2">
+					      	관련 데이터가 존재하지 않습니다.
 					      </td>
 					    </tr>
-					  `;
-						
+						`;
 						$("#vos").html(tag_vos);
-					});
+					} else {
+						$.each(vos, function(index, vo) {						
+							if (vo.qna_status === 1) {
+								status = '미답변';
+						  } else if (vo.qna_status === 2) {
+							  status = '답변완료';
+						  }
+							status = vo.qna_status === 1 ? '미답변' : '답변완료';
+							
+							txtCategory = convertNumToCategory(vo.qna_category);
+							
+							date = new Date(vo.qna_date);
+							let formattedDate = date.toLocaleString();
+							
+						  tag_vos += `
+						    <tr>
+						      <td scope="row" class="text-center align-middle fw-bold">\${vo.qna_num}</th>
+						      <td class="py-4 my-1">
+						      	<a href="qnaSelectOne.do?qna_num=\${vo.qna_num}">
+							        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
+							        <div class="mt-3">\${txtCategory}</div>
+							        <div class="mt-2">\${formattedDate}</div>
+							      </a>
+						      </td>
+						    </tr>
+						  `;
+							
+							$("#vos").html(tag_vos);
+						});
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log('xhr.status:', xhr.status);
+				}
+			});
+		}
+		
+		// Q&A 리스트 pagination ajax
+		function renderQnAListPagination(initCategory=0) {
+			$.ajax({
+				url: "jsonQnaSelectCount.do",
+				data: {writer: "tester1", //사용자 정보 수정하기
+							 qna_category: initCategory,
+							 pageNum : $('input[name="pageNum"]').val(),
+							 amount : $('input[name="amount"]').val()
+				},
+				method: 'GET',
+				dataType: 'json',
+				success: function(vo){
+					console.log('ajax...success:', vo);					
+					$("#pagination").empty();
+					
+					let tag_page = `   					
+						<li class="list-inline-item prev pagenate_button">
+			      	<a href="\${vo.startPage-1}"><span>&laquo;</span></a>
+			    	</li>
+		    	`;
+
+					for (let num = vo.startPage; num <= vo.endPage+1; num++) {
+						tag_page += `
+							<li class="list-inline-item \${vo.cri.pageNum == num ? "active":""} page-num">
+								<a class="page-link" href="">\${num}</a>
+							</li>
+					  `;
+					}
+					
+					tag_page += `
+				    <li class="list-inline-item next pagenate_button">
+				      <a href="\${vo.endPage+1}"><span aria-hidden="true">&raquo;</span></a>
+				    </li>
+					`;
+	
+					$("#pagination").html(tag_page);
+					
+					if(vo.prev) {
+						$(".prev").show();
+					} else {
+						$(".prev").hide();
+					}
+					
+					if(vo.next) {
+						$(".next").show();
+					} else {
+						$(".next").hide();
+					}
+					
+					renderQnAList(initCategory);
+
 				},
 				error: function(xhr, status, error) {
 					console.log('xhr.status:', xhr.status);
@@ -157,56 +257,56 @@
 	<div class="container">
 		<div class="breadcrumb fs-5 fw-bold px-4">내 Q&A 목록</div>
  		<div class="row my-3">
-	     	<div class="col-md-3 col-lg-2">     
-			    <ul class="mypage-floating-menu px-0">
-			    	<li><a href="#">마이페이지</a></li>
-			    	<li><a href="#">회원정보수정</a></li>
-			    	<li><a href="#">찜목록</a></li>
-			    	<li><a href="#">내 거래 목록</a></li>
-			    	<li><a href="#">내동네설정</a></li>
-			    	<li class="fw-bold"><a href="qnaSelectAll.do">내 Q&A 목록</a></li>
-			    </ul>
-	   		</div>
-	   		<div class="col-md-9 col-lg-10 px-5">
-	      	<div class="row">
-	      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
-	      		<div class="col-md-6 text-end"><a href="qnaInsert.do">글쓰기</a></div>
-      			<hr class="mt-3">
-	      		<ul class="list-inline q-filter-btn">
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-all">전체</li>
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-account">계정문의</li>
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-chat">채팅, 알림문의</li>
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-trade">거래문의</li>
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-ad">광고문의</li>
-	      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-etc">기타문의</li>	      			
-	      		</ul>
-	      	</div>
-	        <table class="table table-sm">
-					  <thead>
-					    <tr>
-					      <th scope="col" class="col-2 text-center py-3">글번호</th>
-					      <th scope="col" class="col-10 text-center py-3">내용</th>
-					    </tr>
-					  </thead>
-					  <tbody id="vos">
-					  </tbody>
-					</table>
-				
+     	<div class="col-md-3 col-lg-2">     
+		    <ul class="mypage-floating-menu px-0">
+		    	<li><a href="#">마이페이지</a></li>
+		    	<li><a href="#">회원정보수정</a></li>
+		    	<li><a href="#">찜목록</a></li>
+		    	<li><a href="#">내 거래 목록</a></li>
+		    	<li><a href="#">내동네설정</a></li>
+		    	<li class="fw-bold"><a href="qnaSelectAll.do?writer=tester1">내 Q&A 목록</a></li>
+		    	<!-- 사용자 정보 수정하기 -->
+		    </ul>
+   		</div>
+   		<div class="col-md-9 col-lg-10 px-5">
+      	<div class="row">
+      		<div class="col-md-6 fs-5 fw-bold">Q&A 목록</div>
+      		<div class="col-md-6 text-end"><a href="qnaInsert.do">글쓰기</a></div>
+     			<hr class="mt-3">
+      		<ul class="list-inline q-filter-btn">
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-all">전체</li>
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-account">계정문의</li>
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-chat">채팅, 알림문의</li>
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-trade">거래문의</li>
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-ad">광고문의</li>
+      			<li class="list-inline-item px-3 py-2 q-category" id="q-category-etc">기타문의</li>	      			
+      		</ul>
+      	</div>
+        <table class="table table-sm">
+				  <thead>
+				    <tr>
+				      <th scope="col" class="col-3 text-center py-3">글번호</th>
+				      <th scope="col" class="col-9 text-center py-3">내용</th>
+				    </tr>
+				  </thead>
+				  <tbody id="vos">
+				  </tbody>
+				</table>
+			
 				<nav class="text-center">
-				  <ul class="list-inline">
-				    <li class="list-inline-item">
-				      <a href="#"><span>&laquo;</span></a>
-				    </li>
-				    <li class="list-inline-item"><a class="page-link" href="#">1</a></li>
-				    <li class="list-inline-item"><a class="page-link" href="#">2</a></li>
-				    <li class="list-inline-item"><a class="page-link" href="#">3</a></li>
-				    <li class="list-inline-item">
-				      <a href="#"><span aria-hidden="true">&raquo;</span></a>
-				    </li>
+				  <ul class="list-inline" id="pagination">
+				  
 				  </ul>
 				</nav>  
-	          
-	  		</div>      
+				
+				<form id="actionForm" action="qnaSelectAll.do" method="get">
+					<input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
+					<input type="hidden" name="amount" value="${pageMaker.amount}">
+					<input type="hidden" name="qna_category" value="">
+					<input type="hidden" name="writer" value="tester1">
+					<!-- 유저 정보 수정하기 -->
+				</form>  
+  		</div>      
 	  </div>
 	</div>
 </body>

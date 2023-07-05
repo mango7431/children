@@ -2,6 +2,7 @@ package test.com.idle.dao;
 
 import java.util.List;
 
+import test.com.idle.vo.Criteria;
 import test.com.idle.vo.QnaVO;
 
 public interface QnaDAO {
@@ -14,6 +15,8 @@ public interface QnaDAO {
 	public QnaVO qnaSelectOne(QnaVO vo);
 	
 	public List<QnaVO> qnaSelectAll(QnaVO vo);
+
+	public List<QnaVO> paging(Criteria cri, QnaVO vo);
 	
-	public List<QnaVO> page(int page, int limit);
+	public int getTotalCount(Criteria cri, QnaVO vo);
 }
