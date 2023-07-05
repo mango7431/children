@@ -12,4 +12,6 @@ public interface RoomDAO {
 
 	RoomVO roomCheck(RoomVO vo);
 
+	int delete(RoomVO vo);
+
 }

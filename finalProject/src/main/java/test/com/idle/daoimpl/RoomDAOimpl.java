@@ -45,6 +45,15 @@ public class RoomDAOimpl implements RoomDAO {
 		
 		return vo2;
 	}
+
+	@Override
+	public int delete(RoomVO vo) {
+		log.info("insert()...{}",vo);
+		
+		int flag = sqlSession.delete("R_DELETE",vo);
+		
+		return flag;
+	}
 	
 	
 

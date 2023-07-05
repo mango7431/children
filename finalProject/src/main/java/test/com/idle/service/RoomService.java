@@ -32,4 +32,8 @@ public class RoomService {
 		return dao.roomCheck(vo);
 	}
 
+	public int delete(RoomVO vo) {
+		return dao.delete(vo);
+	}
+
 }

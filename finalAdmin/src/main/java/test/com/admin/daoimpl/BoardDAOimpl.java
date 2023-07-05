@@ -76,8 +76,13 @@ public class BoardDAOimpl implements BoardDAO {
 	@Override
 	public int delete(BoardVO vo) {
 		log.info("delete()...{}",vo);
-		
-		int flag = sqlSession.delete("B_DELETE",vo);
+		int flag = 0;
+		try {
+			flag = sqlSession.delete("B_DELETE",vo);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return flag;
 	}

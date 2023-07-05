@@ -13,79 +13,6 @@
 </head>
 <script type="text/javascript">
 	
-function searchList(page=1){
-	console.log('searchList() ...');
-	
-	$.ajax({
-		url:"jsonBoardSearchList.do",
-		data:{
-			searchKey:$('#searchKey').val(),
-			searchWord:$('#searchWord').val(),
-			page:page
-		},
-		method:'GET',
-		dataType:'json',
-		success: function(data){
-			console.log('ajax success:',data);
-			
-			let vos = ``;
-			let pages = ``;
-			
-			let arr = data.vos;
-			let pg = data.page;
-			
-			$.each(arr,function(index,vo){
-				
-				let date = new Date(vo.board_date).toLocaleString();
-				
-				vos += `
-					<tr onClick="location.href='boardSelectOne.do?board_num=\${vo.board_num}'" onmouseover="this.style.background='silver'" onmouseout="this.style.background='white'">
-				      <td>\${vo.board_num}</td>
-				      <td>\${vo.board_title}</td>
-				      <td>\${vo.writer}</td>
-				      <td>\${vo.price}</td>
-				      <td>\${date}</td>
-				   </tr>
-				`;
-			});
-			
-			$("#vos").html(vos);
-			
-			pages += `
-			<tr>
-				<td colspan="5" align="center">
-					<c:if test="\${pg.startPage > 1}">
-            			<a href="javascript:searchList(\${pg.startPage - 1})">&lt;</a>
-        			</c:if>
-			`;
-			
-			$.each(Array.from({ length: pg.endPage - pg.startPage + 1 }, function(_, i) {
-    			return pg.startPage + i;
-			}), function(_, number) {
-    			pages += `<a href="javascript:searchList(\${number})">\${number}</a> `;
-			});
-			
-			
-			pages += `
-					<c:if test="${pe.endPage < pg.totalPage}">
-    					<a href="javascript:searchList(\${pg.endPage + 1})">&gt;</a>
-					</c:if>
-				</td>
-			</tr>
-			`;
-			
-			$("#pages").html(pages);
-			
-			let totalCount = pg.totalCount;
-			$("#totalCount").html(totalCount);
-			
-		},
-		error:function(xhr,status,error){
-			console.log('xhr:',xhr.status);
-		}
-	});
-}
-	
 </script>
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
@@ -102,6 +29,7 @@ function searchList(page=1){
 			<input type="hidden" name="page" value="1" id="page"/>
 			<input type="submit" value="검색">
 		</form>
+		
 		<table class="table">
 			<thead>
 				<tr>
@@ -109,6 +37,7 @@ function searchList(page=1){
 					<th scope="col">제목</th>
 					<th scope="col">작성자</th>
 					<th scope="col">가격</th>
+					<th scope="col">경고횟수</th>
 					<th scope="col">작성일</th>
 				</tr>
 			</thead>
@@ -119,6 +48,7 @@ function searchList(page=1){
 						<td>${vo.board_title }</td>
 						<td>${vo.writer }</td>
 						<td>${vo.price }</td>
+						<td>${vo.board_report }</td>
 						<td>${vo.board_date }</td>
 					</tr>
 				</c:forEach>
@@ -126,7 +56,7 @@ function searchList(page=1){
 			<tfoot id="pages">
 				<tr>
 					<c:if test="${empty param.searchKey}">
-						<td colspan="5" align="center">
+						<td colspan="6" align="center">
 							<c:if test="${page.startPage > 1}">
 								<a href="boardSelectAll.do?page=${page.startPage - 1}">&lt;</a>
 							</c:if> 
@@ -139,7 +69,7 @@ function searchList(page=1){
 						</td>
 					</c:if>
 					<c:if test="${not empty param.searchKey}">
-						<td colspan="5" align="center">
+						<td colspan="6" align="center">
 							<c:if test="${page.startPage > 1}">
 								<a href="boardSearchList.do?searchKey=${param.searchKey}&searchWord=${param.searchWord}&page=${page.startPage - 1}">&lt;</a>
 							</c:if> 

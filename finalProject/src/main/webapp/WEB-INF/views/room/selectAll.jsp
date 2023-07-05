@@ -20,6 +20,37 @@
 <script type="text/javascript">
 	
 	$(function(){
+		
+		$('.chat_list #delete').click(function(event) {
+		    event.stopPropagation();
+		    console.log('Button clicked');
+		    
+		    var roomNum = $(this).data('roomnum');
+		    console.log(roomNum);
+		    
+		    if(confirm('채팅방을 정말 삭제하시겠습니까? 채팅 내역이 다 사라집니다.')){
+		    	$.ajax({
+					url:"jsonRoomDelete.do",
+					data:{room_num:roomNum},
+					method:'GET',
+					dataType:'json',
+					success:function(result){
+						console.log('ajax success:',result);
+						
+						if(result==1){
+							location.href = 'roomSelectAll.do';
+						}
+						
+					},
+					error:function(xhr,status,error){
+						console.log('xhr:',xhr.status);
+					}
+				});
+		    }else{
+		    	
+		    }
+		  });
+		
 		var currentStompConnection = null;
 		$('.chat_list').click(function(){
 			var roomNum = $(this).data('roomnum');
@@ -128,6 +159,22 @@
 							prepareScroll();
 						}
 					});
+					stomp.subscribe("/sub/chat/roomDeleted" + roomNum, function(message){
+						console.log(message);
+						
+						let str = `
+							<div class="incoming_msg">
+				              <div class="incoming_msg_img"></div>
+				              <div class="received_msg">
+				                <div class="received_withd_msg">
+				                  <p>상대방이 채팅방을 삭제했습니다.</p>
+				                  <span class="time_date"></span></div>
+				              </div>
+				            </div>
+						`;
+						$('.msg_history').append(str);
+						prepareScroll();
+					});
 					prepareScroll();
 					
 				});
@@ -193,11 +240,19 @@
 							</div>
 							<div class="chat_ib">
 								<c:if test="${user_id eq vo.buyer }">
+									<h5>${vo.board_title }, 가격:${vo.price }
+										<span class="chat_date"><button id="delete" data-roomnum="${vo.room_num}">삭제</button></span>
+									</h5>
+									<h5>글쓴이와의 채팅</h5>
 									<h5>${vo.seller }
 										<span class="chat_date">${vo.room_date }</span>
 									</h5>
 								</c:if>
 								<c:if test="${user_id eq vo.seller }">
+									<h5>${vo.board_title }, 가격:${vo.price }
+										<span class="chat_date"><button id="delete" data-roomnum="${vo.room_num}">삭제</button></span>
+									</h5>
+									<h5>거래희망자와의 채팅</h5>
 									<h5>${vo.buyer }
 										<span class="chat_date">${vo.room_date }</span>
 									</h5>

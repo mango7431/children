@@ -13,5 +13,7 @@ public class RoomVO {
 	private String seller;
 	private Timestamp room_date;
 	private String member_savename;
+	private String board_title;
+	private int price;
 
 }

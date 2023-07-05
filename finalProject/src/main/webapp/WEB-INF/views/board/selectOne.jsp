@@ -76,7 +76,7 @@
 				}
 				
 				
-				let m_img = `<img src="resources/img/\${vo2.member_savename }" class="d-block w-100">`;
+				let m_img = `<img src="resources/img/thumb_\${vo2.member_savename }" class="d-block w-100">`;
 				$('#m_img').html(m_img);
 				
 				let m_name = `\${vo2.name}`;
@@ -189,7 +189,7 @@
 		console.log(writer);
 		
 		$.ajax({
-			url:"jsonChatInsert.do",
+			url:"jsonRoomInsert.do",
 			data:{
 				board_num:${param.board_num},
 				buyer:'${user_id}',

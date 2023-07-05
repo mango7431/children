@@ -30,7 +30,6 @@ public class RoomController {
 		
 		RoomVO vo = new RoomVO();
 		vo.setBuyer(session.getAttribute("user_id").toString());
-		vo.setSeller(session.getAttribute("user_id").toString());
 		log.info("vo : {}",vo);
 		
 		List<RoomVO> vos = service.selectAll(vo);
