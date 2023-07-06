@@ -81,12 +81,23 @@
 			});
 			
 			$('.delete-btn').click(function(event) {
-	            event.preventDefault();
-	            var confirmDelete = confirm("정말로 삭제하시겠습니까?");
-	            if (confirmDelete) {
-	                window.location.href = $(this).attr('href');
-	            }
+	      event.preventDefault();
+	      var confirmDelete = confirm("정말로 삭제하시겠습니까?");
+	      if (confirmDelete) {
+          window.location.href = $(this).attr('href');
+	      }
       });
+			
+			$('.border-btn').on("click", function(e) {
+				e.preventDefault();
+				detailForm.submit();
+			});
+			
+			$('.update-btn').on("click", function(e) {
+				e.preventDefault();
+				$("#detailForm").attr("action", "qnaUpdate.do");
+				detailForm.submit();
+			});
 			
 		}); //load
 		
@@ -107,14 +118,15 @@
 		    	<li><a href="#">찜목록</a></li>
 		    	<li><a href="#">내 거래 목록</a></li>
 		    	<li><a href="#">내동네설정</a></li>
-		    	<li class="fw-bold"><a href="qnaSelectAll.do">내 Q&A 목록</a></li>
+		    	<li class="fw-bold"><a href="qnaSelectAll.do?writer=tester1">내 Q&A 목록</a></li>
+		    	<!-- 사용자 정보 수정하기 -->
 		    </ul>
    		</div>
    		<div class="col-md-9 col-lg-10 px-5">
       	<div class="row">
       		<div class="col-md-6 fs-5 fw-bold">Q&A</div>
       		<div class="col-md-6 text-end">
-      			<a href="qnaUpdate.do?qna_num=${param.qna_num}">수정하기</a>
+      			<a href="" class="update-btn">수정하기</a>
       			<a href="qnaDeleteOK.do?qna_num=${param.qna_num}" class="ms-3 delete-btn">삭제하기</a>
       		</div>
      			<hr class="mt-3">
@@ -122,14 +134,30 @@
  				<div class="row q-detail py-3" id="vo">
 
    			</div>
+   			
+				<div class="row">
+					<div class="col px-0 mt-3">
+						<button class="border-btn">목록</button>
+						<!-- 사용자 정보 수정하기 -->
+					</div>
+				</div>
+
 				<div class="row answer-area">
 					<div class="fw-bold fs-5 mt-5 mb-3">답변</div>
 					<div class="q-detail py-3" id="answer">
 						
  					</div>
 				</div>
-   			
-   			
+				
+				<form id="detailForm" action="qnaSelectAll.do" method="get">
+					<input type="hidden" name="qna_num" value="${param.qna_num}">
+					<input type="hidden" name="pageNum" value="${cri.pageNum}">
+					<input type="hidden" name="amount" value="${cri.amount}">
+					<input type="hidden" name="qna_category" value="${qna_category}">
+					<input type="hidden" name="writer" value="tester1">
+					<!-- 유저 정보 수정하기 -->
+				</form>  
+
   		</div>      
   	</div>
 

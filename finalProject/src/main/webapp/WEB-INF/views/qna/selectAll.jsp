@@ -51,8 +51,6 @@
 			  $('input[name="qna_category"]').val(parameterCategory);
 				e.preventDefault();
 				
-				console.log('click');
-				
 				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 				actionForm.submit();
 			});
@@ -61,10 +59,24 @@
 			  $('input[name="qna_category"]').val(parameterCategory);
 				e.preventDefault();
 				
-				console.log('click');
-				
 				actionForm.find("input[name='pageNum']").val($(this).text());
 				actionForm.submit();
+			});
+			
+			//상세 페이지
+			$(document).on("click", ".page-detail", function(e) {
+				$('input[name="qna_category"]').val(parameterCategory);
+				var qnaNum = $(this).closest("tr").find(".qna-num").text().trim();
+				console.log(qnaNum);
+				//e.preventDefault();
+				var url = "qnaSelectOne.do?qna_num=" + qnaNum
+						+"&pageNum=" + $('input[name="pageNum"]').val()
+						+"&amount=" + $('input[name="amount"]').val()
+						+"&qna_category=" + $('input[name="qna_category"]').val()
+						+"&writer=tester1";
+				//사용자 정보 수정하기
+				
+				$(this).attr("href", url);
 			});
 		}); //load
 		
@@ -114,9 +126,9 @@
 							
 						  tag_vos += `
 						    <tr>
-						      <td scope="row" class="text-center align-middle fw-bold">\${vo.qna_num}</th>
+						      <td scope="row" class="text-center align-middle fw-bold qna-num">\${vo.qna_num}</th>
 						      <td class="py-4 my-1">
-						      	<a href="qnaSelectOne.do?qna_num=\${vo.qna_num}">
+						      	<a href="" class="page-detail">
 							        <div class="fs-5"><span class="q-status fw-bold me-2">\${status}</span>\${vo.qna_title}</div>
 							        <div class="mt-3">\${txtCategory}</div>
 							        <div class="mt-2">\${formattedDate}</div>
@@ -300,8 +312,8 @@
 				</nav>  
 				
 				<form id="actionForm" action="qnaSelectAll.do" method="get">
-					<input type="hidden" name="pageNum" value="${pageMaker.pageNum}">
-					<input type="hidden" name="amount" value="${pageMaker.amount}">
+					<input type="hidden" name="pageNum" value="${cri.pageNum}">
+					<input type="hidden" name="amount" value="${cri.amount}">
 					<input type="hidden" name="qna_category" value="">
 					<input type="hidden" name="writer" value="tester1">
 					<!-- 유저 정보 수정하기 -->

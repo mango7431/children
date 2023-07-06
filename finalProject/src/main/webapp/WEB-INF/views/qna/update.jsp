@@ -149,8 +149,11 @@
 			    	<div class="col">
 			    		<sup>(<span id="nowByte">0</span>/3000bytes)</sup>	
 			    	</div>
+			    	
+			    	<input type="hidden" name="pageNum" value="${param.pageNum}"/>
+			    	
 		        <div class="col d-flex justify-content-end">
-		            <button type="submit" class="submit-btn">수정하기</button>
+	            <button type="submit" class="submit-btn">수정하기</button>
 		        </div>
 			    </div>
 				</form>

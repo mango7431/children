@@ -3,8 +3,10 @@ package test.com.idle.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.QnaService;
@@ -23,14 +25,16 @@ public class QnaController {
 	public String qnaSelectAll(Criteria cri, Model model) {
 		log.info("/qnaSelectAll.do");
 		
-		model.addAttribute("pageMaker", cri);
+		model.addAttribute("cri", cri);
 		
 		return "qna/selectAll";
 	}
 	
 	@RequestMapping(value = "/qnaSelectOne.do", method = RequestMethod.GET)
-	public String qnaSelectOne(Model model) {
+	public String qnaSelectOne(@ModelAttribute("cri") Criteria cri, Model model, QnaVO vo) {
 		log.info("/qnaSelectOne.do");
+		
+		model.addAttribute("qna_category", vo.getQna_category());
 		
 		return "qna/selectOne";
 	}
@@ -58,31 +62,39 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "/qnaUpdate.do", method = RequestMethod.GET)
-	public String qnaUpdate(Model model) {
+	public String qnaUpdate(@ModelAttribute("cri") Criteria cri, Model model, QnaVO vo) {
 		log.info("/qnaUpdate.do");
+		
+		model.addAttribute("qna_category", vo.getQna_category());
 		
 		return "qna/update";
 	}
 	
 	@RequestMapping(value = "/qnaUpdateOK.do", method = RequestMethod.GET)
-	public String qnaUpdateOK(QnaVO vo) {
+	public String qnaUpdateOK(@ModelAttribute("cri") Criteria cri, QnaVO qnaVO, 
+			RedirectAttributes rttr) {
 		log.info("/qnaUpdateOK.do");
-		log.info("{}", vo);
-		
-		int result = service.qnaUpdate(vo);
+		log.info("QnaVO:{}", qnaVO);
+		log.info("pageNum:{}", cri.getPageNum());
+
+		int result = service.qnaUpdate(qnaVO);
 		log.info("result:{}", result);
+				
+		rttr.addAttribute("qna_category", qnaVO.getQna_category());
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
 		
 		if(result == 1) {
-			return "redirect:qnaSelectOne.do?qna_num="+vo.getQna_num();
+			return "redirect:qnaSelectOne.do?qna_num="+qnaVO.getQna_num();
 		} else {			
-			return "redirect:qnaUpdate.do?qna_num="+vo.getQna_num();
+			return "redirect:qnaUpdate.do?qna_num="+qnaVO.getQna_num();
 		}
 	}
 	
 	@RequestMapping(value = "/qnaDeleteOK.do", method = RequestMethod.GET)
 	public String qnaDeleteOK(QnaVO vo) {
 		log.info("/qnaDeleteOK.do");
-		log.info("{]", vo);
+		log.info("{}", vo);
 		
 		int result = service.qnaDelete(vo);
 		log.info("result:{}", result);
