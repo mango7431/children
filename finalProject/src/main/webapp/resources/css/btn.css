@@ -14,8 +14,6 @@
 }
 
 .page-num.active a {
-	padding: 5px 10px;
-	border-radius: 50%;
-	background-color: blue;
-	color: #fff;
+	font-weight: bold;
+	color: blue;
 }
