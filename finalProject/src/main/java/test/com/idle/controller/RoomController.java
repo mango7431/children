@@ -39,22 +39,5 @@ public class RoomController {
 		
 		return "room/selectAll";
 	}
-	
-	@RequestMapping(value = "/roomSelectOne.do", method = RequestMethod.GET)
-	public String roomSelectOne(Model model) {
-		log.info("/roomSelectAll.do");
-		
-		RoomVO vo = new RoomVO();
-		vo.setBuyer(session.getAttribute("user_id").toString());
-		vo.setSeller(session.getAttribute("user_id").toString());
-		log.info("vo : {}",vo);
-		
-		List<RoomVO> vos = service.selectAll(vo);
-		log.info("vos : {}",vos);
-		
-		model.addAttribute("vos",vos);
-		
-		return "room/selectOne";
-	}
 
 }

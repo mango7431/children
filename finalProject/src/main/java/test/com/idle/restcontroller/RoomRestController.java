@@ -1,5 +1,9 @@
 package test.com.idle.restcontroller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,9 @@ public class RoomRestController {
 	
 	@Autowired
 	RoomService service;
+	
+	@Autowired
+	HttpSession session;
 	
 	@Autowired
 	SimpMessagingTemplate template;
@@ -51,7 +58,7 @@ public class RoomRestController {
 		log.info("{}",result);
 		
 		if(result == 1) {
-			template.convertAndSend("/sub/chat/roomDeleted"+vo.getRoom_num(),vo);
+			template.convertAndSend("/sub/chat/roomDeleted"+vo.getRoom_num(),result);
 		}
 		
 		return result;

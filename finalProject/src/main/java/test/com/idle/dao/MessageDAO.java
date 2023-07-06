@@ -12,4 +12,8 @@ public interface MessageDAO {
 
 	MessageVO selectSavename(MessageVO vo);
 
+	int readCheck(MessageVO vo);
+
+	int readCount(MessageVO vo);
+
 }

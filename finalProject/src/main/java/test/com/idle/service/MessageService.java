@@ -32,4 +32,12 @@ public class MessageService {
 		return dao.selectSavename(vo);
 	}
 
+	public int readCheck(MessageVO vo) {
+		return dao.readCheck(vo);
+	}
+
+	public int readCount(MessageVO vo) {
+		return dao.readCount(vo);
+	}
+
 }

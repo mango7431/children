@@ -13,5 +13,6 @@ public class MessageVO {
 	private String message;
 	private Timestamp message_date;
 	private String sender_savename;
+	private int readcounts;
 
 }

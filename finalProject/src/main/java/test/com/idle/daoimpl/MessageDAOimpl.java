@@ -24,7 +24,12 @@ public class MessageDAOimpl implements MessageDAO {
 	@Override
 	public int insert(MessageVO vo) {
 		log.info("insert()...{}",vo);
-		int flag = sqlSession.insert("MESSAGE_INSERT",vo);
+		int flag = 0;
+		try {
+			flag = sqlSession.insert("MESSAGE_INSERT",vo);			
+		}catch (Exception e) {
+			log.info("방삭제됨 ㅅㄱ");
+		}
 		return flag;
 	}
 
@@ -43,6 +48,24 @@ public class MessageDAOimpl implements MessageDAO {
 		MessageVO vo2 = sqlSession.selectOne("MESSAGE_SELECT_SAVENAME",vo);
 		
 		return vo2;
+	}
+
+	@Override
+	public int readCheck(MessageVO vo) {
+		log.info("readCheck()...{}",vo);
+		
+		int flag = sqlSession.update("MESSAGE_READ_CHECK",vo);
+		
+		return flag;
+	}
+
+	@Override
+	public int readCount(MessageVO vo) {
+		log.info("readCount()...{}",vo);
+		
+		int flag = sqlSession.selectOne("READ_COUNT",vo);
+		
+		return flag;
 	}
 
 }

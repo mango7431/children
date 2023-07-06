@@ -19,5 +19,13 @@
 		where message.room_num=#{room_num}
 		order by message_num
 	</select>
+	
+	<select id="READ_COUNT" resultType="int">
+		select count(*) from message where room_num = #{room_num} and sender != #{sender} and readcount=1
+	</select>
+	
+	<update id="MESSAGE_READ_CHECK">
+		UPDATE message SET readcount = readcount-1 where room_num=#{room_num} and sender != #{sender} and readcount=1
+	</update>
 
 </mapper>

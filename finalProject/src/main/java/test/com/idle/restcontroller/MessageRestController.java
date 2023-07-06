@@ -20,13 +20,35 @@ public class MessageRestController {
 	MessageService service;
 	
 	@ResponseBody
-	@RequestMapping(value = "/json_message_selectAll.do", method = RequestMethod.GET)
-	public List<MessageVO> json_message_selectAll(MessageVO vo) {
+	@RequestMapping(value = "/jsonMessageSelectAll.do", method = RequestMethod.GET)
+	public List<MessageVO> jsonMessageSelectAll(MessageVO vo) {
 		log.info("message : {}",vo);
 		
 		List<MessageVO> vos = service.selectAll(vo);
 		
 		return vos;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/readCheck.do", method = RequestMethod.POST)
+	public int readCheck(MessageVO vo) {
+		log.info("readCheck : {}",vo);
+		
+		int result = service.readCheck(vo);
+		log.info("result : {}",result);
+		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/jsonReadCount.do", method = RequestMethod.GET)
+	public int jsonReadCount(MessageVO vo) {
+		log.info("readCheck : {}",vo);
+		
+		int result = service.readCount(vo);
+		log.info("result : {}",result);
+		
+		return result;
 	}
 
 }
