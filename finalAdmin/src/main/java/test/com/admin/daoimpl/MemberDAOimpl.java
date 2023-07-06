@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.dao.MemberDAO;
+import test.com.admin.vo.Criteria;
 import test.com.admin.vo.MemberVO;
 
 @Slf4j
@@ -25,6 +26,11 @@ public class MemberDAOimpl implements MemberDAO {
 	public List<MemberVO> memberSelectAll() {
 		log.info("memberSelectAll...");
 		return sqlSession.selectList("M_SELECT_ALL");
+	}
+	
+	@Override
+	public List<MemberVO> memberPaging(Criteria cri) {
+		return sqlSession.selectList("M_PAGING", cri);
 	}
 
 	@Override
@@ -53,6 +59,13 @@ public class MemberDAOimpl implements MemberDAO {
 			vos = sqlSession.selectList("M_SEARCHLIST_NAME", "%" + searchWord + "%");					
 		}
 		return vos;
+	}
+	
+	@Override
+	public int getTotalCount(Criteria cri) {
+		log.info("getTotalCount...Criteria:{}", cri);
+		
+		return sqlSession.selectOne("M_TOTAL_COUNT", cri);
 	}
 
 }

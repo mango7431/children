@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.dao.MemberDAO;
+import test.com.admin.vo.Criteria;
 import test.com.admin.vo.MemberVO;
 
 @Slf4j
@@ -22,6 +23,14 @@ public class MemberService {
 	
 	public List<MemberVO> memberSelectAll() {
 		return dao.memberSelectAll();
+	}
+	
+	public List<MemberVO> memberPaging(Criteria cri) {
+		return dao.memberPaging(cri);
+	}
+	
+	public int getTotalCount(Criteria cri) {
+		return dao.getTotalCount(cri);
 	}
 
 	public MemberVO memberSelectOne(MemberVO vo) {

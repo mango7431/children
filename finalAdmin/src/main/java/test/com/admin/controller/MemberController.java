@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.MemberService;
+import test.com.admin.vo.Criteria;
 import test.com.admin.vo.MemberVO;
 
 @Controller
@@ -18,8 +19,10 @@ public class MemberController {
 	private MemberService service;
 	
 	@RequestMapping(value = {"/memberSelectAll.do"}, method = RequestMethod.GET)
-	public String memberSelectAll() {
+	public String memberSelectAll(Criteria cri, Model model) {
 		log.info("/memberSelectAll.do");
+		
+		model.addAttribute("cri", cri);
 		return "member/selectAll";
 	}
 	

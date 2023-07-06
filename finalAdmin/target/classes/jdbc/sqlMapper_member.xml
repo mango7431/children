@@ -8,6 +8,22 @@
 		select * from member order by id desc
 	</select>
 	
+	<select id="M_PAGING" resultType="test.com.admin.vo.MemberVO">
+		<![CDATA[
+			select rn, id, pw, name, address, member_report, member_savename
+			from (
+				select /*+INDEX_DESC(member member_pk)*/
+					rownum rn, id, pw, name, address, member_report, member_savename
+				from member
+				where rownum <= #{pageNum} * #{amount}
+			) where rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+	
+	<select id="M_TOTAL_COUNT" resultType="int">
+		select count(*) from member 
+	</select>
+	
 	<select id="M_SEARCHLIST_ID" resultType="test.com.admin.vo.MemberVO">
 		select * from member where id like #{searchWord} 
 	</select>

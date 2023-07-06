@@ -14,8 +14,15 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			var pageNum = $('input[name="pageNum"]').val();
+			var amount = $('input[name="amount"]').val();
+			
 			$.ajax({
 				url: "jsonMemberSelectAll.do",
+				data: {
+					pageNum : pageNum,
+			 		amount : amount
+				},
 				method: 'GET',
 				dataType: 'json',
 				success: function(vos){
@@ -24,7 +31,6 @@
 					$.each(vos, function(index, vo) {
 						tag_vos += `
 					    <tr>
-					      <td scope="row" class="text-center align-middle">\${index+1}</td>
 					      <td scope="row" class="text-center align-middle">
 					      	<img width="35px" src="resources/uploadimg/\${vo.member_savename}">
 					      </td>
@@ -37,6 +43,7 @@
 					});
 					
 					$("#vos").html(tag_vos);
+					showPagination(pageNum, amount);
 				},
 				error: function(xhr, status, error) {
 					console.log('xhr.status:', xhr.status);
@@ -44,11 +51,27 @@
 			});
 			
 			$("#vos").on("click", "tr", function() {
-			    var id = $(this).find("td:nth-child(3)").text();
+			    var id = $(this).find("td:nth-child(2)").text();
 			    goToDetailPage(id);
 			});
 			
-		});
+			var actionForm = $("#actionForm");
+			
+			$(document).on("click", ".pagenate_button a", function(e) {
+				e.preventDefault();
+				
+				actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+				actionForm.submit();
+			});
+			
+			$(document).on("click", ".page-num a", function(e) {
+				e.preventDefault();
+				
+				actionForm.find("input[name='pageNum']").val($(this).text());
+				actionForm.submit();
+			});
+			
+		}); //onload
 		
 		function goToDetailPage(id) {
 			var detailPageUrl = "memberSelectOne.do?id="+id
@@ -72,9 +95,8 @@
 					$.each(vos, function(index, vo) {
 						tag_vos += `
 					    <tr>
-					      <td scope="row" class="text-center align-middle">\${index+1}</td>
 					      <td scope="row" class="text-center align-middle">
-					      	<img width="35px" src="resources/uploadimg/\${vo.member_savename}">
+					      	<img width="50px" src="resources/uploadimg/\${vo.member_savename}">
 					      </td>
 					      <td scope="row" class="text-center align-middle">\${vo.id}</td>
 					      <td scope="row" class="text-center align-middle">\${vo.name}</td>
@@ -91,33 +113,89 @@
 				}
 			});
 		}
+		
+		function showPagination(pageNum, amount) {
+			console.log("showPagination()...");
+			
+			$.ajax({
+				url: "jsonMemberSelectCount.do",
+				data: {
+					pageNum : pageNum,
+					amount : amount					
+				},
+				method: 'GET',
+				dataType: 'json',
+				success: function(vo){
+					console.log('ajax...success:', vo);		
+					$("#pagination").empty();
+					
+					let tag_page = `   					
+						<li class="list-inline-item prev pagenate_button">
+			      	<a href="\${vo.startPage-1}"><span>&laquo;</span></a>
+			    	</li>
+		    	`;
+
+					for (let num = vo.startPage; num <= vo.endPage; num++) {
+						tag_page += `
+							<li class="list-inline-item \${vo.cri.pageNum == num ? "active":""} page-num">
+								<a class="page-link" href="">\${num}</a>
+							</li>
+					  `;
+					}
+					
+					tag_page += `
+				    <li class="list-inline-item next pagenate_button">
+				      <a href="\${vo.endPage+1}"><span aria-hidden="true">&raquo;</span></a>
+				    </li>
+					`;
+	
+					$("#pagination").html(tag_page);
+					
+					if(vo.prev) {
+						$(".prev").show();
+					} else {
+						$(".prev").hide();
+					}
+					
+					if(vo.next) {
+						$(".next").show();
+					} else {
+						$(".next").hide();
+					}
+				},
+				error: function(xhr, status, error) {
+					console.log('xhr.status:', xhr.status);
+				}
+			});
+		}
 	</script>
 </head>
 <body>
 <jsp:include page="../top_menu.jsp"></jsp:include>
 	<div class="container">
 		<div class="breadcrumb fs-5 fw-bold px-4">회원목록</div>
-		<div class="row justify-content-end">
-			<div class="col-2">
-		    <select class="form-select" id="searchKey" required aria-label="select example">
+		
+		<div class="row justify-content-md-end align-items-center">
+		  <div class="col-md-2 col-sm-4 mt-2">
+		    <select class="form-select form-select" id="searchKey" required aria-label="select example">
 		      <option selected>선택</option>
 		      <option value="id">아이디</option>
 		      <option value="name">이름</option>
 		    </select>
-			</div>
-			<div class="col-3">
-				<input type="text" class="form-control" id="searchWord">				
-			</div>
-			<div class="col-1">
-				<button type="button" class="submit-btn" onclick="searchList()">검색</button>
-			</div>
-		</div>	
+		  </div>
+		  <div class="col-md-4 col-sm-8 mt-2">
+		    <div class="input-group">
+		      <input type="text" class="form-control form-control" id="searchWord">
+		      <button type="button" class="btn btn-primary btn" onclick="searchList()">검색</button>
+		    </div>
+		  </div>
+		</div>
+
 		<hr>
 		<div class="row">
 			<table class="table table-sm">
 			  <thead>
 			    <tr>
-			      <th scope="col" class="col text-center py-3">No.</th>
 			      <th scope="col" class="col text-center py-3">프로필</th>
 			      <th scope="col" class="col text-center py-3">ID</th>
 			      <th scope="col" class="col text-center py-3">이름</th>
@@ -129,6 +207,18 @@
 	
 			  </tbody>
 			</table>
+			
+			<nav class="text-center">
+			  <ul class="list-inline" id="pagination">
+			  
+			  </ul>
+			</nav>  
+				
+			<form id="actionForm" action="memberSelectAll.do" method="get">
+				<input type="hidden" name="pageNum" value="${cri.pageNum}">
+				<input type="hidden" name="amount" value="${cri.amount}">
+				<!-- 유저 정보 수정하기 -->
+			</form> 
 		</div>
 	</div>
 </body>

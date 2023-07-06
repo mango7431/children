@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.MemberService;
+import test.com.admin.vo.Criteria;
 import test.com.admin.vo.MemberVO;
+import test.com.admin.vo.PageVO;
 
 @Controller
 @Slf4j
@@ -20,14 +22,38 @@ public class MemberRestController {
 	@Autowired
 	private MemberService service;
 	
+//	@ResponseBody
+//	@RequestMapping(value = {"/jsonMemberSelectAll.do"}, method = RequestMethod.GET)
+//	public List<MemberVO> jsonMemberSelectAll() {
+//		log.info("/jsonMemberSelectAll.do");
+//		
+//		List<MemberVO> vos = service.memberSelectAll();
+//		log.info("vos size:{}", vos.size());
+//		return vos;
+//	}
+	
 	@ResponseBody
 	@RequestMapping(value = {"/jsonMemberSelectAll.do"}, method = RequestMethod.GET)
-	public List<MemberVO> jsonMemberSelectAll() {
+	public List<MemberVO> jsonMemberSelectAll(Criteria cri) {
 		log.info("/jsonMemberSelectAll.do");
+		log.info("Criteria:{}", cri);
 		
-		List<MemberVO> vos = service.memberSelectAll();
+		List<MemberVO> vos = service.memberPaging(cri);
 		log.info("vos size:{}", vos.size());
 		return vos;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = {"/jsonMemberSelectCount.do"}, method = RequestMethod.GET)
+	public PageVO jsonMemberSelectCount(Criteria cri) {
+		log.info("/jsonMemberSelectCount.do");
+		log.info("Criteria:{}", cri);
+		
+		int total = service.getTotalCount(cri);
+		log.info("total:{}", total);
+		
+		PageVO pageVO = new PageVO(cri, total);
+		return pageVO;
 	}
 	
 	@ResponseBody
