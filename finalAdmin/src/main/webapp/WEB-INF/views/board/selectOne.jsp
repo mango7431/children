@@ -83,7 +83,7 @@
 				let udbutton = `
 				<a href="boardReportUp.do?board_num=\${vo2.board_num}">경고증가</a>
 				<a href="boardReportDown.do?board_num=\${vo2.board_num}">경고감소</a>
-				<a href="boardDeleteOK.do?board_num=\${vo2.board_num}">삭제</a>
+				<a href="boardDeleteOK.do?board_num=\${vo2.board_num}" onclick="return deleteOK()">삭제</a>
 				`;
 				$('#udbutton').html(udbutton);
 				
@@ -96,7 +96,7 @@
 	});
 	
 	function deleteOK() {
-		  if (confirm("정말로 삭제하시겠습니까?")) {
+		  if (confirm("정말로 삭제하시겠습니까? 작성자가 울수도 있습니다.")) {
 		    return true; // 예(확인)를 클릭하면 링크가 진행되어 삭제됨
 		  } else {
 		    return false; // 아니요(취소)를 클릭하면 링크가 취소되어 삭제되지 않음
