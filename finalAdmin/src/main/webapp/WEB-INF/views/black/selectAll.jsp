@@ -31,13 +31,13 @@ $(function(){
 				var boardBtn = '';
 				var report = '';
 				
-				if(vo.black_type === 1){
+				if(vo.black_type === 2){
 					report = '<span>게시글신고</span>';
 					boardReport = `<p><b>경고횟수 : </b>\${vo.board_report}</p>`;
 					if (vo.board_title !== null){
 						boardBtn = `<button onclick="removeBoard('\${vo.board_num}', '\${vo.targetid}')">영구삭제</button>`;						
 					}
-				}else if(vo.black_type === 2){
+				}else if(vo.black_type === 1){
 					report = '<span>회원신고</span>';
 					memberReport = `<p><b>경고횟수 : </b>\${vo.member_report}</p>`;
 					if (vo.targetid !== null){
@@ -63,8 +63,8 @@ $(function(){
 						<td>
 							\${boardReport}
 							\${memberReport}
-							\${(vo.black_type === 1 && vo.board_title === null) ? '삭제완료' : ((vo.black_type === 1 && vo.board_title !== null) ? '<button onclick="reportUp(\''+vo.black_num+'\', \''+vo.black_type+'\', \''+vo.board_num+'\', \''+vo.targetid+'\')">경고+</button>' : '')}
-							\${(vo.black_type === 2 && vo.targetid === null) ? '탈퇴완료' : ((vo.black_type === 2 && vo.targetid !== null) ? '<button onclick="reportUp(\''+vo.black_num+'\', \''+vo.black_type+'\', \''+vo.board_num+'\', \''+vo.targetid+'\')">경고+</button>' : '')}
+							\${(vo.black_type === 2 && vo.board_title === null) ? '삭제완료' : ((vo.black_type === 2 && vo.board_title !== null) ? '<button onclick="reportUp(\''+vo.black_num+'\', \''+vo.black_type+'\', \''+vo.board_num+'\', \''+vo.targetid+'\')">경고+</button>' : '')}
+							\${(vo.black_type === 1 && vo.targetid === null) ? '탈퇴완료' : ((vo.black_type === 1 && vo.targetid !== null) ? '<button onclick="reportUp(\''+vo.black_num+'\', \''+vo.black_type+'\', \''+vo.board_num+'\', \''+vo.targetid+'\')">경고+</button>' : '')}
 							\${boardBtn}
 							\${memberBtn}
 						</td>

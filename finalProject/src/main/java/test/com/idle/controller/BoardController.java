@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.service.BoardService;
-import test.com.idle.vo.BlackVO;
 import test.com.idle.vo.BoardVO;
 
 @Controller
@@ -47,18 +46,6 @@ public class BoardController {
 	
 		return "board/selectAll";
 	}
-	
-	//신고하기 기능
-	@RequestMapping(value = "/blackInsertOK.do", method = RequestMethod.POST)
-	public String blackInsertOK(BlackVO vo) {
-		log.info("/blackInsertOK.do:{}",vo);
-
-		int result = service.blackInsert(vo);
-		log.info("result:{}", result);
-		
-		return "redirect:boardSelectOne.do?board_num="+vo.getBoard_num();
-	}
-	
 	
 	//영웅님
 	@RequestMapping(value = "/boardSelectOne.do", method = RequestMethod.GET)

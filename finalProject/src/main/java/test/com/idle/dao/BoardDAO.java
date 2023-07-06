@@ -13,8 +13,6 @@ public interface BoardDAO {
 
 	public List<BoardVO> boardSelectAllViews(Integer minPrice, Integer maxPrice, Integer board_type);
 	
-	public int blackInsert(BlackVO vo);
-	
 	//영웅님
 	BoardVO selectOne(BoardVO vo);
 

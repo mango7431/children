@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import lombok.extern.slf4j.Slf4j;
 import test.com.idle.dao.BoardDAO;
-import test.com.idle.vo.BlackVO;
 import test.com.idle.vo.BoardVO;
 
 @Repository
@@ -62,15 +61,6 @@ public class BoardDAOimpl implements BoardDAO {
 		List<BoardVO> vos = sqlSession.selectList("B_SELECTALL_VIEWS",filters);
 		
 		return vos;
-	}
-	
-	@Override
-	public int blackInsert(BlackVO vo) {
-		log.info("blackInsert...");
-		
-		int flag = sqlSession.update("BLACK_INSERT",vo);
-		
-		return flag;
 	}
 
 	//영웅님

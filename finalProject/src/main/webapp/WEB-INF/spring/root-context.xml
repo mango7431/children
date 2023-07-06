@@ -28,6 +28,8 @@
 			<list>
 				<value>classpath:jdbc/sqlMapper_board.xml</value>
 				<value>classpath:jdbc/sqlMapper_black.xml</value>
+				<value>classpath:jdbc/sqlMapper_likes.xml</value>
+				<value>classpath:jdbc/sqlMapper_mywite.xml</value>
 			</list>
 		</property>
 	</bean>

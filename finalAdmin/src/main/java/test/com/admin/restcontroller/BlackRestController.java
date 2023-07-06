@@ -38,9 +38,9 @@ public class BlackRestController {
 	public void reportUp(BlackVO vo, @RequestParam("black_type") int black_type) {
 		log.info("reportUp()..{},{}",vo,black_type);
 		
-		if(black_type == 1) {
+		if(black_type == 2) {
 			service.boardreportUp(vo);
-		}else if(black_type ==2) {
+		}else if(black_type == 1) {
 			service.memberreportUp(vo);
 		}
 	}

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import test.com.idle.dao.BoardDAO;
-import test.com.idle.vo.BlackVO;
 import test.com.idle.vo.BoardVO;
 
 @Service
@@ -25,11 +24,7 @@ public class BoardService {
 
 	public List<BoardVO> boardSelectAllViews(Integer minPrice, Integer maxPrice, Integer board_type) {
 		return dao.boardSelectAllViews(minPrice, maxPrice, board_type);
-	}
-	
-	public int blackInsert(BlackVO vo) {
-		return dao.blackInsert(vo);
-	}
+	}	
 
 	//영웅님
 	public BoardVO selectOne(BoardVO vo) {

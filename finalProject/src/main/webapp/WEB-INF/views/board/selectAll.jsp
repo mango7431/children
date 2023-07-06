@@ -278,7 +278,7 @@ aside .filterBtn{
 				            <div class="itemContent">
 				              <a href="boardSelectOne.do?board_num=${vo.board_num}">
 				             	<c:choose>
-								  <c:when test="${vo.board_type eq 1}">
+								  <c:when test="${vo.board_type eq 2}">
 								     <c:choose>
                                         <c:when test="${vo.board_status eq 1}">
                                          <span style="background:#d3d3d3;border-radius:3px;">판매중</span>
@@ -288,7 +288,7 @@ aside .filterBtn{
                                         </c:when>
                                      </c:choose>
 								  </c:when>
-								  <c:when test="${vo.board_type eq 2}">
+								  <c:when test="${vo.board_type eq 1}">
 								    <c:choose>
                                      <c:when test="${vo.board_status eq 1}">
                                        <span style="background:#d3d3d3;border-radius:3px;">구매중</span>
@@ -341,11 +341,11 @@ aside .filterBtn{
  	 }
 	
 	function showSellBoards() {
-	    window.location.href = "boardSelectAll.do?board_type=1";
+	    window.location.href = "boardSelectAll.do?board_type=2";
 	  }
 
 	 function showBuyBoards() {
-	   window.location.href = "boardSelectAll.do?board_type=2";
+	   window.location.href = "boardSelectAll.do?board_type=1";
 	 }
 	 
 	 //카테고리 더보기 토글

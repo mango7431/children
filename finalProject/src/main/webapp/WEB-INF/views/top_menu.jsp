@@ -28,7 +28,7 @@
 	            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
 	          </a>
 	          <ul class="dropdown-menu text-small">
-	            <li><a class="dropdown-item" href="#">내 상점</a></li>
+	            <li><a class="dropdown-item" href="myWriteBuySelectAll.do">내 상점</a></li>
 	            <li><a class="dropdown-item" href="#">마이페이지</a></li>
 	            <li><hr class="dropdown-divider"></li>
 	            <li><a class="dropdown-item" href="#">로그아웃</a></li>
