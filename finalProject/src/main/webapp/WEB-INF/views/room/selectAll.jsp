@@ -52,7 +52,7 @@
 		    var roomNum = $(this).data('roomnum');
 		    console.log(roomNum);
 		    
-		    if(confirm('채팅방을 정말 삭제하시겠습니까? 채팅 내역이 다 사라집니다.')){
+		    if(confirm('채팅방을 정말 삭제하시겠습니까? 채팅 내역이 다 사라집니다. ')){
 		    	$.ajax({
 					url:"jsonRoomDelete.do",
 					data:{room_num:roomNum},
@@ -78,7 +78,6 @@
 		var currentStompConnection = null;
 		$('.chat_list').click(function(){
 			roomNum = $(this).data('roomnum');
-// 			var user_id = '${user_id}';
 			console.log('chat_list click ',roomNum);
 			console.log('user_id : ',user_id);
 			
@@ -302,16 +301,6 @@
 						<div class="headind_srch">
 							<div class="recent_heading">
 								<h4>채팅목록</h4>
-							</div>
-							<div class="srch_bar">
-								<div class="stylish-input-group">
-									<input type="text" class="search-bar" placeholder="Search">
-									<span class="input-group-addon">
-										<button type="button">
-											<i class="fa fa-search" aria-hidden="true"></i>
-										</button>
-									</span>
-								</div>
 							</div>
 						</div>
 						<div class="inbox_chat" id="roomList">
