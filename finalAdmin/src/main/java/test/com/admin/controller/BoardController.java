@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.BoardService;
 import test.com.admin.vo.BoardVO;
-import test.com.admin.vo.PageVO;
+import test.com.admin.vo.PagingVO;
 
 @Controller
 @Slf4j
@@ -21,13 +21,13 @@ public class BoardController {
 	BoardService service;
 	
 	@RequestMapping(value = "/boardSelectAll.do", method = RequestMethod.GET)
-	public String boardSelectAll(PageVO vo,Model model) {
+	public String boardSelectAll(PagingVO vo,Model model) {
 		log.info("/boardSelectAll.do...{}",vo);
 		
 		int boardCount = service.boardCount();
 		log.info("boardCount : {}",boardCount);
 		
-		PageVO page = new PageVO(vo.getPage(),10,boardCount);
+		PagingVO page = new PagingVO(vo.getPage(),10,boardCount);
 		log.info("{}",page);
 		
 		List<BoardVO> vos = service.selectAllPage(page);
@@ -77,13 +77,13 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/boardSearchList.do", method = RequestMethod.GET)
-	public String boardSearchList(String searchKey,String searchWord,PageVO vo,Model model) {
+	public String boardSearchList(String searchKey,String searchWord,PagingVO vo,Model model) {
 		log.info("/boardSearchList.do...{}",vo);
 		
 		int boardSearchCount = service.boardSearchCount(searchKey,searchWord);
 		log.info("boardCount : {}",boardSearchCount);
 		
-		PageVO page = new PageVO(vo.getPage(),10,boardSearchCount);
+		PagingVO page = new PagingVO(vo.getPage(),10,boardSearchCount);
 		log.info("{}",page);
 		
 		List<BoardVO> vos = service.searchList(searchKey,searchWord,page);

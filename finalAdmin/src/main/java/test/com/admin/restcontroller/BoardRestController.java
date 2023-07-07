@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.service.BoardService;
 import test.com.admin.vo.BoardVO;
-import test.com.admin.vo.PageVO;
+import test.com.admin.vo.PagingVO;
 
 @Controller
 @Slf4j
@@ -35,7 +35,7 @@ public class BoardRestController {
 	
 	@RequestMapping(value = "/jsonBoardSearchList.do", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> jsonBoardSearchList(String searchKey,String searchWord,PageVO vo) {
+	public Map<String, Object> jsonBoardSearchList(String searchKey,String searchWord,PagingVO vo) {
 		log.info("/jsonBoardSearchList.do...{},{}",searchKey,searchWord);
 		log.info("pageVO : {}",vo);
 		
@@ -44,7 +44,7 @@ public class BoardRestController {
 		int boardSearchCount = service.boardSearchCount(searchKey,searchWord);
 		log.info("boardCount : {}",boardSearchCount);
 		
-		PageVO page = new PageVO(vo.getPage(),10,boardSearchCount);
+		PagingVO page = new PagingVO(vo.getPage(),10,boardSearchCount);
 		
 		List<BoardVO> vos = service.searchList(searchKey,searchWord,page);
 		log.info("{}",vos);

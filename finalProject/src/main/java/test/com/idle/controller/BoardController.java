@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,26 +34,43 @@ public class BoardController {
 	@Autowired
 	ServletContext sContext;
 	
+	//수정
+	// 중고거래 목록
 	@RequestMapping(value = "/boardSelectAll.do", method = RequestMethod.GET)
-	public String boardSelectAll(Model model) {
-		log.info("/boardSelectAll.do");
-		
-		List<BoardVO> vos = new ArrayList<BoardVO>();
-		vos = service.selectAll();
-		log.info("{}",vos);
-		
-		model.addAttribute("vos",vos);
-		
+	public String boardSelectAll(Model model, @RequestParam(value = "category", required = false) String category,
+			@RequestParam(value = "minPrice", required = false) Integer minPrice,
+			@RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+			@RequestParam(value = "sortType", required = false) String sortType,
+			@RequestParam(value = "board_type", required = false) Integer board_type) {
+		log.info("/boardSelectAll.do,{},{}", category, minPrice);
+		log.info("/boardSelectAll.do,{},{}", sortType, board_type);
+
+		if (category == null || category.equals("all")) {
+			if (sortType == null || sortType.equals("latest")) {
+				List<BoardVO> vos = service.boardSelectAll(minPrice, maxPrice, board_type);
+				model.addAttribute("vos", vos);
+			} else if (sortType.equals("views")) {
+				List<BoardVO> vos = service.boardSelectAllViews(minPrice, maxPrice, board_type);
+				model.addAttribute("vos", vos);
+			}
+		} else {
+			List<BoardVO> vos = service.boardSelectAll(category, minPrice, maxPrice, board_type);
+			model.addAttribute("vos", vos);
+		}
+
 		return "board/selectAll";
 	}
 
 	
 	@RequestMapping(value = "/boardSelectOne.do", method = RequestMethod.GET)
-	public String boardSelectOne(BoardVO vo) {
+	public String boardSelectOne(BoardVO vo, Model model) {
 		log.info("/boardSelectOne.do...{}",vo);
 		
 		int result = service.viewCountUp(vo);
 		log.info("result : {}",result);
+		
+		BoardVO vo2 = service.selectOne(vo);
+		model.addAttribute("vo2",vo2);
 		
 		return "board/selectOne";
 	}
@@ -100,6 +118,7 @@ public class BoardController {
 				log.info("{}",formatName);
 				ImageIO.write(thumb_buffer_img, formatName, thumb_file);
 				
+				// 관리자쪽에 썸네일 추가
 				File admin_thumb_file = new File(adminRealPath + "/thumb_" + list.get(i));
 				log.info("{}",formatName);
 				ImageIO.write(thumb_buffer_img, formatName, admin_thumb_file);

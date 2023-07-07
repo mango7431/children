@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.dao.BoardDAO;
 import test.com.admin.vo.BoardVO;
-import test.com.admin.vo.PageVO;
+import test.com.admin.vo.PagingVO;
 
 @Service
 @Slf4j
@@ -25,7 +25,7 @@ public class BoardService {
 		return dao.selectAll();
 	}
 
-	public List<BoardVO> selectAllPage(PageVO vo) {
+	public List<BoardVO> selectAllPage(PagingVO vo) {
 		return dao.selectAllPage(vo);
 	}
 	
@@ -49,7 +49,7 @@ public class BoardService {
 		return dao.delete(vo);
 	}
 
-	public List<BoardVO> searchList(String searchKey, String searchWord, PageVO vo) {
+	public List<BoardVO> searchList(String searchKey, String searchWord, PagingVO vo) {
 		return dao.searchList(searchKey,searchWord,vo);
 	}
 

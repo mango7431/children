@@ -27,6 +27,11 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:jdbc/sqlMapper_board.xml</value>
+				<value>classpath:jdbc/sqlMapper_notice.xml</value>
+				<value>classpath:jdbc/sqlMapper_qna.xml</value>
+				<value>classpath:jdbc/sqlMapper_qnareply.xml</value>
+				<value>classpath:jdbc/sqlMapper_member.xml</value>
+				<value>classpath:jdbc/sqlMapper_black.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import lombok.extern.slf4j.Slf4j;
 import test.com.admin.dao.BoardDAO;
 import test.com.admin.vo.BoardVO;
-import test.com.admin.vo.PageVO;
+import test.com.admin.vo.PagingVO;
 
 @Repository
 @Slf4j
@@ -32,7 +32,7 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectAllPage(PageVO vo) {
+	public List<BoardVO> selectAllPage(PagingVO vo) {
 		log.info("selectAllPage()...{}", vo);
 		List<BoardVO> vos = sqlSession.selectList("B_SELECT_ALL_PAGE", vo);
 		return vos;
@@ -88,7 +88,7 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> searchList(String searchKey, String searchWord, PageVO vo) {
+	public List<BoardVO> searchList(String searchKey, String searchWord, PagingVO vo) {
 		log.info("searchList() ...");
 		log.info("searchKey : {}",searchKey);
 		log.info("searchWord : {}",searchWord);

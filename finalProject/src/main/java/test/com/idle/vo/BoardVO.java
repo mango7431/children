@@ -23,8 +23,8 @@ public class BoardVO {
 	private String board_savename1;
 	private String board_savename2;
 	private String board_savename3;
-	private int board_status;
-	private int board_type;
+	private int board_status; //1판매중, 2판매완료, 3숨기기
+	private int board_type; //1팔아요, 2구해요
 	private int likecount;
 	private int chatcount;
 	private String id;

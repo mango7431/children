@@ -3,13 +3,13 @@ package test.com.admin.dao;
 import java.util.List;
 
 import test.com.admin.vo.BoardVO;
-import test.com.admin.vo.PageVO;
+import test.com.admin.vo.PagingVO;
 
 public interface BoardDAO {
 
 	List<BoardVO> selectAll();
 
-	List<BoardVO> selectAllPage(PageVO vo);
+	List<BoardVO> selectAllPage(PagingVO vo);
 
 	int boardCount();
 
@@ -21,7 +21,7 @@ public interface BoardDAO {
 
 	int delete(BoardVO vo);
 
-	List<BoardVO> searchList(String searchKey, String searchWord, PageVO vo);
+	List<BoardVO> searchList(String searchKey, String searchWord, PagingVO vo);
 
 	int boardSearchCount(String searchKey, String searchWord);
 

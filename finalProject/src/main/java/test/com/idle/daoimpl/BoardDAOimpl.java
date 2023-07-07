@@ -1,6 +1,8 @@
 package test.com.idle.daoimpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,41 @@ public class BoardDAOimpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectAll() {
-		log.info("selectAll()...");
+	public List<BoardVO> boardSelectAll(String category, Integer minPrice, Integer maxPrice, Integer board_type) {
+		log.info("selectAll...");
 		
-		List<BoardVO> vos = sqlSession.selectList("B_SELECT_ALL");
+		Map<String, Object> filters = new HashMap<>();
+		filters.put("category", category);
+		filters.put("minPrice", minPrice);
+		filters.put("maxPrice", maxPrice);
+		filters.put("board_type", board_type);
+		List<BoardVO> vos = sqlSession.selectList("B_SELECTALL",filters);
+		
+		return vos;
+	}
+	
+	@Override
+	public List<BoardVO> boardSelectAll(Integer minPrice, Integer maxPrice, Integer board_type) {
+		log.info("selectAll...");
+		
+		Map<String, Object> filters = new HashMap<>();
+		filters.put("minPrice", minPrice);
+		filters.put("maxPrice", maxPrice);
+		filters.put("board_type", board_type);
+		List<BoardVO> vos = sqlSession.selectList("B_SELECTALL",filters);
+		
+		return vos;
+	}
+
+	@Override
+	public List<BoardVO> boardSelectAllViews(Integer minPrice, Integer maxPrice, Integer board_type) {
+		log.info("selectAll...");
+		
+		Map<String, Object> filters = new HashMap<>();
+		filters.put("minPrice", minPrice);
+		filters.put("maxPrice", maxPrice);
+		filters.put("board_type", board_type);
+		List<BoardVO> vos = sqlSession.selectList("B_SELECTALL_VIEWS",filters);
 		
 		return vos;
 	}

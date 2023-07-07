@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PageVO {
+public class PagingVO {
 	
 	private int page;
 	private int size;
@@ -18,7 +18,7 @@ public class PageVO {
 	private int endPage;
 	private int totalPage;
 	
-	public PageVO(int page,int size, int totalCount) {
+	public PagingVO(int page,int size, int totalCount) {
 		this.size=size;
 		this.totalCount=totalCount; // 총 데이터 갯수
 		

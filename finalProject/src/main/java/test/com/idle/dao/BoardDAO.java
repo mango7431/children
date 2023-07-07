@@ -6,7 +6,11 @@ import test.com.idle.vo.BoardVO;
 
 public interface BoardDAO {
 
-	List<BoardVO> selectAll();
+	public List<BoardVO> boardSelectAll(String category, Integer minPrice, Integer maxPrice, Integer board_type);
+
+	public List<BoardVO> boardSelectAll(Integer minPrice, Integer maxPrice, Integer board_type);
+
+	public List<BoardVO> boardSelectAllViews(Integer minPrice, Integer maxPrice, Integer board_type);
 
 	BoardVO selectOne(BoardVO vo);
 

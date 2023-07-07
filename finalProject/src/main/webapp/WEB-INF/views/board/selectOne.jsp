@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="test.com.idle.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <html>
@@ -70,11 +71,10 @@
 					let buttons = `
 						<button onclick="likeButton()">찜</button>
 						<button onclick="chat('\${vo2.writer}')">채팅</button>
-						<button>신고하기</button>
+						<button id="reportBtn">신고하기</button>
 						`;
 						$('#buttons').html(buttons);
 				}
-				
 				
 				let m_img = `<img src="resources/img/thumb_\${vo2.member_savename }" class="d-block w-100">`;
 				$('#m_img').html(m_img);
@@ -111,6 +111,13 @@
 					
 					$('#board_status').html(board_status);
 				}
+				
+				//수정 팀원 기능
+				$(document).on('click', '#reportBtn', function() {
+	                $('#reportModal').show();
+	            });
+
+	            $(document).on //수정 팀원 기능end
 				
 			},
 			error:function(xhr,status,error){
@@ -244,6 +251,56 @@
 		}
 	
 </script>
+<style type="text/css">
+#reportModal{
+	width: 30%;
+	margin: 0 auto;
+	border: 1px solid black;
+	background: white;
+	position: fixed;
+  	left: 50%;
+  	top: 50%;
+	transform: translate(-50%, -50%);
+   	padding: 30px;
+   	border-radius: 20px;
+}
+
+#reportWarning{
+	color : red;
+}
+
+.close {
+	float: right;
+}
+
+.modalBtn{
+	text-align: center;
+}
+
+.modalContent input[type="radio"] {
+    display: none;
+ }
+
+.modalContent input[type="radio"]:checked + label {
+    font-weight: bold;
+}
+
+.modalContent label {
+    cursor: pointer;
+}
+
+.modalContent label:hover{
+	font-weight: bold;
+}
+
+.reportBoard{
+	height: auto;
+	margin-bottom: 15px;
+}
+.reportBoard label{
+	margin-bottom: 18px;
+}
+</style>
 </head>
 <body>
  <section style="padding-left: 100px; padding-right: 100px;">
@@ -309,5 +366,98 @@
 			<textarea class="form-control" id="board_content" style="height: 400px" readonly></textarea>
 		</div>
 	</section>
+<!-- 수정 팀원 기능: 신고하기 -->
+<div id="reportModal"  style="display: none;">
+	<button class="close"><span>X</span></button>
+	<h2>신고하기</h2>
+	<p>아래 신고 사유를 선택해주세요</p>
+	<hr>
+	<div class="modalContent">
+		<form action="blackInsertOK.do" method="post" onsubmit="return blackInsertForm()">
+			<div class="reportBoard">
+				<input type="hidden" name="targetid" value="${vo2.writer}"/>
+				<%-- <input type="hidden" name="reporterid" value="${userId}"/> --%>
+				<input type="hidden" name="reporterid" value="tester3"/>
+				<input type="hidden" name="board_num" value="${vo2.board_num}"/>
+				<input type="hidden" name="black_type" value=""/>
+				<input type="radio" name="black_category" id="black_category1" value="1"/><label for="black_category1">광고성 게시글이에요</label><br />
+				<input type="radio" name="black_category" id="black_category2" value="2"/><label for="black_category2">거래금지품목(술,약류,담배 등)을 팔아요</label><br />
+				<input type="radio" name="black_category" id="black_category3" value="3"/><label for="black_category3">상품정보가 부정확해요</label><br />
+				<input type="radio" name="black_category" id="black_category4" value="4"/><label for="black_category4">사기인 것 같아요</label><br />
+				<input type="radio" name="black_category" onclick="toggleText(this.value)" id="black_category5" value="5"/><label for="black_category5">기타 사유 입력</label><br />
+				<textarea rows="3" cols="40" name="comments" id="comments1" style="display: none;" placeholder="게시글 신고 내용을 작성해주세요."></textarea>	
+				<input type="radio" name="black_category" onclick="toggleText(this.value)" id="black_category6" value="6"/><label for="black_category6">'${vo2.name}'님을 신고할래요</label><br />	
+				<textarea rows="3" cols="40" name="comments" id="comments2" style="display: none;" placeholder="사용자 신고 내용을 작성해주세요."></textarea>	
+			</div>
+			<hr />
+			<div class="modalBtn">
+			<button type="submit">신고등록</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+//신고모달창 show&hide
+$(document).ready(function() {
+  $('input[name="black_category"]').on('change', function() {
+    var value = $(this).val();
+    
+    if (value === '5') {
+      $('#comments1').show();
+      $('#comments2').hide();
+    } else if (value === '6') {
+      $('#comments1').hide();
+      $('#comments2').show();
+    } else {
+      $('#comments1').hide();
+      $('#comments2').hide();
+    }
+  });
+  
+  var categoryChecked = $('input[name="black_category"]:checked').val();
+  if (categoryChecked === '5') {
+    $('#comments1').show();
+  } else if (categoryChecked === '6') {
+    $('#comments2').show();
+  }
+});
+
+//신고모달창 show&hide
+$(function(){
+   $('.close').click(function() {
+      $('#reportModal').hide();
+   });
+});
+
+//신고모달창 black_type
+$(function() {
+   $('input[name="black_category"]').on('change', function() {
+     var value = $(this).val();
+     if (value >= 1 && value <= 5) {
+       $('input[name="black_type"]').val(1);
+      } else if (value == 6) {
+        $('input[name="black_type"]').val(2);
+     }
+   });
+});
+
+//신고하기 버튼 눌렀을 때
+function blackInsertForm() {
+  const blackCategoryChecked = document.querySelector('input[name="black_category"]:checked');
+   if (!blackCategoryChecked) {
+    alert('신고 사유를 선택해주세요.');
+      return false; // 폼 전송 막기
+    }
+   
+  const reportConfirm = confirm('허위신고 시 중고링 이용이 제한될 수 있습니다. 정말로 신고하시겠습니까?');
+   if (!reportConfirm) {
+     return false;
+   }
+   
+ alert('신고가 등록되었습니다.');
+ return true;
+}
+</script>
 </body>
 </html>
