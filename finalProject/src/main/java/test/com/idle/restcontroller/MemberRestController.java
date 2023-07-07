@@ -20,8 +20,8 @@ public class MemberRestController {
 	@Autowired
 	MemberService service;
 	
-	@RequestMapping(value = "/jsonIdCheck.do", method = RequestMethod.GET)
 	@ResponseBody
+	@RequestMapping(value = "/jsonIdCheck.do", method = RequestMethod.GET)
 	public Map<String, String> jsonIdCheck(MemberVO vo) {
 		log.info("/jsonIdCheck.do");
 		log.info("{}",vo);//id
@@ -38,5 +38,16 @@ public class MemberRestController {
 		map.put("result", msg);
 		return map;
 	}//end jsonIdCheck
+	
+	@ResponseBody
+	@RequestMapping(value = "/jsonMemberSelectOne.do", method = RequestMethod.GET)
+	public MemberVO jsonMemberSelectOne(MemberVO vo) {
+		log.info("/jsonMemberSelectOne.do...vo:{}", vo);
+		log.info("{}",vo);
+		
+		MemberVO vo2 = service.selectOne(vo);
+		log.info("vo2:{}", vo2);
+		return vo2;
+	}//end jsonMemberSelectOne
 	
 }//end class

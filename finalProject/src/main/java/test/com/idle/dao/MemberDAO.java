@@ -9,6 +9,7 @@ public interface MemberDAO {
 	public MemberVO idCheck(MemberVO vo);
 	
 	public MemberVO login(MemberVO vo);
+
+	public MemberVO selectOne(MemberVO vo);
 	
-//	public List<MemberVO> selectAll();
 }

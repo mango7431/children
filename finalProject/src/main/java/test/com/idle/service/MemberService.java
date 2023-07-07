@@ -1,7 +1,5 @@
 package test.com.idle.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +29,9 @@ public class MemberService {
 		return dao.login(vo);
 	}
 
-//	public List<MemberVO> selectAll() {
-//		return dao.selectAll();
-//	}
+	public MemberVO selectOne(MemberVO vo) {
+		return dao.selectOne(vo);
+	}
 
 }//end class
 

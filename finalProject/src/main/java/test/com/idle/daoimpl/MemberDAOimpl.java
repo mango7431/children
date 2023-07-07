@@ -42,13 +42,12 @@ public class MemberDAOimpl implements MemberDAO {
 		return sqlSession.selectOne("LOGIN", vo);
 	}
 
-//	@Override
-//	public List<MemberVO> selectAll() {
-//		log.info("selectAll()...");
-//		List<MemberVO> vos = sqlSession.selectList("SELECT_ALL");
-//
-//		return vos;
-//
-//	}// end selectAll
+	@Override
+	public MemberVO selectOne(MemberVO vo) {
+		log.info("selectOne()...{}" + vo);
+		MemberVO vo2 = sqlSession.selectOne("MEMBER_SELECT_ONE", vo);
+		return vo2;
+	}
+
 
 }

@@ -30,12 +30,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<form action="loginOK.do" method="post">
-		<!-- 		<table> -->
-		<!-- 			<tr> -->
-		<!-- 				<td><label for="id">아이디</label></td> -->
-		<!-- 				<td><input type="text" id="id" name="id" value="tester"></td> -->
-		<!-- 			</tr> -->
-
 		<div class="form-group">
 			<label for="id">아이디</label> <br> <input type="text" id="id"
 				name="id" value="tester" placeholder="ID" required>
@@ -49,12 +43,6 @@
 		<div>
 			<input type="submit" value="로그인" class="myButton">
 		</div>
-
-
-		<!-- 			<tr> -->
-		<!-- 				<td colspan="2"><input type="submit" value="로그인" class="myButton"></td> -->
-		<!-- 			</tr> -->
-		<!-- 		</table> -->
 	</form>
 	<p>${message}</p>
 </body>

@@ -21,10 +21,8 @@
 	               	
 	        <div>
 	        	<a id="login" href="login.do">로그인</a>
-	        	<a id="m_insert" href="memberInsert3.do">회원가입3(최종)</a>
-<!-- 	        	<a href="memberInsert1.do">회원가입1</a> -->
-<!-- 	        	<a href="memberInsert2.do">회원가입2</a> -->
-<!-- 	        	<a href="m_selectAll.do">회원목록test</a> -->
+	        	<a id="memberInsert" href="memberInsert.do">회원가입</a>
+
 	        </div>
 	        <div class="dropdown text-end">
 	          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,7 +30,7 @@
 	          </a>
 	          <ul class="dropdown-menu text-small">
 	            <li><a class="dropdown-item" href="#">내 상점</a></li>
-	            <li><a class="dropdown-item" href="#">마이페이지</a></li>
+	            <li><a class="dropdown-item" href="memberSelectOne.do?id=${user_id}">마이페이지</a></li>
 	            <li><hr class="dropdown-divider"></li>
 	            <li id="logout"><a class="dropdown-item" href="logout.do">로그아웃</a></li>
 	          </ul>
@@ -40,22 +38,19 @@
 	      </div>
 	    </div>
 	    
-	    <hr>
+	 
 	    <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
-$(function() {
-	console.log('onload....');
 
-});
 	if('${user_id}'===''){//섹션 없을떄(로그인정보 없을때)
 		$('#login').show();
-		$('#m_insert').show();
+		$('#memberInsert').show();
 		$('#logout').hide();
 	
 	}else{//섹션 있을떄(로그인정보 있을때)
 		$('#login').hide();
-		$('#m_insert').hide();
+		$('#memberInsert').hide();
 		$('#logout').show();
 		
 	}

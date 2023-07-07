@@ -27,12 +27,30 @@
 	$(function() {
 		console.log('onload....');
 
+		$('#insert_form').submit(
+				function() {
+					console.log("insert_form!", $("#idCheck_flag").val(), $(
+							"#idCheck_flag").val() === '1');
+					if ($("#idCheck_flag").val() === '1') {
+						alert("회원가입 완료되었습니다!");
+						return true;
+					}
+					alert("ID중복검사버튼을 눌러 사용가능한 아이디인지 확인해주세요!");
+					return false;
+				});
+
+		$('#btn_idCheck').click(function() {
+			console.log("btn_idCheck!");
+
+			idCheck();
+
+			return false;
+		});
 	});
-	
+
 	function idCheck() {
 		console.log('idCheck()....');
 
-		//2.jquery ajax
 		console.log('id:', $("#id").val());
 		$.ajax({
 			url : "jsonIdCheck.do",
@@ -40,16 +58,25 @@
 				id : $("#id").val()
 			},
 			method : 'GET',
-			dataType : 'json', 
+			dataType : 'json',
 			success : function(response) {
 				console.log('ajax...success:', response);
-				let msg = response.result === 'OK' ? '사용가능한 아이디 입니다' : '아이디: 사용할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.'
+
+				let msg = '';
+				if (response.result === 'OK') {
+					msg = '사용가능한 아이디 입니다';
+					$("#idCheck_flag").val(1);
+				} else {
+					msg = '아이디: 사용할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.';
+					$("#idCheck_flag").val(0);
+				}
+
 				$("#demo").html(msg);
 			},
 			error : function(xhr, status, error) {
 				console.log('xhr.status:', xhr.status);
 			}
-		});
+		});//end  $.ajax()
 	}
 </script>
 
@@ -58,65 +85,38 @@
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<form action="memberInsertOK.do" method="post"
-		enctype="multipart/form-data">
+		enctype="multipart/form-data" id="insert_form">
+		<h3>회원가입</h3>
+		<input type="hidden" id="idCheck_flag" value="0">
 
-		<!-- 아이디 -->
 		<div class="form-group">
-			<label for="id">아이디</label> <br> 
-			<input type="text" id="id" name="id" 
-				placeholder="ID" required>
-			<button type="button" onclick="idCheck()" class="myButton">ID중복검사</button>
-<!-- 			<div class="check_font" id="id_check"></div> -->
-			<br><span id="demo"></span></td>
+			<label for="id">아이디</label> <br> <input type="text" id="id"
+				name="id" value="tester" placeholder="ID" required>
+			<button type="button" id="btn_idCheck" class="myButton">ID중복검사</button>
+			<br> <span id="demo"></span>
 		</div>
 
-		<!-- 비밀번호 -->
-		<div class="form-group">
-			<label for="pw">비밀번호</label> <br> 
-			<input type="password" id="pw" name="pw" 
-				placeholder="PASSWORD" required>
-			<div class="check_font" id="pw_check"></div>
-		</div>
-		<!-- 비밀번호 재확인 -->
-		<!-- 			<div class="form-group"> -->
-		<!-- 				<label for="user_pw2">비밀번호 확인</label> -->
-		<!-- 					<input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="Confirm Password" required> -->
-		<!-- 				<div class="check_font" id="pw2_check"></div> -->
-		<!-- 			</div> -->
-		<!-- 이름 -->
-		<div class="form-group">
-			<label for="name">이름</label> <br> 
-			<input type="text" id="name" name="name" 
-				placeholder="Name" required>
-			<div class="check_font" id="name_check"></div>
-		</div>
-		<!-- 주소 -->
-		<div class="form-group">
-			<label for="address">주소 </label> <br>
-			<input type="text" id="address" name="address" 
-				placeholder="Address" required>
-			<div class="check_font" id="address_check"></div>
-		</div>
-		<!-- 프로필 사진 -->
-		<!-- 		필수X -->
-		<div class="form-group">
-			<label for="multipartFile">프로필 사진</label> <br>
-			<input type="file" id="multipartFile" name="multipartFile">
-			<div class="check_font" id="multipartFile_check"></div>
+		<div>
+			<label for="pw">비밀번호</label> <br> <input type="password" id="pw"
+				name="pw" placeholder="PASSWORD" required value="hi11">
 		</div>
 
+		<div>
+			<label for="name">이름</label> <br> <input type="text" id="name"
+				name="name" placeholder="Name" required value="lee">
+		</div>
 
-	
-		
-<!-- 		<div class="reg_button"> -->
-<!-- 			<a class="btn btn-danger px-3" href="home.do"> <i -->
-<!-- 				class="fa fa-rotate-right pr-2" aria-hidden="true"></i>취소하기 -->
-<!-- 			</a>&emsp;&emsp; -->
-<!-- 			<button class="btn btn-primary px-3" id="reg_submit"> -->
-<!-- 				<i class="fa fa-heart pr-2" aria-hidden="true"></i>가입하기 -->
-<!-- 			</button> -->
+		<div>
+			<label for="address">주소 </label> <br> <input type="text"
+				id="address" name="address" placeholder="Address" required
+				value="서울">
+		</div>
 
-<!-- 			<input type="submit" class="myButton"></td> -->
+		<div>
+			<label for="multipartFile">프로필 사진</label> <br> <input
+				type="file" id="multipartFile" name="multipartFile">
+		</div>
+
 		<div>
 			<input type="submit" class="myButton">
 		</div>
