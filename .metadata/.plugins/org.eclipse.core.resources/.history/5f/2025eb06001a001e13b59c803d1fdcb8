@@ -1,0 +1,5 @@
+package test.com.idle.config;
+
+public class StompWebSocketConfig {
+
+}

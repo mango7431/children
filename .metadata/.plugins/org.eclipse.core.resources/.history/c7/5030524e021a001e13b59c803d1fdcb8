@@ -1,0 +1,5 @@
+package test.com.idle.dao;
+
+public interface RoomDAO {
+
+}

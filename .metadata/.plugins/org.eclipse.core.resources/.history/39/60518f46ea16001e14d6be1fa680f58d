@@ -1,0 +1,48 @@
+package test.com.admin.daoimpl;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import lombok.extern.slf4j.Slf4j;
+import test.com.admin.dao.BoardDAO;
+import test.com.admin.vo.BoardVO;
+import test.com.admin.vo.PageVO;
+
+@Repository
+@Slf4j
+public class BoardDAOimpl implements BoardDAO{
+	
+	@Autowired
+	SqlSession sqlSession;
+	
+	public BoardDAOimpl() {
+		log.info("BoardDAOimpl()...");
+	}
+
+	@Override
+	public List<BoardVO> selectAll() {
+		log.info("selectAll()...");
+		List<BoardVO> vos = sqlSession.selectList("B_SELECT_ALL");
+		return vos;
+	}
+
+	@Override
+	public List<BoardVO> selectAllPage(PageVO vo) {
+		log.info("selectAllPage()...{}",vo);
+		List<BoardVO> vos = sqlSession.selectList("B_SELECT_ALL_PAGE",vo);
+		return vos;
+	}
+
+	@Override
+	public int boardCount() {
+		log.info("boardCount()...");
+		
+		int result = sqlSession.selectOne("B_COUNT");
+		
+		return result;
+	}
+
+}

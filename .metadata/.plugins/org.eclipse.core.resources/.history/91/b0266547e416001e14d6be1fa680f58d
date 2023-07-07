@@ -1,0 +1,5 @@
+package test.com.admin.dao;
+
+public interface BoardDAO {
+
+}

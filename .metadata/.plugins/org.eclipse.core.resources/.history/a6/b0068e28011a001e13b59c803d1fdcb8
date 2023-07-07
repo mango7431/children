@@ -1,0 +1,7 @@
+package test.com.idle.daoimpl;
+
+import test.com.idle.dao.RoomDAO;
+
+public class RoomDAOimpl implements RoomDAO {
+
+}

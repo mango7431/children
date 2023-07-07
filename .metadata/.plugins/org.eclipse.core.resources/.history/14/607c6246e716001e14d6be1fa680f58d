@@ -1,0 +1,11 @@
+package test.com.admin.vo;
+
+import lombok.Data;
+
+@Data
+public class PageVO {
+	
+	private int start;
+	private int end;
+
+}

@@ -1,0 +1,9 @@
+package test.com.idle.dao;
+
+import test.com.idle.vo.MessageVO;
+
+public interface MessageDAO {
+
+	int insert(MessageVO vo);
+
+}

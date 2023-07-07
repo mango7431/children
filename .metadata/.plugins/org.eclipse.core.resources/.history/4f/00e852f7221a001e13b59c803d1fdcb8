@@ -1,0 +1,21 @@
+package test.com.idle.daoimpl;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import lombok.extern.slf4j.Slf4j;
+import test.com.idle.dao.MessageDAO;
+
+@Repository
+@Slf4j
+public class MessageDAOimpl implements MessageDAO {
+	
+	@Autowired
+	SqlSession sqlSession;
+	
+	public MessageDAOimpl() {
+		log.info("MessageDAOimpl()...");
+	}
+
+}

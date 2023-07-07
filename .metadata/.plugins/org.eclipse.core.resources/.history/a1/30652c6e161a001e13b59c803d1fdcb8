@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.com.idle">
+
+	<select id="R_SELECT_ALL" resultType="test.com.idle.vo.RoomVO">
+		select r.*, (
+		select m.member_savename
+		from member m
+		where m.id = case when r.buyer = #{buyer} then r.seller else r.buyer end
+		) as member_savename
+		from room r
+		where r.buyer = #{buyer} or r.seller = #{seller}
+	</select>
+
+	<select id="R_SELECT_ONE" resultType="test.com.idle.vo.RoomVO">
+		select * from room where
+		room_num=#{room_num}
+	</select>
+	
+	<insert id="R_INSERT">
+		insert into room(room_num,board_num,buyer,seller)
+		values(seq_room.nextval,#{board_num},#{buyer},#{seller})
+	</insert>
+
+</mapper>
