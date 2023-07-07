@@ -15,10 +15,6 @@
 		select count(*) cnt from sell
 	</select>
 	
-<!-- 	<select id="JSON_HIDE_CHECK"> -->
-<!-- 	select * from sell where board_num=#{board_num} and board_status=3 -->
-<!-- 	</select> -->
-	
 	<delete id="S_DELETE">
 		delete from sell where sell_num = #{sell_num}
 	</delete>

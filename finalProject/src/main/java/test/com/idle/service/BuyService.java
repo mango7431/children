@@ -6,32 +6,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import test.com.idle.dao.SellDAO;
-import test.com.idle.vo.SellVO;
+import test.com.idle.dao.BuyDAO;
+import test.com.idle.vo.BuyVO;
 
 @Slf4j
 @Service
-public class SellService {
+public class BuyService {
 	
 	@Autowired
-	SellDAO dao;
+	BuyDAO dao;
 
-	public SellService() {
-		log.info("SellService");
+	public BuyService() {
+		log.info("BuyService");
 	}
 	
-	public List<SellVO> selectAll(int cpage) {
+	public List<BuyVO> selectAll(int cpage) {
 		return dao.selectAll(cpage);
 	}
 
-	public int delete(SellVO vo) {
+	public int delete(BuyVO vo) {
 		return dao.delete(vo);
 	}
 
-	public int sellRowCount() {
-		return dao.sellRowCount();
+	public int buyRowCount() {
+		return dao.buyRowCount();
 	}
-
-	
 
 }

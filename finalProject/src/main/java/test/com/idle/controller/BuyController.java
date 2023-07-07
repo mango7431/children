@@ -8,46 +8,43 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.extern.slf4j.Slf4j;
-import test.com.idle.service.SellService;
-import test.com.idle.vo.SellVO;
+import test.com.idle.service.BuyService;
+import test.com.idle.vo.BuyVO;
 
 @Controller
 @Slf4j
-public class SellController {
+public class BuyController {
 	
 	@Autowired
-	SellService service;
+	BuyService service;
 	
-	@RequestMapping(value = {"/sellSelectAll.do"}, method = RequestMethod.GET)
-	public String sellSelectAll(Model model, @RequestParam(defaultValue = "1") int cpage) {
-		log.info("/sellSelectAll.do");
+	@RequestMapping(value = {"/buySelectAll.do"}, method = RequestMethod.GET)
+	public String buySelectAll(Model model, @RequestParam(defaultValue = "1") int cpage) {
+		log.info("/buySelectAll.do");
 		log.info("cpage...{}",cpage);
-		List<SellVO> vos = service.selectAll(cpage);
+		List<BuyVO> vos = service.selectAll(cpage);
 		log.info("{}",vos);
-		int result = service.sellRowCount();
+		int result = service.buyRowCount();
 		log.info("result...{}", Math.ceil(result/10.0));
 		model.addAttribute("totalPageCount",Math.ceil(result/10.0));
-		model.addAttribute("vos",vos);
-	
+		model.addAttribute("vos", vos);
 		
-		return "myMarket/mydealsell";
+		return "myMarket/mydealbuy";
 	}
-
 	
-	@RequestMapping(value = {"/sellDeleteOK.do"}, method = RequestMethod.GET)
-	public String sellDeleteOK(SellVO vo) {
-		log.info("/sellDeleteOK.do");
+	@RequestMapping(value = {"/buyDeleteOK.do"}, method = RequestMethod.GET)
+	public String buyDeleteOK(BuyVO vo) {
+		log.info("/buyDeleteOK.do");
 		
 		int result = service.delete(vo);
 		log.info("result...{}", result);
 		
 		if(result==1) {
-			return "redirect:sellSelectAll.do";
+			return "redirect:buySelectAll.do";
 		}else {
-			return "redirect:sellSelectAll.do";
+			return "redirect:buySelectAll.do";
 //			return "redirect:boardSelectOne.do?board_num="+vo.getBoard_num();		
 		}
 	}

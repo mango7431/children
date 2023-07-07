@@ -12,6 +12,5 @@ public interface SellDAO {
 
 	public int sellRowCount();
 
-	public void jsonhideCheck(boolean isChecked, int board_num);
 
 }
