@@ -3,16 +3,27 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Bootstrap demo</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
- 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-	<jsp:include page="../css.jsp"></jsp:include>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-	
-	<script type="text/javascript">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+	integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+	crossorigin="anonymous"></script>
+<jsp:include page="../css.jsp"></jsp:include>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script type="text/javascript">
 		$(function(){
 			console.log('onload...');
 			pageLoad();
@@ -127,6 +138,7 @@
 			$.ajax({
 				url : "jsonQnaReplyInsertOK.do",
 				data:{
+					//qna_num은 답글상태를 변하기위해 필요
 					qna_num:${param.qna_num},
 					qnareply_content:$('#reply_content').val()
 					
@@ -176,6 +188,8 @@
 			$.ajax({
 				url : "jsonQnaReplyDeleteOK.do",
 				data:{
+ 					//qnareply_num 은 답글을 삭제하기위해 필요
+					//qna_num은 답글상태를 변하기위해 필요
 					qna_num:${param.qna_num},
 					qnareply_num:qnareply_num
 				},
@@ -198,17 +212,18 @@
 		
 		
 	</script>
-	
+
 </head>
 <body onload="selectAll()">
-<jsp:include page="../top_menu.jsp"></jsp:include>
+	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<div class="col-md-8">
 		<div>
 			<h4 id="qna_num"></h4>
 			<h4 id="qna_status"></h4>
-			<p id="qna_category"> </p>
+			<p id="qna_category"></p>
 			<p id="qna_date"></p>
-			<textarea class="form-control" id="qna_content" style="height: 150px" readonly></textarea>
+			<textarea class="form-control" id="qna_content" style="height: 150px"
+				readonly></textarea>
 		</div>
 	</div>
 	<hr>
@@ -220,10 +235,10 @@
 	<hr>
 	<h5>답글 작성</h5>
 	<div>
-	<textarea id="reply_content" rows="10" cols="70">답글입니다.</textarea>
-	<!-- 		<textarea class="form-control"  id="reply_content" style="height: 150px">답글1</textarea> -->
-<!-- 		<div><input type="text" id="reply_content" value="댓글입니다."></div> -->
-		<div><button onclick="insertOK()">작성완료</button></div>
+		<textarea id="reply_content" rows="10" cols="70">답글입니다.</textarea>
+		<div>
+			<button onclick="insertOK()">작성완료</button>
+		</div>
 	</div>
 </body>
 </html>

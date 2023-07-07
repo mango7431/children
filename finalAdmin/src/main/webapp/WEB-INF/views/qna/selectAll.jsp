@@ -15,19 +15,10 @@
 	
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-		
 </head>
 <body>
 	<jsp:include page="../top_menu.jsp"></jsp:include>
 	<h3>Q&A목록</h3>
-<!-- 	<select name="searchKey" id="searchKey"> -->
-<!-- 		<option value="title">title</option> -->
-<!-- 		<option value="content">content</option> -->
-<!-- 	</select> -->
-<!-- 	<input type="text" name="searchWord" id="searchWord" value="sp"> -->
-<!-- 	<button onclick="searchList()" class="myButton">검색</button> -->
-
 
 	<table id="boardList">
 		<thead>
@@ -44,9 +35,9 @@
 			
 		<c:forEach var="vo" items="${vos}">
 			<tr>
-				<!--질문번호 -->
+			
 				<td><a href="qnaSelectOne.do?qna_num=${vo.qna_num}">${vo.qna_num}</a></td>
-				<!--답변여부 -->
+				
 			  	<td>
 				  <c:choose>
 				  <c:when test="${vo.qna_status eq 1}">
@@ -57,7 +48,7 @@
 				  </c:when>
 				</c:choose>
 			  	</td>
-				<!-- 구분 -->
+				
 				<td>
 				  <c:choose>
 				  <c:when test="${vo.qna_category eq 1}">
@@ -77,8 +68,6 @@
 				  </c:when>
 				</c:choose>
 			  	</td>
-			  	
-				<!--제목, 작성자, 작성일자 -->
 		
 				<td>${vo.qna_title}</td>
 				<td>${vo.writer}</td>
