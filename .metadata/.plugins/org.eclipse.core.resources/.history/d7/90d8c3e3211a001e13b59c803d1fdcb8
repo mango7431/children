@@ -1,7 +1,0 @@
-package test.com.idle.daoimpl;
-
-import test.com.idle.dao.MessageDAO;
-
-public class MessageDAOimpl implements MessageDAO {
-
-}

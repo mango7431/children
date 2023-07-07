@@ -1,7 +1,0 @@
-package test.com.idle.daoimpl;
-
-import test.com.idle.dao.LikesDAO;
-
-public class LikesDAOimpl implements LikesDAO {
-
-}
