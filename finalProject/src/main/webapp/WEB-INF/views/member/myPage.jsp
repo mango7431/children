@@ -25,8 +25,6 @@
 <script type="text/javascript">
 	$(function(){
 		console.log("onload....","${param.id}");
-		
-		
 	});//end onload..
 
 </script>
@@ -64,8 +62,8 @@
 								<th>name</th>
 								<th>address</th>
 								<th>member_report</th>
-								<th>member_report</th>
-								<th>member_report</th>
+								<th>프로필이미지</th>
+								<th></th>
 							</tr>
 						</thead>
 						<tbody id="vo2">
